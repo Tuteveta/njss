@@ -7,18 +7,11 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: owc-next/package-lock.json
 
       - name: Install dependencies
         working-directory: owc-next
@@ -28,27 +21,8 @@ jobs:
         working-directory: owc-next
         run: npm run build
 
-      - name: Setup SSH key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.EC2_KEY }}" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-
-      - name: Sync build to EC2
-        run: |
-          rsync -avz --delete \
-            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
-            owc-next/.next/ \
-            ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:~/owc-png/owc-next/.next/
-          rsync -avz \
-            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
-            owc-next/public/ \
-            ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:~/owc-png/owc-next/public/
-
       - name: Restart PM2
         run: |
-          ssh -i ~/.ssh/deploy_key \
-            -o StrictHostKeyChecking=no \
-            -o UserKnownHostsFile=/dev/null \
-            ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
-            "cd ~/owc-png/owc-next && pm2 restart owc-next || pm2 start npm --name owc-next -- start && pm2 save"
+          cd ~/owc-png/owc-next
+          pm2 restart owc-next || pm2 start npm --name "owc-next" -- start
+          pm2 save
