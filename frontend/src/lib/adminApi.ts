@@ -190,6 +190,13 @@ export const adminApi = {
   reorderHeroSlides: (ids: number[]) =>
     authFetch("/admin/hero-slides/reorder", { method: "PUT", body: JSON.stringify({ ids }) }),
 
+  // Messages
+  getMessages: () => authFetch("/admin/messages"),
+  markRead: (id: number) =>
+    authFetch(`/admin/messages/${id}/read`, { method: "PUT" }),
+  deleteMessage: (id: number) =>
+    authFetch(`/admin/messages/${id}`, { method: "DELETE" }),
+
   // Audit Log
   getAuditLog: () => authFetch("/admin/audit-log"),
 
