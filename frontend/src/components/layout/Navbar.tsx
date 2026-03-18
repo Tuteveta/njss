@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import { Menu, X, ChevronDown, ChevronUp, FileText, Lock, Search, Phone, Mail, ExternalLink } from "lucide-react"
+import { Menu, X, ChevronDown, ChevronUp, FileText, Lock, Search } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { useSettings } from "@/context/SettingsContext"
 
 function GovBanner() {
   const [open, setOpen] = useState(false)
@@ -44,33 +43,6 @@ function GovBanner() {
   )
 }
 
-function UtilityBar() {
-  const s = useSettings()
-  return (
-    <div className="hidden lg:block bg-gray-50 border-b border-gray-200 text-xs">
-      <div className="max-w-7xl mx-auto px-4 lg:px-10 flex items-center justify-between h-8">
-        <div className="flex items-center gap-5 text-gray-500">
-          <a href={`tel:${s.contact_phone}`} className="flex items-center gap-1.5 hover:text-[hsl(210,70%,25%)] transition-colors">
-            <Phone className="w-3 h-3" />{s.contact_phone || "+675 321 6000"}
-          </a>
-          <a href={`mailto:${s.contact_email}`} className="flex items-center gap-1.5 hover:text-[hsl(210,70%,25%)] transition-colors">
-            <Mail className="w-3 h-3" />{s.contact_email || "info@owc.gov.pg"}
-          </a>
-          <span className="text-gray-300">|</span>
-          <span className="text-gray-400">{s.contact_hours || "Mon – Fri: 8:00 AM – 4:00 PM"}</span>
-        </div>
-        <a
-          href="https://portal.owc.gov.pg"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-1 text-[hsl(210,70%,35%)] hover:text-[hsl(210,70%,20%)] font-medium transition-colors"
-        >
-          Claims Portal <ExternalLink className="w-3 h-3" />
-        </a>
-      </div>
-    </div>
-  )
-}
 
 const CLAIMS_URL = "https://portal.owc.gov.pg"
 
@@ -108,7 +80,6 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full">
       <GovBanner />
-      <UtilityBar />
 
       {/* Main nav */}
       <div className={cn(
