@@ -10,21 +10,43 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy to EC2 via SSH
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: owc-next/package-lock.json
+
+      - name: Install dependencies
+        working-directory: owc-next
+        run: npm ci
+
+      - name: Build
+        working-directory: owc-next
+        run: npm run build
+
+      - name: Copy build to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          port: 22
+          source: "owc-next/.next,owc-next/public,owc-next/package.json,owc-next/next.config.ts"
+          target: "~/owc-png/"
+          strip_components: 0
+
+      - name: Restart PM2
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           port: 22
-          command_timeout: 20m
           script: |
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            cd ~/owc-png
-            git pull origin master
-            cd owc-next
-            npm ci
-            npm run build
+            cd ~/owc-png/owc-next
             pm2 restart owc-next || pm2 start npm --name "owc-next" -- start
             pm2 save
