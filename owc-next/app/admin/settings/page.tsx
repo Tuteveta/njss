@@ -333,7 +333,7 @@ export default function SiteSettings() {
               <textarea
                 rows={16}
                 spellCheck={false}
-                className="w-full rounded-md border border-gray-200 bg-gray-950 text-green-400 px-4 py-3 text-sm font-mono focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(210,70%,25%)] resize-y"
+                className="w-full rounded-md border border-gray-200 bg-gray-50 text-gray-800 px-4 py-3 text-sm font-mono focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(210,70%,25%)] resize-y"
                 value={form.custom_css}
                 onChange={e => set("custom_css", e.target.value)}
                 placeholder={`/* Example: change accent colour */\n.btn-primary { background: #0d7a4e !important; }\n\n/* Hide a specific section */\n#stats { display: none; }`}
