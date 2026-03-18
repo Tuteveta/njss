@@ -118,7 +118,7 @@ export default function PDFManager() {
               <select
                 value={category}
                 onChange={e => setCategory(e.target.value)}
-                className="w-full rounded-xl border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring h-10"
+                className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(210,70%,25%)] h-10"
               >
                 {CATEGORIES.map(c => <option key={c}>{c}</option>)}
               </select>

@@ -153,7 +153,7 @@ export default function ServicesManager() {
                 <select
                   value={form.iconName}
                   onChange={e => setForm(p => ({ ...p, iconName: e.target.value }))}
-                  className="w-full rounded-xl border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(210,70%,25%)]"
                 >
                   {ICON_OPTIONS.map(ico => <option key={ico} value={ico}>{ico}</option>)}
                 </select>
@@ -164,11 +164,11 @@ export default function ServicesManager() {
               </div>
               <div className="sm:col-span-2">
                 <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Description</label>
-                <textarea rows={3} className="w-full rounded-xl border border-input bg-background px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" value={form.description} onChange={e => setForm(p => ({ ...p, description: e.target.value }))} placeholder="Brief description of this service…" />
+                <textarea rows={3} className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(210,70%,25%)]" value={form.description} onChange={e => setForm(p => ({ ...p, description: e.target.value }))} placeholder="Brief description of this service…" />
               </div>
               <div className="sm:col-span-2">
                 <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Who Is Eligible</label>
-                <textarea rows={2} className="w-full rounded-xl border border-input bg-background px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" value={form.whoEligible} onChange={e => setForm(p => ({ ...p, whoEligible: e.target.value }))} placeholder="Any worker employed under a contract of service…" />
+                <textarea rows={2} className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(210,70%,25%)]" value={form.whoEligible} onChange={e => setForm(p => ({ ...p, whoEligible: e.target.value }))} placeholder="Any worker employed under a contract of service…" />
               </div>
               <div className="sm:col-span-2">
                 <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Benefits / What's Included</label>

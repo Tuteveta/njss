@@ -221,7 +221,7 @@ export default function SiteSettings() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">HQ Address</label>
                 <textarea
                   rows={3}
-                  className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(210,70%,25%)]"
                   value={form.contact_address}
                   onChange={e => set("contact_address", e.target.value)}
                   placeholder="Gaukara Rumana, Wards Rd..."
@@ -333,7 +333,7 @@ export default function SiteSettings() {
               <textarea
                 rows={16}
                 spellCheck={false}
-                className="w-full rounded-md border border-input bg-gray-950 text-green-400 px-4 py-3 text-sm font-mono focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring resize-y"
+                className="w-full rounded-md border border-gray-200 bg-gray-950 text-green-400 px-4 py-3 text-sm font-mono focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(210,70%,25%)] resize-y"
                 value={form.custom_css}
                 onChange={e => set("custom_css", e.target.value)}
                 placeholder={`/* Example: change accent colour */\n.btn-primary { background: #0d7a4e !important; }\n\n/* Hide a specific section */\n#stats { display: none; }`}

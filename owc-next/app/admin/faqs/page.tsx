@@ -130,7 +130,7 @@ export default function FAQManager() {
               <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Answer *</label>
               <textarea
                 rows={4}
-                className="w-full rounded-xl border border-input bg-background px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(210,70%,25%)]"
                 value={form.answer}
                 onChange={e => setForm(p => ({ ...p, answer: e.target.value }))}
                 placeholder="Enter the answer…"

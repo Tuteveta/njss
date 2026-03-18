@@ -212,7 +212,7 @@ export default function HeroSlidesManager() {
               </div>
               <div className="sm:col-span-2">
                 <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Subtitle</label>
-                <textarea rows={2} className="w-full rounded-xl border border-input bg-background px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" value={form.subtitle} onChange={e => set("subtitle", e.target.value)} placeholder="Short description…" />
+                <textarea rows={2} className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(210,70%,25%)]" value={form.subtitle} onChange={e => set("subtitle", e.target.value)} placeholder="Short description…" />
               </div>
               <div className="sm:col-span-2">
                 <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Background Image</label>

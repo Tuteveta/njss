@@ -58,7 +58,7 @@ function KVList({ label, items, onChange }: { label: string; items: KV[]; onChan
                 <X className="w-4 h-4" />
               </button>
             </div>
-            <textarea rows={2} className="w-full rounded-xl border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" value={item.desc} onChange={e => { const n = [...items]; n[i] = { ...n[i], desc: e.target.value }; onChange(n) }} placeholder="Description" />
+            <textarea rows={2} className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(210,70%,25%)]" value={item.desc} onChange={e => { const n = [...items]; n[i] = { ...n[i], desc: e.target.value }; onChange(n) }} placeholder="Description" />
           </div>
         ))}
         <button type="button" onClick={() => onChange([...items, { title: "", desc: "" }])} className="text-xs font-medium text-[hsl(210,70%,25%)] hover:underline flex items-center gap-1">
@@ -151,11 +151,11 @@ export default function AboutManager() {
                 <>
                   <div>
                     <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Mission Statement</label>
-                    <textarea rows={4} className="w-full rounded-xl border border-input bg-background px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" value={data.mission} onChange={e => set("mission", e.target.value)} placeholder="Our mission…" />
+                    <textarea rows={4} className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(210,70%,25%)]" value={data.mission} onChange={e => set("mission", e.target.value)} placeholder="Our mission…" />
                   </div>
                   <div>
                     <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Vision Statement</label>
-                    <textarea rows={4} className="w-full rounded-xl border border-input bg-background px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" value={data.vision} onChange={e => set("vision", e.target.value)} placeholder="Our vision…" />
+                    <textarea rows={4} className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(210,70%,25%)]" value={data.vision} onChange={e => set("vision", e.target.value)} placeholder="Our vision…" />
                   </div>
                 </>
               )}
