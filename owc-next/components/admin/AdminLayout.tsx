@@ -186,7 +186,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <div className={cn("flex-1 flex flex-col min-h-screen transition-all duration-200", collapsed ? "lg:ml-[60px]" : "lg:ml-56")}>
 
         {/* Top bar */}
-        <header className="bg-white border-b border-gray-200 sticky top-0 z-20 px-4 h-14 flex items-center justify-between gap-4">
+        <header className="bg-white border-b border-gray-200 sticky top-0 z-20 px-6 h-14 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             {/* Hamburger — always visible */}
             <button
