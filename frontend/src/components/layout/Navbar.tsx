@@ -44,7 +44,7 @@ function GovBanner() {
 }
 
 
-const CLAIMS_URL = "https://portal.owc.gov.pg"
+const CLAIMS_URL = "/claims"
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -135,14 +135,12 @@ export default function Navbar() {
                 />
               </div>
             </form>
-            <a
-              href={CLAIMS_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to={CLAIMS_URL}
               className="inline-flex items-center justify-center h-9 px-4 rounded-lg text-sm font-semibold bg-[hsl(210,70%,22%)] hover:bg-[hsl(210,70%,18%)] text-white transition-colors shadow-sm"
             >
               File a Claim
-            </a>
+            </Link>
           </div>
 
           {/* Mobile hamburger */}
@@ -190,14 +188,13 @@ export default function Navbar() {
               )
             })}
             <div className="pt-3 pb-3 border-t border-gray-100 mt-2">
-              <a
-                href={CLAIMS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to={CLAIMS_URL}
                 className="flex items-center justify-center h-10 rounded-lg text-sm font-semibold bg-[hsl(210,70%,22%)] hover:bg-[hsl(210,70%,18%)] text-white transition-colors"
+                onClick={() => setMobileOpen(false)}
               >
                 File a Claim
-              </a>
+              </Link>
             </div>
           </div>
         </div>
