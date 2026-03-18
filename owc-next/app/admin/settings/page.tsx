@@ -140,8 +140,8 @@ export default function SiteSettings() {
                     key={t.id}
                     onClick={() => set("theme", t.id)}
                     className={cn(
-                      "rounded-xl border-2 p-3 text-left transition-all",
-                      form.theme === t.id ? "border-emerald-500 shadow-md" : "border-gray-200 hover:border-gray-400"
+                      "rounded-xl border p-3 text-left transition-all",
+                      form.theme === t.id ? "border-[hsl(210,70%,25%)] bg-[hsl(210,70%,25%)]/5" : "border-gray-200 hover:border-gray-300"
                     )}
                   >
                     <div className="flex gap-1.5 mb-2">
@@ -149,7 +149,7 @@ export default function SiteSettings() {
                       <div className="w-6 h-6 rounded-full" style={{ background: t.dark }} />
                     </div>
                     <div className="text-xs font-medium text-gray-700">{t.label}</div>
-                    {form.theme === t.id && <div className="text-[10px] text-emerald-600 font-semibold mt-0.5">Active</div>}
+                    {form.theme === t.id && <div className="text-[10px] text-[hsl(210,70%,25%)] font-semibold mt-0.5">Active</div>}
                   </button>
                 ))}
               </div>
