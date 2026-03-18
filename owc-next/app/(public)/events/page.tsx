@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { MapPin, Clock, Calendar, Search, Tag, ChevronRight } from "lucide-react"
+import { MapPin, Clock, Calendar, Search, Tag, ChevronRight, Mail, Phone, Bell } from "lucide-react"
 import PageHero from "@/components/PageHero"
 import ScrollNav from "@/components/ScrollNav"
 
@@ -223,17 +223,37 @@ export default function Events() {
           )}
 
           {/* Subscribe CTA */}
-          <div className="mt-14 bg-[hsl(210,70%,25%)] rounded-2xl p-8 text-center text-white">
-            <h3 className="text-xl font-bold mb-2">Stay Informed</h3>
-            <p className="text-blue-100 text-sm mb-5 max-w-md mx-auto">
-              To receive updates about upcoming OWC workshops and events in your province, contact your nearest Provincial Labour Office or OWC headquarters.
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-4 text-sm">
-              <a href="mailto:workerscomp@owc.gov.pg"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white text-[hsl(210,70%,25%)] font-semibold hover:bg-blue-50 transition-colors">
-                workerscomp@owc.gov.pg <ChevronRight className="w-4 h-4" />
-              </a>
-              <span className="text-blue-200">or call (+675) 313 5000 / Toll-Free 180 1100</span>
+          <div className="mt-14 relative overflow-hidden rounded-2xl bg-[hsl(210,70%,20%)] text-white">
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/5" />
+              <div className="absolute -bottom-8 -left-8 w-36 h-36 rounded-full bg-white/5" />
+            </div>
+            <div className="relative px-8 py-8 md:px-12">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="flex items-center gap-4">
+                  <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/10 border border-white/20 shrink-0">
+                    <Bell className="w-4 h-4 text-blue-300" />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold leading-tight">Stay Informed</h3>
+                    <p className="text-blue-200 text-xs leading-relaxed mt-0.5 max-w-sm">
+                      Contact your nearest Provincial Labour Office or OWC headquarters for event updates.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+                  <a href="mailto:workerscomp@owc.gov.pg"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white text-[hsl(210,70%,22%)] font-semibold text-sm hover:bg-blue-50 transition-colors">
+                    <Mail className="w-3.5 h-3.5 shrink-0" />
+                    workerscomp@owc.gov.pg
+                  </a>
+                  <a href="tel:+6753135000"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white/10 border border-white/20 text-white font-semibold text-sm hover:bg-white/20 transition-colors">
+                    <Phone className="w-3.5 h-3.5 shrink-0 text-blue-300" />
+                    (+675) 313 5000
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
 

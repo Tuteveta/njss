@@ -60,15 +60,8 @@ const navItems = [
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [query, setQuery] = useState("")
-  const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
-    window.addEventListener("scroll", onScroll, { passive: true })
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [])
 
   const handleSearch = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -81,10 +74,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full">
       <GovBanner />
-      <div className={cn(
-        "bg-white border-b transition-shadow duration-200",
-        scrolled ? "shadow-md border-gray-200" : "shadow-sm border-gray-100"
-      )}>
+      <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 lg:px-10 flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-3 shrink-0 group">
             <img src="/png-coa.png" alt="OWC Logo" className="h-11 w-auto transition-transform duration-200 group-hover:scale-105" />
@@ -108,7 +98,7 @@ export default function Navbar() {
                 >
                   {item.label}
                   <span className={cn(
-                    "absolute bottom-0 left-0 right-0 h-0.5 bg-[hsl(210,70%,22%)] transition-all duration-200",
+                    "absolute -bottom-px left-0 right-0 h-0.5 bg-[hsl(210,70%,22%)] transition-all duration-200",
                     active ? "opacity-100" : "opacity-0 group-hover:opacity-30"
                   )} />
                 </Link>

@@ -8,6 +8,10 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Office of Workers Compensation — Papua New Guinea",
   description: "Official website of the Office of Workers Compensation, Papua New Guinea",
+  icons: {
+    icon: "/png-coa.png",
+    apple: "/png-coa.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
