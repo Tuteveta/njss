@@ -62,7 +62,7 @@ export default function Services() {
       {!loading && services.length > 0 && (
         <>
           {/* Mobile pill tabs */}
-          <div className="bg-white border-b sticky top-0 z-10 shadow-sm">
+          <div className="bg-white border-b border-gray-100 sticky top-0 z-10">
             <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-2 overflow-x-auto no-scrollbar">
               <span className="text-xs text-gray-400 font-medium shrink-0 pr-2">Services:</span>
               {services.map(svc => {
@@ -86,7 +86,7 @@ export default function Services() {
 
               {/* Sticky sidebar */}
               <aside className="hidden lg:block w-56 shrink-0">
-                <div className="sticky top-20 bg-white rounded-xl border border-gray-100 p-4 shadow-sm">
+                <div className="sticky top-20 bg-white rounded-xl border border-gray-200 p-4">
                   <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Services</p>
                   <nav className="space-y-0.5">
                     {services.map(svc => {
@@ -115,7 +115,7 @@ export default function Services() {
               {active && (
                 <div className="flex-1 min-w-0">
                   {/* Header card */}
-                  <div className="bg-white rounded-2xl border border-gray-100 shadow-sm mb-4 overflow-hidden">
+                  <div className="bg-white rounded-2xl border border-gray-200 mb-4 overflow-hidden">
                     <div className="px-8 py-8 flex items-start gap-6">
                       <div className="w-14 h-14 rounded-xl bg-[hsl(210,70%,25%)] flex items-center justify-center shrink-0">
                         <IconComponent className="w-7 h-7 text-white" />
@@ -137,14 +137,14 @@ export default function Services() {
 
                   {/* Content row */}
                   <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-                    <div className="md:col-span-2 bg-white rounded-2xl border border-gray-100 shadow-sm p-6 flex flex-col">
+                    <div className="md:col-span-2 bg-white rounded-2xl border border-gray-200 p-6 flex flex-col">
                       <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Who Is Eligible</p>
                       <p className="text-sm text-gray-600 leading-relaxed flex-1">{active.whoEligible}</p>
                       <Link href="/contact" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[hsl(210,70%,25%)] hover:gap-3 transition-all self-start">
                         Enquire about this service <ArrowRight className="w-4 h-4" />
                       </Link>
                     </div>
-                    <div className="md:col-span-3 bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                    <div className="md:col-span-3 bg-white rounded-2xl border border-gray-200 p-6">
                       <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">What's Included</p>
                       <ul className="space-y-2.5">
                         {active.benefits.map((b, i) => (
@@ -179,7 +179,7 @@ export default function Services() {
 
       {loading && (
         <div className="py-32 text-center">
-          <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto" />
+          <div className="w-8 h-8 border border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto" />
         </div>
       )}
     </div>

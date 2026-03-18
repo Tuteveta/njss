@@ -1,5 +1,5 @@
 "use client"
-import { useState, FormEvent } from "react"
+import { useState, useEffect, FormEvent } from "react"
 import { useRouter } from "next/navigation"
 import { Eye, EyeOff, AlertCircle, KeyRound } from "lucide-react"
 import { adminApi, saveSession, isLoggedIn } from "@/lib/adminApi"
@@ -15,10 +15,9 @@ export default function AdminLogin() {
   const [loading, setLoading] = useState(false)
   const [showForgot, setShowForgot] = useState(false)
 
-  if (isLoggedIn()) {
-    router.push("/admin")
-    return null
-  }
+  useEffect(() => {
+    if (isLoggedIn()) router.push("/admin")
+  }, [router])
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()

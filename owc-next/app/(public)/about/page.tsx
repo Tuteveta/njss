@@ -119,7 +119,7 @@ export default function About() {
             <div className="w-12 h-1 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-200 mt-4" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 flex flex-col gap-6">
+            <div className="bg-white rounded-2xl border border-gray-200 p-8 flex flex-col gap-6">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-[hsl(210,70%,25%)] flex items-center justify-center shrink-0">
                   <Target className="w-5 h-5 text-white" />
@@ -131,7 +131,7 @@ export default function About() {
               </div>
               <p className="text-gray-600 leading-relaxed text-[15px]">{about.mission}</p>
             </div>
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 flex flex-col gap-6">
+            <div className="bg-white rounded-2xl border border-gray-200 p-8 flex flex-col gap-6">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-emerald-600 flex items-center justify-center shrink-0">
                   <Eye className="w-5 h-5 text-white" />
@@ -159,7 +159,7 @@ export default function About() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {about.mandate.map((item, i) => (
-              <div key={i} className="flex items-start gap-3 bg-gray-50 rounded-xl p-4 border border-gray-100">
+              <div key={i} className="flex items-start gap-3 bg-gray-50 rounded-xl p-4 border border-gray-200">
                 <CheckCircle className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0" />
                 <p className="text-sm text-gray-700 leading-relaxed">{item}</p>
               </div>
@@ -178,7 +178,7 @@ export default function About() {
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             {about.highlights.map((h, i) => (
-              <div key={i} className="relative bg-gray-50 rounded-xl border border-gray-100 px-4 py-4 flex items-center gap-3 group hover:shadow-sm hover:-translate-y-0.5 transition-all duration-300 overflow-hidden">
+              <div key={i} className="relative bg-gray-50 rounded-xl border border-gray-200 px-4 py-4 flex items-center gap-3 group transition-colors overflow-hidden">
                 <div className="absolute top-0 left-0 right-0 h-0.5 rounded-t-xl bg-gradient-to-r from-[hsl(210,70%,30%)] to-emerald-400" />
                 <div className="w-8 h-8 rounded-lg bg-[hsl(210,70%,25%)]/10 flex items-center justify-center shrink-0">
                   <TrendingUp className="w-3.5 h-3.5 text-[hsl(210,70%,25%)]" />
@@ -205,7 +205,7 @@ export default function About() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {about.priorities.map((p, i) => (
-                <div key={i} className="bg-white rounded-2xl border border-gray-100 p-6 flex gap-4 hover:shadow-md hover:-translate-y-1 transition-all duration-300 group">
+                <div key={i} className="bg-white rounded-2xl border border-gray-200 p-6 flex gap-4 transition-colors group">
                   <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-amber-100 transition-colors">
                     <span className="text-xs font-black text-amber-600">{String(i + 1).padStart(2, "0")}</span>
                   </div>
@@ -229,7 +229,7 @@ export default function About() {
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {about.values.map((v, i) => (
-              <div key={i} className="group bg-white rounded-xl border border-gray-100 p-6 text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+              <div key={i} className="group bg-white rounded-xl border border-gray-200 p-6 text-center transition-colors">
                 <div className="w-12 h-12 bg-[hsl(210,70%,96%)] rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-[hsl(210,70%,25%)] transition-colors duration-300">
                   <Award className="w-6 h-6 text-[hsl(210,70%,25%)] group-hover:text-white transition-colors duration-300" />
                 </div>

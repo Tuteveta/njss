@@ -4,17 +4,7 @@ import { useEffect, useState, useCallback } from "react"
 import { ArrowRight, Shield, Users, FileText, Clock, TrendingUp, CheckCircle, Phone, Download, AlertCircle, ChevronRight, ChevronLeft, CalendarDays, MapPin } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import ScrollNav from "@/components/ScrollNav"
 import { useSettings } from "@/context/SettingsContext"
-
-const HOME_SECTIONS = [
-  { id: "stats", label: "Statistics" },
-  { id: "home-services", label: "Our Services" },
-  { id: "process", label: "Claims Process" },
-  { id: "home-news", label: "News" },
-  { id: "home-events", label: "Events" },
-  { id: "cta", label: "Contact" },
-]
 
 interface HomeEvent {
   id: number
@@ -160,7 +150,7 @@ function HeroSlider({ slides }: { slides: ApiSlide[] }) {
   const slide = slides[Math.min(current, slides.length - 1)]
 
   return (
-    <section className="relative text-white overflow-hidden h-[45vh] min-h-[300px] max-h-[420px] sm:h-[50vh] sm:max-h-[480px]">
+    <section className="relative text-white overflow-hidden h-[400px] sm:h-[440px] lg:h-[480px]">
       {/* Slides */}
       {slides.map((s, i) => (
         <div
@@ -169,59 +159,49 @@ function HeroSlider({ slides }: { slides: ApiSlide[] }) {
           style={{ opacity: i === current ? 1 : 0, zIndex: i === current ? 1 : 0 }}
         >
           <div
-            className="absolute inset-0 bg-cover bg-center scale-105 transition-transform ease-linear"
-            style={{
-              backgroundImage: `url('${s.image}')`,
-              transform: i === current ? "scale(1.05)" : "scale(1)",
-              transitionDuration: "8000ms",
-            }}
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url('${s.image}')` }}
           />
-          <div className="absolute inset-0 bg-[hsl(210,70%,10%)]/80" />
-          <div
-            className="absolute inset-0 opacity-[0.07]"
-            style={{
-              backgroundImage:
-                "linear-gradient(rgba(255,255,255,.2) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.2) 1px,transparent 1px)",
-              backgroundSize: "48px 48px",
-            }}
-          />
+          <div className="absolute inset-0 bg-[hsl(210,70%,10%)]/75" />
         </div>
       ))}
 
       {/* Content */}
       <div className="relative z-10 h-full flex items-center">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 w-full">
-          <div className="max-w-3xl">
-            <Badge className="mb-5 bg-emerald-600 border-0 hover:bg-emerald-700 text-white text-xs tracking-wider uppercase">
-              {slide.badge}
-            </Badge>
+        <div className="max-w-7xl mx-auto px-6 lg:px-14 w-full">
+          <div className="max-w-2xl">
+            {slide.badge && (
+              <span className="inline-block mb-3 px-3 py-1 rounded-full bg-emerald-600/90 text-white text-xs font-semibold tracking-wider uppercase">
+                {slide.badge}
+              </span>
+            )}
             <h1
               key={`title-${current}`}
-              className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6 animate-[fadeInUp_0.6s_ease_forwards]"
+              className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-snug mb-3"
             >
               {slide.title}
             </h1>
             <p
               key={`sub-${current}`}
-              className="text-lg lg:text-xl text-blue-100/90 mb-10 leading-relaxed max-w-2xl animate-[fadeInUp_0.7s_ease_forwards]"
+              className="text-sm sm:text-base text-blue-100/90 mb-6 leading-relaxed line-clamp-3"
             >
               {slide.subtitle}
             </p>
-            <div className="flex flex-wrap gap-4">
-              {slide.ctaExternal ? (
-                <a href={slide.ctaHref} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center h-12 px-8 rounded-lg text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white transition-colors shadow-lg shadow-emerald-900/20">
-                  {slide.ctaLabel} <ArrowRight className="ml-2 w-4 h-4" />
+            <div className="flex flex-wrap gap-3">
+              {slide.ctaLabel && (slide.ctaExternal ? (
+                <a href={slide.ctaHref || "/"} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 h-10 px-6 rounded-lg text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white transition-colors">
+                  {slide.ctaLabel} <ArrowRight className="w-4 h-4" />
                 </a>
               ) : (
-                <Link href={slide.ctaHref}
-                  className="inline-flex items-center h-12 px-8 rounded-lg text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white transition-colors shadow-lg shadow-emerald-900/20">
-                  {slide.ctaLabel} <ArrowRight className="ml-2 w-4 h-4" />
+                <Link href={slide.ctaHref || "/"}
+                  className="inline-flex items-center gap-2 h-10 px-6 rounded-lg text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white transition-colors">
+                  {slide.ctaLabel} <ArrowRight className="w-4 h-4" />
                 </Link>
-              )}
+              ))}
               {slide.secondaryLabel && (
-                <Link href={slide.secondaryHref}
-                  className="inline-flex items-center h-12 px-8 rounded-lg text-sm font-semibold border border-white/40 text-white hover:bg-white/10 hover:border-white transition-colors">
+                <Link href={slide.secondaryHref || "/"}
+                  className="inline-flex items-center gap-2 h-10 px-6 rounded-lg text-sm font-semibold border border-white/40 text-white hover:bg-white/10 transition-colors">
                   {slide.secondaryLabel}
                 </Link>
               )}
@@ -230,42 +210,38 @@ function HeroSlider({ slides }: { slides: ApiSlide[] }) {
         </div>
       </div>
 
-      {/* Prev / Next arrows */}
-      <button
-        onClick={prev}
-        className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/10 hover:bg-white/25 border border-white/20 flex items-center justify-center text-white transition-colors backdrop-blur-sm"
-        aria-label="Previous slide"
-      >
-        <ChevronLeft className="w-5 h-5" />
-      </button>
-      <button
-        onClick={next}
-        className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/10 hover:bg-white/25 border border-white/20 flex items-center justify-center text-white transition-colors backdrop-blur-sm"
-        aria-label="Next slide"
-      >
-        <ChevronRight className="w-5 h-5" />
-      </button>
+      {/* Prev / Next arrows — only show if multiple slides */}
+      {slides.length > 1 && <>
+        <button
+          onClick={prev}
+          className="absolute left-3 bottom-5 z-20 w-8 h-8 rounded-full bg-white/15 hover:bg-white/30 border border-white/20 flex items-center justify-center text-white transition-colors"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft className="w-4 h-4" />
+        </button>
 
-      {/* Dots */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2.5">
-        {slides.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => go(i)}
-            aria-label={`Go to slide ${i + 1}`}
-            className={`transition-all duration-300 rounded-full ${
-              i === current
-                ? "w-8 h-2.5 bg-emerald-400"
-                : "w-2.5 h-2.5 bg-white/40 hover:bg-white/70"
-            }`}
-          />
-        ))}
-      </div>
+        {/* Dots */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => go(i)}
+              aria-label={`Slide ${i + 1}`}
+              className={`transition-all duration-300 rounded-full ${
+                i === current ? "w-6 h-2 bg-emerald-400" : "w-2 h-2 bg-white/40 hover:bg-white/70"
+              }`}
+            />
+          ))}
+        </div>
 
-      {/* Slide counter */}
-      <div className="absolute top-6 right-6 lg:right-10 z-20 text-xs text-white/50 font-mono">
-        {String(current + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
-      </div>
+        <button
+          onClick={next}
+          className="absolute right-3 bottom-5 z-20 w-8 h-8 rounded-full bg-white/15 hover:bg-white/30 border border-white/20 flex items-center justify-center text-white transition-colors"
+          aria-label="Next slide"
+        >
+          <ChevronRight className="w-4 h-4" />
+        </button>
+      </>}
     </section>
   )
 }
@@ -296,7 +272,6 @@ export default function Home() {
 
   return (
     <div>
-      <ScrollNav sections={HOME_SECTIONS} faded />
       {/* Hero Slider */}
       <HeroSlider slides={heroSlides} />
 
@@ -317,7 +292,7 @@ export default function Home() {
 
       {/* Stats */}
       {show("home_show_stats") && (
-        <section id="stats" className="bg-white py-8 border-b">
+        <section id="stats" className="bg-white py-8 border-b border-gray-100">
           <div className="max-w-7xl mx-auto px-4">
             <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-gray-200">
               {STAT_DEFS.map((stat) => (
@@ -347,7 +322,7 @@ export default function Home() {
             {services.map((svc) => (
               svc.external ? (
               <a key={svc.title} href={svc.href} target="_blank" rel="noopener noreferrer"
-                className="group flex items-start gap-4 bg-white rounded-xl border border-gray-100 p-5 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                className="group flex items-start gap-4 bg-white rounded-xl border border-gray-200 p-5 transition-colors">
                 <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${svc.color} group-hover:scale-110 transition-transform duration-300`}>
                   <svc.icon className="w-5 h-5" />
                 </div>
@@ -361,7 +336,7 @@ export default function Home() {
               </a>
               ) : (
               <Link key={svc.title} href={svc.href}
-                className="group flex items-start gap-4 bg-white rounded-xl border border-gray-100 p-5 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                className="group flex items-start gap-4 bg-white rounded-xl border border-gray-200 p-5 transition-colors">
                 <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${svc.color} group-hover:scale-110 transition-transform duration-300`}>
                   <svc.icon className="w-5 h-5" />
                 </div>
@@ -492,7 +467,7 @@ export default function Home() {
                   const colorClass = EVENT_COLORS[e.category] ?? EVENT_COLORS.General
                   return (
                     <Link key={e.id} href="/events"
-                      className="group flex gap-4 bg-white rounded-xl border border-gray-100 p-4 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                      className="group flex gap-4 bg-white rounded-xl border border-gray-200 p-4 transition-colors">
                       <div className="shrink-0 w-14 h-14 rounded-xl bg-[hsl(210,70%,25%)] text-white flex flex-col items-center justify-center">
                         <span className="text-lg font-black leading-none">{day}</span>
                         <span className="text-[10px] font-semibold uppercase tracking-wider opacity-80">{month}</span>
@@ -538,7 +513,7 @@ export default function Home() {
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-              <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex flex-col gap-2">
+              <div className="bg-white rounded-xl border border-gray-200 p-5 flex flex-col gap-2">
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-lg bg-[hsl(210,70%,25%)]/10 flex items-center justify-center shrink-0">
                     <Phone className="w-3.5 h-3.5 text-[hsl(210,70%,25%)]" />
@@ -553,7 +528,7 @@ export default function Home() {
                   </Link>
                 </div>
               </div>
-              <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex flex-col gap-2">
+              <div className="bg-white rounded-xl border border-gray-200 p-5 flex flex-col gap-2">
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-lg bg-[hsl(210,70%,25%)]/10 flex items-center justify-center shrink-0">
                     <Phone className="w-3.5 h-3.5 text-[hsl(210,70%,25%)]" />
@@ -564,7 +539,7 @@ export default function Home() {
                 <div className="text-xs text-gray-500 leading-relaxed">Gaukara Rumana, Wards Rd, Port Moresby, NCD</div>
                 <div className="mt-auto pt-2.5 border-t border-gray-100 text-sm font-semibold text-[hsl(210,70%,25%)]">{s.contact_phone.split("/")[0].trim()}</div>
               </div>
-              <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex flex-col gap-2">
+              <div className="bg-white rounded-xl border border-gray-200 p-5 flex flex-col gap-2">
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center shrink-0">
                     <Phone className="w-3.5 h-3.5 text-emerald-700" />
@@ -576,7 +551,7 @@ export default function Home() {
                 <div className="mt-auto pt-2.5 border-t border-gray-100 text-sm font-semibold text-emerald-700">+675 472 0000</div>
               </div>
             </div>
-            <div className="mt-5 bg-gray-50 rounded-xl border border-gray-100 p-4 flex items-center justify-between gap-4">
+            <div className="mt-5 bg-gray-50 rounded-xl border border-gray-200 p-4 flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
                   <Download className="w-4 h-4 text-red-300" />
