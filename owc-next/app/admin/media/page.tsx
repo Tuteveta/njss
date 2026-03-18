@@ -123,11 +123,11 @@ export default function MediaLibrary() {
         {loading ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {Array(10).fill(0).map((_, i) => (
-              <div key={i} className="aspect-square bg-white rounded-2xl border border-gray-100 animate-pulse" />
+              <div key={i} className="aspect-square bg-white rounded-2xl border border-gray-200 animate-pulse" />
             ))}
           </div>
         ) : images.length === 0 ? (
-          <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center">
+          <div className="bg-white rounded-2xl border border-gray-200 p-16 text-center">
             <ImageIcon className="w-10 h-10 text-gray-200 mx-auto mb-3" />
             <p className="text-gray-500 font-medium">No images yet</p>
             <p className="text-gray-400 text-sm mt-1">Upload your first image above</p>
@@ -138,7 +138,7 @@ export default function MediaLibrary() {
               <div
                 key={img.filename}
                 className={`bg-white rounded-2xl border overflow-hidden group cursor-pointer transition-all ${
-                  selected === img.filename ? "border-[hsl(210,70%,40%)] ring-2 ring-[hsl(210,70%,40%)]/20" : "border-gray-100 hover:border-gray-300"
+                  selected === img.filename ? "border-[hsl(210,70%,40%)] ring-2 ring-[hsl(210,70%,40%)]/20" : "border-gray-200 hover:border-gray-300"
                 }`}
                 onClick={() => setSelected(selected === img.filename ? null : img.filename)}
               >
@@ -161,7 +161,7 @@ export default function MediaLibrary() {
                     </button>
                   </div>
                 </div>
-                <div className="px-3 py-3 border-t border-gray-50">
+                <div className="px-3 py-3 border-t border-gray-200">
                   <p className="text-xs text-gray-700 font-medium truncate">{img.filename}</p>
                   <p className="text-xs text-gray-400 mt-0.5">{formatBytes(img.size)}</p>
                 </div>
@@ -175,8 +175,8 @@ export default function MediaLibrary() {
           const img = images.find(i => i.filename === selected)
           if (!img) return null
           return (
-            <div className="bg-white rounded-2xl border border-gray-100 p-6 flex gap-6 items-start">
-              <img src={img.url} alt={img.filename} className="w-32 h-32 rounded-xl object-cover border border-gray-100 shrink-0" />
+            <div className="bg-white rounded-2xl border border-gray-200 p-6 flex gap-6 items-start">
+              <img src={img.url} alt={img.filename} className="w-32 h-32 rounded-xl object-cover border border-gray-200 shrink-0" />
               <div className="flex-1 min-w-0 space-y-3">
                 <div>
                   <p className="text-xs text-gray-400 font-semibold uppercase tracking-wider mb-1">Filename</p>
@@ -185,7 +185,7 @@ export default function MediaLibrary() {
                 <div>
                   <p className="text-xs text-gray-400 font-semibold uppercase tracking-wider mb-1">URL</p>
                   <div className="flex items-center gap-2">
-                    <code className="text-xs bg-gray-50 border border-gray-100 rounded-lg px-3 py-2 flex-1 truncate text-gray-700">{img.url}</code>
+                    <code className="text-xs bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 flex-1 truncate text-gray-700">{img.url}</code>
                     <button
                       onClick={() => copyUrl(img.url)}
                       className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors shrink-0"

@@ -111,7 +111,7 @@ export default function OfficesManager() {
         </div>
 
         {(creating || editing) && (
-          <div className="bg-white rounded-2xl border border-gray-100 p-6 space-y-4">
+          <div className="bg-white rounded-2xl border border-gray-200 p-6 space-y-4">
             <h2 className="text-sm font-bold text-gray-700">{editing ? "Edit Office" : "New Office"}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="sm:col-span-2">
@@ -146,7 +146,7 @@ export default function OfficesManager() {
           </div>
         )}
 
-        <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
           {loading ? (
             <div className="p-16 text-center">
               <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto mb-3" />
@@ -160,13 +160,13 @@ export default function OfficesManager() {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-[1fr_auto_auto_auto] border-b border-gray-100 bg-gray-50/60 px-6">
+              <div className="grid grid-cols-[1fr_auto_auto_auto] border-b border-gray-200 bg-gray-50/60 px-6">
                 <div className="py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Office</div>
                 <div className="py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider hidden md:block px-4">Phone</div>
                 <div className="py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider hidden lg:block px-4">Hours</div>
                 <div className="py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider text-right">Actions</div>
               </div>
-              <div className="divide-y divide-gray-50">
+              <div className="divide-y divide-gray-200">
                 {offices.map(o => (
                   <div key={o.id} className="grid grid-cols-[1fr_auto_auto_auto] items-center px-6 py-4 hover:bg-gray-50/60 transition-colors">
                     <div className="min-w-0 pr-4">

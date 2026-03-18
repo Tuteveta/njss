@@ -25,7 +25,7 @@ interface RecentArticle {
 
 function StatSkeleton() {
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 p-6 animate-pulse">
+    <div className="bg-white rounded-2xl border border-gray-200 p-6 animate-pulse">
       <div className="flex items-start justify-between mb-5">
         <div className="w-12 h-12 rounded-xl bg-gray-100" />
         <div className="w-8 h-4 bg-gray-100 rounded" />
@@ -110,7 +110,7 @@ export default function Dashboard() {
             <Link
               key={card.label}
               href={card.href}
-              className="relative bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-lg transition-all group flex flex-col"
+              className="relative bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-lg transition-all group flex flex-col"
             >
               <div className="flex items-start justify-between mb-5">
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${card.bg}`}>
@@ -142,14 +142,14 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
 
           {/* Recent Articles */}
-          <div className="xl:col-span-2 bg-white rounded-2xl border border-gray-100 overflow-hidden">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-50">
+          <div className="xl:col-span-2 bg-white rounded-2xl border border-gray-200 overflow-hidden">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
               <h2 className="text-sm font-bold text-gray-800">Recent Articles</h2>
               <Link href="/admin/news" className="text-xs font-medium text-[hsl(210,70%,30%)] hover:underline flex items-center gap-1">
                 View all <ArrowRight className="w-3 h-3" />
               </Link>
             </div>
-            <div className="divide-y divide-gray-50">
+            <div className="divide-y divide-gray-200">
               {articles.length === 0 ? (
                 <div className="px-6 py-12 text-center">
                   <Newspaper className="w-8 h-8 text-gray-200 mx-auto mb-2" />
@@ -174,7 +174,7 @@ export default function Dashboard() {
                 </Link>
               ))}
             </div>
-            <div className="px-6 py-3 border-t border-gray-50">
+            <div className="px-6 py-3 border-t border-gray-200">
               <Link href="/admin/news/new"
                 className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-[hsl(210,70%,25%)] text-white text-sm font-medium hover:bg-[hsl(210,70%,20%)] transition-colors"
               >
@@ -184,8 +184,8 @@ export default function Dashboard() {
           </div>
 
           {/* Public site links */}
-          <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
-            <div className="px-6 py-4 border-b border-gray-50">
+          <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+            <div className="px-6 py-4 border-b border-gray-200">
               <h2 className="text-sm font-bold text-gray-800">Public Site</h2>
             </div>
             <div className="p-4 space-y-1">
@@ -218,7 +218,7 @@ export default function Dashboard() {
                 className={`flex flex-col justify-between rounded-2xl p-6 transition-all group min-h-[130px] ${
                   action.primary
                     ? "bg-[hsl(210,70%,25%)] hover:bg-[hsl(210,70%,20%)] shadow-md hover:shadow-lg"
-                    : "bg-white border border-gray-100 hover:shadow-md"
+                    : "bg-white border border-gray-200 hover:shadow-md"
                 }`}
               >
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 ${

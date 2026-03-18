@@ -97,17 +97,17 @@ export default function Messages() {
 
         {/* List */}
         {loading ? (
-          <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center">
+          <div className="bg-white rounded-2xl border border-gray-200 p-16 text-center">
             <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto mb-3" />
             <p className="text-gray-400 text-sm">Loading messages…</p>
           </div>
         ) : filtered.length === 0 ? (
-          <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center">
+          <div className="bg-white rounded-2xl border border-gray-200 p-16 text-center">
             <MessageSquare className="w-10 h-10 text-gray-200 mx-auto mb-3" />
             <p className="text-gray-500 font-medium">No messages here</p>
           </div>
         ) : (
-          <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden divide-y divide-gray-50">
+          <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden divide-y divide-gray-200">
             {filtered.map(msg => (
               <div key={msg.id} className={`transition-colors ${!msg.read ? "bg-[hsl(210,70%,99%)]" : ""}`}>
                 <button
@@ -154,7 +154,7 @@ export default function Messages() {
 
                 {expanded === msg.id && (
                   <div className="px-6 pb-6 pl-[84px]">
-                    <div className="bg-gray-50 rounded-xl p-5 text-sm text-gray-700 leading-relaxed whitespace-pre-wrap border border-gray-100 mb-4">
+                    <div className="bg-gray-50 rounded-xl p-5 text-sm text-gray-700 leading-relaxed whitespace-pre-wrap border border-gray-200 mb-4">
                       {msg.message}
                     </div>
                     <div className="flex items-center gap-4">

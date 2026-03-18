@@ -24,7 +24,7 @@ const THEMES = [
 
 function Toggle({ on, onToggle, label, desc }: { on: boolean; onToggle: () => void; label: string; desc?: string }) {
   return (
-    <div className="flex items-center justify-between p-4 rounded-lg border border-gray-100 bg-gray-50">
+    <div className="flex items-center justify-between p-4 rounded-lg border border-gray-200 bg-gray-50">
       <div>
         <div className="text-sm font-medium text-gray-800">{label}</div>
         {desc && <div className="text-xs text-gray-500 mt-0.5">{desc}</div>}

@@ -20,7 +20,7 @@ function ImagePickerModal({ onSelect, onClose }: { onSelect: (url: string) => vo
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl mx-4 overflow-hidden flex flex-col max-h-[80vh]">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
           <h2 className="font-bold text-gray-900">Media Library</h2>
           <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-400"><X className="w-4 h-4" /></button>
         </div>
@@ -267,7 +267,7 @@ export default function EventsManager() {
                 </div>
                 {form.image && (
                   <div className="mt-3 relative inline-block">
-                    <img src={form.image} alt="" className="h-24 rounded-xl object-cover border border-gray-100" />
+                    <img src={form.image} alt="" className="h-24 rounded-xl object-cover border border-gray-200" />
                     <button onClick={() => setForm(f => ({ ...f, image: "" }))} className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors shadow">
                       <X className="w-3.5 h-3.5" />
                     </button>
@@ -299,7 +299,7 @@ export default function EventsManager() {
           </h2>
           {loading ? (
             <div className="space-y-3">
-              {[1,2,3].map(i => <div key={i} className="bg-white rounded-xl border border-gray-100 h-24 animate-pulse" />)}
+              {[1,2,3].map(i => <div key={i} className="bg-white rounded-xl border border-gray-200 h-24 animate-pulse" />)}
             </div>
           ) : upcoming.length === 0 ? (
             <p className="text-sm text-gray-400 py-4">No upcoming events. Create one above.</p>
@@ -330,7 +330,7 @@ function EventRow({ event, onEdit, onDelete }: { event: OWCEvent; onEdit: (e: OW
   const past = isPast(event.eventDate)
   const colorClass = CATEGORY_COLORS[event.category] ?? CATEGORY_COLORS.General
   return (
-    <div className={`bg-white rounded-xl border border-gray-100 p-4 flex items-start gap-4 ${past ? "opacity-60" : ""}`}>
+    <div className={`bg-white rounded-xl border border-gray-200 p-4 flex items-start gap-4 ${past ? "opacity-60" : ""}`}>
       {event.image ? (
         <img src={event.image} alt="" className="w-16 h-16 rounded-lg object-cover shrink-0" />
       ) : (

@@ -132,7 +132,7 @@ export default function AdminLogin() {
           </div>
 
           {/* Card footer */}
-          <div className="border-t border-gray-100 px-8 py-4 text-center">
+          <div className="border-t border-gray-200 px-8 py-4 text-center">
             <a href="/" className="text-xs text-gray-400 hover:text-gray-600 transition-colors">
               ← Back to public site
             </a>

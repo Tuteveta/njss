@@ -177,7 +177,7 @@ export default function NewsEditor() {
             <div className="xl:col-span-2 space-y-6">
 
               {/* Article Details */}
-              <div className="bg-white rounded-2xl border border-gray-100 p-6 space-y-5">
+              <div className="bg-white rounded-2xl border border-gray-200 p-6 space-y-5">
                 <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-widest">Article Details</h2>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Title *</label>
@@ -213,7 +213,7 @@ export default function NewsEditor() {
               </div>
 
               {/* Body blocks */}
-              <div className="bg-white rounded-2xl border border-gray-100 p-6">
+              <div className="bg-white rounded-2xl border border-gray-200 p-6">
                 <div className="flex items-center justify-between mb-5">
                   <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-widest">Article Body</h2>
                   <button
@@ -226,7 +226,7 @@ export default function NewsEditor() {
                 </div>
                 <div className="space-y-4">
                   {body.map((block, i) => (
-                    <div key={i} className="border border-gray-100 rounded-xl p-5 bg-gray-50/40">
+                    <div key={i} className="border border-gray-200 rounded-xl p-5 bg-gray-50/40">
                       <div className="flex items-center justify-between mb-4">
                         <span className="text-xs font-semibold text-gray-400">Section {i + 1}</span>
                         {body.length > 1 && (
@@ -262,9 +262,9 @@ export default function NewsEditor() {
             <div className="space-y-6">
 
               {/* Publish settings */}
-              <div className="bg-white rounded-2xl border border-gray-100 p-6 space-y-5">
+              <div className="bg-white rounded-2xl border border-gray-200 p-6 space-y-5">
                 <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-widest">Publish</h2>
-                <div className="flex items-center gap-3 p-4 rounded-xl bg-gray-50 border border-gray-100">
+                <div className="flex items-center gap-3 p-4 rounded-xl bg-gray-50 border border-gray-200">
                   <input
                     type="checkbox"
                     id="published"
@@ -294,7 +294,7 @@ export default function NewsEditor() {
               </div>
 
               {/* Meta */}
-              <div className="bg-white rounded-2xl border border-gray-100 p-6 space-y-5">
+              <div className="bg-white rounded-2xl border border-gray-200 p-6 space-y-5">
                 <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-widest">Meta</h2>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Author</label>
@@ -307,7 +307,7 @@ export default function NewsEditor() {
               </div>
 
               {/* Hero image */}
-              <div className="bg-white rounded-2xl border border-gray-100 p-6 space-y-4">
+              <div className="bg-white rounded-2xl border border-gray-200 p-6 space-y-4">
                 <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-widest">Hero Image</h2>
                 <Input
                   value={image}
@@ -315,7 +315,7 @@ export default function NewsEditor() {
                   placeholder="https://images.unsplash.com/…"
                 />
                 {image && (
-                  <div className="rounded-xl overflow-hidden border border-gray-100 h-40">
+                  <div className="rounded-xl overflow-hidden border border-gray-200 h-40">
                     <img src={image} alt="Hero preview" className="w-full h-full object-cover" />
                   </div>
                 )}

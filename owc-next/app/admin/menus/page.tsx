@@ -98,13 +98,13 @@ export default function MenuManager() {
           {/* Menu editor */}
           <div className="xl:col-span-2 space-y-3">
             {loading ? (
-              <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center">
+              <div className="bg-white rounded-2xl border border-gray-200 p-16 text-center">
                 <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto mb-3" />
                 <p className="text-gray-400 text-sm">Loading menu…</p>
               </div>
             ) : (
               <>
-                <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden divide-y divide-gray-50">
+                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden divide-y divide-gray-200">
                   {items.length === 0 ? (
                     <div className="px-6 py-12 text-center">
                       <Navigation className="w-8 h-8 text-gray-200 mx-auto mb-2" />
@@ -113,7 +113,7 @@ export default function MenuManager() {
                   ) : (
                     <>
                       {/* Column headers */}
-                      <div className="grid grid-cols-[40px_32px_1fr_1fr_40px] items-center px-4 py-3 bg-gray-50/60 border-b border-gray-100">
+                      <div className="grid grid-cols-[40px_32px_1fr_1fr_40px] items-center px-4 py-3 bg-gray-50/60 border-b border-gray-200">
                         <div />
                         <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider">#</div>
                         <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-2">Label</div>
@@ -174,8 +174,8 @@ export default function MenuManager() {
 
           {/* Preview panel */}
           <div className="space-y-4">
-            <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
-              <div className="px-5 py-4 border-b border-gray-50">
+            <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+              <div className="px-5 py-4 border-b border-gray-200">
                 <h2 className="text-sm font-bold text-gray-800">Live Preview</h2>
                 <p className="text-xs text-gray-400 mt-0.5">How the menu will appear</p>
               </div>

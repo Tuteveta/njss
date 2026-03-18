@@ -51,7 +51,7 @@ function KVList({ label, items, onChange }: { label: string; items: KV[]; onChan
       <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">{label}</label>
       <div className="space-y-3">
         {items.map((item, i) => (
-          <div key={i} className="bg-gray-50 rounded-xl p-3 space-y-2 border border-gray-100">
+          <div key={i} className="bg-gray-50 rounded-xl p-3 space-y-2 border border-gray-200">
             <div className="flex gap-2">
               <Input value={item.title} onChange={e => { const n = [...items]; n[i] = { ...n[i], title: e.target.value }; onChange(n) }} placeholder="Title" className="flex-1" />
               <button type="button" onClick={() => onChange(items.filter((_, j) => j !== i))} className="p-2 rounded-lg text-gray-400 hover:bg-red-50 hover:text-red-500 transition-colors">
@@ -127,14 +127,14 @@ export default function AboutManager() {
         </div>
 
         {loading ? (
-          <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center">
+          <div className="bg-white rounded-2xl border border-gray-200 p-16 text-center">
             <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto mb-3" />
             <p className="text-gray-400 text-sm">Loading…</p>
           </div>
         ) : (
-          <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+          <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
             {/* Tab bar */}
-            <div className="flex items-center gap-0 border-b border-gray-100 overflow-x-auto">
+            <div className="flex items-center gap-0 border-b border-gray-200 overflow-x-auto">
               {TABS.map(tab => (
                 <button
                   key={tab.key}
@@ -185,7 +185,7 @@ export default function AboutManager() {
               )}
             </div>
 
-            <div className="px-6 pb-6 flex justify-end border-t border-gray-50 pt-4">
+            <div className="px-6 pb-6 flex justify-end border-t border-gray-200 pt-4">
               <Button onClick={save} disabled={saving} className="flex items-center gap-2">
                 <Info className="w-4 h-4" /> {saving ? "Saving…" : "Save All Changes"}
               </Button>

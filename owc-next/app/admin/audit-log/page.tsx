@@ -66,7 +66,7 @@ export default function AuditLog() {
         </div>
 
         {/* Table */}
-        <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
           {loading ? (
             <div className="p-16 text-center">
               <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto mb-3" />
@@ -80,12 +80,12 @@ export default function AuditLog() {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-[auto_1fr_auto] border-b border-gray-100 bg-gray-50/60 px-6">
+              <div className="grid grid-cols-[auto_1fr_auto] border-b border-gray-200 bg-gray-50/60 px-6">
                 <div className="py-3.5 pr-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Action</div>
                 <div className="py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">User &amp; Detail</div>
                 <div className="py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider text-right">When</div>
               </div>
-              <div className="divide-y divide-gray-50">
+              <div className="divide-y divide-gray-200">
                 {entries.map(e => (
                   <div key={e.id} className="grid grid-cols-[auto_1fr_auto] items-center px-6 py-4 hover:bg-gray-50/60 transition-colors">
                     <div className="pr-4">

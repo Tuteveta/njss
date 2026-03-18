@@ -37,7 +37,7 @@ function ImagePickerModal({ onSelect, onClose }: { onSelect: (url: string) => vo
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[80vh] flex flex-col">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
           <h2 className="font-semibold text-gray-900">Choose from Media Library</h2>
           <button onClick={onClose} className="p-2 rounded-lg text-gray-400 hover:bg-gray-100 transition-colors">
             <X className="w-5 h-5" />
@@ -199,7 +199,7 @@ export default function HeroSlidesManager() {
         </div>
 
         {(creating || editing) && (
-          <div className="bg-white rounded-2xl border border-gray-100 p-6 space-y-4">
+          <div className="bg-white rounded-2xl border border-gray-200 p-6 space-y-4">
             <h2 className="text-sm font-bold text-gray-700">{editing ? "Edit Slide" : "New Slide"}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -224,7 +224,7 @@ export default function HeroSlidesManager() {
                 </div>
                 {form.image && (
                   <div className="mt-3 relative inline-block">
-                    <img src={form.image} alt="" className="h-28 rounded-xl object-cover border border-gray-100" />
+                    <img src={form.image} alt="" className="h-28 rounded-xl object-cover border border-gray-200" />
                     <button type="button" onClick={() => set("image", "")} className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors">
                       <X className="w-3.5 h-3.5" />
                     </button>
@@ -269,7 +269,7 @@ export default function HeroSlidesManager() {
           </div>
         )}
 
-        <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
           {loading ? (
             <div className="p-16 text-center">
               <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto mb-3" />
@@ -283,13 +283,13 @@ export default function HeroSlidesManager() {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-[auto_1fr_auto_auto] border-b border-gray-100 bg-gray-50/60 px-6">
+              <div className="grid grid-cols-[auto_1fr_auto_auto] border-b border-gray-200 bg-gray-50/60 px-6">
                 <div className="py-3.5 pr-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Order</div>
                 <div className="py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Slide</div>
                 <div className="py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider px-4">Status</div>
                 <div className="py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider text-right">Actions</div>
               </div>
-              <div className="divide-y divide-gray-50">
+              <div className="divide-y divide-gray-200">
                 {slides.map((s, i) => (
                   <div key={s.id} className={`grid grid-cols-[auto_1fr_auto_auto] items-center px-6 py-4 hover:bg-gray-50/60 transition-colors ${!s.published ? "opacity-60" : ""}`}>
                     <div className="flex flex-col gap-1 pr-3">

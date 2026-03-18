@@ -18,7 +18,7 @@ function ImagePickerModal({ onSelect, onClose }: { onSelect: (url: string) => vo
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl mx-4 overflow-hidden flex flex-col max-h-[80vh]">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
           <h2 className="font-bold text-gray-900">Media Library</h2>
           <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-400"><X className="w-4 h-4" /></button>
         </div>
@@ -107,12 +107,12 @@ export default function PagesManager() {
         </div>
 
         {loading ? (
-          <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center">
+          <div className="bg-white rounded-2xl border border-gray-200 p-16 text-center">
             <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto mb-3" />
             <p className="text-gray-400 text-sm">Loading pages…</p>
           </div>
         ) : (
-          <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden divide-y divide-gray-50">
+          <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden divide-y divide-gray-200">
             {pages.map(page => {
               const draft = drafts[page.slug] || page
               const isOpen = expanded === page.slug
@@ -138,7 +138,7 @@ export default function PagesManager() {
                   </button>
 
                   {isOpen && (
-                    <div className="px-6 pb-6 pt-2 bg-gray-50 border-t border-gray-100">
+                    <div className="px-6 pb-6 pt-2 bg-gray-50 border-t border-gray-200">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-4">
                         <div>
                           <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Badge Label</label>
@@ -180,7 +180,7 @@ export default function PagesManager() {
                           </div>
                           {draft.heroImage && (
                             <div className="mt-3 relative inline-block">
-                              <img src={draft.heroImage} alt="" className="h-28 rounded-xl object-cover border border-gray-100 max-w-full" />
+                              <img src={draft.heroImage} alt="" className="h-28 rounded-xl object-cover border border-gray-200 max-w-full" />
                               <button
                                 onClick={() => update(page.slug, "heroImage", "")}
                                 className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors shadow"

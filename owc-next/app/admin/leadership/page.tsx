@@ -27,7 +27,7 @@ function ImagePickerModal({ onSelect, onClose }: { onSelect: (url: string) => vo
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[80vh] flex flex-col">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
           <h3 className="font-bold text-gray-900">Pick from Media Library</h3>
           <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-400 transition-colors">
             <X className="w-4 h-4" />
@@ -61,7 +61,7 @@ function ImagePickerModal({ onSelect, onClose }: { onSelect: (url: string) => vo
             </div>
           )}
         </div>
-        <div className="px-6 py-4 border-t border-gray-100 flex gap-3 justify-end">
+        <div className="px-6 py-4 border-t border-gray-200 flex gap-3 justify-end">
           <Button variant="outline" onClick={onClose}>Cancel</Button>
           <Button disabled={!selected} onClick={() => { onSelect(selected); onClose() }}>
             Use Selected Photo
@@ -182,7 +182,7 @@ export default function LeadershipManager() {
         </div>
 
         {(creating || editing) && (
-          <div className="bg-white rounded-2xl border border-gray-100 p-6 space-y-4">
+          <div className="bg-white rounded-2xl border border-gray-200 p-6 space-y-4">
             <h2 className="text-sm font-bold text-gray-700">{editing ? "Edit Member" : "New Member"}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="sm:col-span-2">
@@ -231,7 +231,7 @@ export default function LeadershipManager() {
           </div>
         )}
 
-        <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
           {loading ? (
             <div className="p-16 text-center">
               <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto mb-3" />
@@ -245,13 +245,13 @@ export default function LeadershipManager() {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-[auto_1fr_auto_auto] border-b border-gray-100 bg-gray-50/60 px-6">
+              <div className="grid grid-cols-[auto_1fr_auto_auto] border-b border-gray-200 bg-gray-50/60 px-6">
                 <div className="py-3.5 pr-4 w-12" />
                 <div className="py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Name &amp; Role</div>
                 <div className="py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider hidden sm:block px-4">Since</div>
                 <div className="py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider text-right">Actions</div>
               </div>
-              <div className="divide-y divide-gray-50">
+              <div className="divide-y divide-gray-200">
                 {members.map(m => (
                   <div key={m.id} className="grid grid-cols-[auto_1fr_auto_auto] items-center px-6 py-4 hover:bg-gray-50/60 transition-colors">
                     {m.photo ? (
