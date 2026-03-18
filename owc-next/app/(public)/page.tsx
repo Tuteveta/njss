@@ -214,7 +214,7 @@ function HeroSlider({ slides }: { slides: ApiSlide[] }) {
       {slides.length > 1 && <>
         <button
           onClick={prev}
-          className="absolute left-3 bottom-5 z-20 w-8 h-8 rounded-full bg-white/15 hover:bg-white/30 border border-white/20 flex items-center justify-center text-white transition-colors"
+          className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/15 hover:bg-white/30 border border-white/20 flex items-center justify-center text-white transition-colors"
           aria-label="Previous slide"
         >
           <ChevronLeft className="w-4 h-4" />
@@ -236,7 +236,7 @@ function HeroSlider({ slides }: { slides: ApiSlide[] }) {
 
         <button
           onClick={next}
-          className="absolute right-3 bottom-5 z-20 w-8 h-8 rounded-full bg-white/15 hover:bg-white/30 border border-white/20 flex items-center justify-center text-white transition-colors"
+          className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/15 hover:bg-white/30 border border-white/20 flex items-center justify-center text-white transition-colors"
           aria-label="Next slide"
         >
           <ChevronRight className="w-4 h-4" />
