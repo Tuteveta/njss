@@ -15,7 +15,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: owc-next
-        run: npm ci
+        run: npm install --prefer-offline
 
       - name: Build
         working-directory: owc-next
