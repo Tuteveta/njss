@@ -1,30 +1,23 @@
 # Dependencies
-frontend/node_modules/
+owc-next/node_modules/
 
-# Build outputs
-frontend/dist/
-
-# Go binaries
-backend/*.exe
-backend/owc-backend
-backend/owc-backend.exe~
-
-# Database
-backend/*.db
-backend/*.db-shm
-backend/*.db-wal
+# Next.js build output
+owc-next/.next/
+owc-next/out/
 
 # Uploads (user data — do not commit)
-backend/uploads/images/*
-backend/uploads/documents/*
-!backend/uploads/images/.gitkeep
-!backend/uploads/documents/.gitkeep
+owc-next/uploads/images/*
+owc-next/uploads/documents/*
+!owc-next/uploads/images/.gitkeep
+!owc-next/uploads/documents/.gitkeep
 
 # Environment & secrets
 .env
 .env.local
 .env.*.local
-backend/.env
+owc-next/.env
+owc-next/.env.local
+owc-next/.env.*.local
 
 # OS
 .DS_Store
@@ -36,3 +29,4 @@ Thumbs.db
 
 # Logs
 *.log
+npm-debug.log*
