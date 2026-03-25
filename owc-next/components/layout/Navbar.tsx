@@ -39,7 +39,7 @@ function GovBanner() {
         </div>
       </div>
       {open && (
-        <div className="border-t border-white/10 bg-[hsl(210,70%,12%)]">
+        <div className="border-t border-white/10 bg-[hsl(210,70%,15%)]">
           <div className="max-w-7xl mx-auto px-4 lg:px-10 py-5 grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="flex items-start gap-3">
               <FileText className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
