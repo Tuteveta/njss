@@ -334,75 +334,31 @@ export default function Home() {
                 Follow these steps to ensure your workers compensation claim is processed smoothly and efficiently.
               </p>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-              {/* Vertical timeline */}
-              <div className="flex flex-col">
-                {process.map((p, i) => (
-                  <div key={p.step} className="flex gap-4">
-                    {/* Spine */}
-                    <div className="flex flex-col items-center">
-                      {i === 0 ? (
-                        <div className="w-9 h-9 rounded-full bg-[hsl(210,70%,25%)] flex items-center justify-center shrink-0 shadow-md shadow-[hsl(210,70%,25%)]/30">
-                          <span className="text-white text-xs font-bold">{p.step}</span>
-                        </div>
-                      ) : (
-                        <div className="w-9 h-9 rounded-full border-2 border-gray-200 flex items-center justify-center shrink-0 bg-white">
-                          <span className="text-gray-400 text-xs font-semibold">{p.step}</span>
-                        </div>
-                      )}
-                      {i < process.length - 1 && (
-                        <div className="w-px flex-1 my-1 bg-gray-200" style={{ minHeight: "32px" }} />
-                      )}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+              {process.map((p, i) => (
+                <div key={p.step} className="relative group">
+                  <div className="text-center p-3">
+                    <div className="relative w-10 h-10 mx-auto mb-2">
+                      <span className="absolute inset-0 rounded-full bg-[hsl(210,70%,25%)] opacity-0 group-hover:opacity-20 group-hover:scale-[2.2] transition-all duration-500 ease-out" />
+                      <span className="absolute inset-0 rounded-full bg-[hsl(210,70%,25%)] opacity-0 group-hover:opacity-10 group-hover:scale-[3.2] transition-all duration-700 ease-out delay-100" />
+                      <div className="relative w-10 h-10 bg-[hsl(210,70%,25%)] text-white rounded-full flex items-center justify-center font-bold text-xs group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[hsl(210,70%,25%)]/30 transition-all duration-300">
+                        {p.step}
+                      </div>
                     </div>
-                    {/* Content */}
-                    <div className="pb-6">
-                      <h3 className={`font-semibold text-sm mb-1 ${i === 0 ? "text-[hsl(210,70%,25%)]" : "text-gray-800"}`}>{p.title}</h3>
-                      <p className="text-xs text-gray-500 leading-relaxed">{p.desc}</p>
-                    </div>
+                    <h3 className="font-semibold text-gray-900 mb-1 text-sm group-hover:text-[hsl(210,70%,25%)] transition-colors">{p.title}</h3>
+                    <p className="text-xs text-gray-500 leading-relaxed hidden sm:block">{p.desc}</p>
                   </div>
-                ))}
-                <div className="mt-2">
-                  <a href={CLAIMS_URL} target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center h-9 px-5 rounded-md text-sm font-medium bg-emerald-600 hover:bg-emerald-700 text-white transition-colors">
-                    Start Your Claim <ArrowRight className="ml-2 w-4 h-4" />
-                  </a>
+                  {i < process.length - 1 && (
+                    <div className="hidden lg:block absolute top-9 left-[calc(50%+20px)] w-[calc(100%-40px)] h-0.5 bg-blue-100" />
+                  )}
                 </div>
-              </div>
-              {/* Supporting info */}
-              <div className="space-y-4">
-                <div className="rounded-xl border border-gray-200 p-5 bg-gray-50">
-                  <div className="flex items-center gap-2 mb-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0" />
-                    <span className="text-sm font-semibold text-gray-800">What You'll Need</span>
-                  </div>
-                  <ul className="text-xs text-gray-500 space-y-1.5 leading-relaxed">
-                    <li>• Employer's name, address, and contact details</li>
-                    <li>• Date, time, and description of the injury or illness</li>
-                    <li>• Medical certificate from a registered doctor</li>
-                    <li>• Copies of all medical bills and receipts</li>
-                    <li>• Your employment contract or payslip</li>
-                  </ul>
-                </div>
-                <div className="rounded-xl border border-gray-200 p-5 bg-gray-50">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Clock className="w-4 h-4 text-[hsl(210,70%,25%)] shrink-0" />
-                    <span className="text-sm font-semibold text-gray-800">Processing Time</span>
-                  </div>
-                  <p className="text-xs text-gray-500 leading-relaxed">
-                    Most claims are assessed within <span className="font-semibold text-gray-700">10–15 working days</span> of receiving all required documents. Complex cases may take longer.
-                  </p>
-                </div>
-                <div className="rounded-xl border border-blue-100 p-5 bg-blue-50/50">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Phone className="w-4 h-4 text-[hsl(210,70%,25%)] shrink-0" />
-                    <span className="text-sm font-semibold text-[hsl(210,70%,25%)]">Need Help?</span>
-                  </div>
-                  <p className="text-xs text-gray-500 mb-2">Our case officers are available Monday–Friday, 8am–4pm.</p>
-                  <Link href="/contact" className="inline-flex items-center gap-1 text-xs font-semibold text-[hsl(210,70%,25%)] hover:underline">
-                    Contact a Case Officer <ChevronRight className="w-3 h-3" />
-                  </Link>
-                </div>
-              </div>
+              ))}
+            </div>
+            <div className="text-center mt-6">
+              <a href={CLAIMS_URL} target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center h-9 px-5 rounded-md text-sm font-medium bg-emerald-600 hover:bg-emerald-700 text-white transition-colors">
+                Start Your Claim <ArrowRight className="ml-2 w-4 h-4" />
+              </a>
             </div>
           </div>
         </section>
