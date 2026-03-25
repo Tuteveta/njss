@@ -18,7 +18,7 @@ function GovBanner() {
     <div className="bg-[hsl(210,70%,15%)] text-xs border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 lg:px-10 py-1.5 flex items-center justify-between gap-4">
         <div className="flex items-center gap-2">
-          <img src="/png-coa.png" alt="PNG Coat of Arms" className="h-4 w-auto opacity-80" />
+          <img src="https://flagcdn.com/h20/pg.png" alt="Papua New Guinea Flag" className="h-4 w-auto rounded-sm opacity-90" />
           <span className="text-blue-200 font-medium">An Official Papua New Guinea Government Website</span>
           <button
             onClick={() => setOpen(o => !o)}
