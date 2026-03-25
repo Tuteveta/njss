@@ -37,6 +37,19 @@ export async function initDb() {
     await conn.execute(`CREATE TABLE IF NOT EXISTS hero_slides (id INT PRIMARY KEY AUTO_INCREMENT, badge VARCHAR(200) NOT NULL DEFAULT '', title TEXT NOT NULL, subtitle TEXT NOT NULL DEFAULT '', image TEXT NOT NULL DEFAULT '', cta_label VARCHAR(200) NOT NULL DEFAULT 'Learn More', cta_href VARCHAR(500) NOT NULL DEFAULT '/', cta_external TINYINT NOT NULL DEFAULT 0, secondary_label VARCHAR(200) NOT NULL DEFAULT '', secondary_href VARCHAR(500) NOT NULL DEFAULT '/', position INT NOT NULL DEFAULT 0, published TINYINT NOT NULL DEFAULT 1)`)
     await conn.execute(`CREATE TABLE IF NOT EXISTS services (id INT PRIMARY KEY AUTO_INCREMENT, position INT NOT NULL DEFAULT 0, tag VARCHAR(100) NOT NULL DEFAULT '', icon_name VARCHAR(100) NOT NULL DEFAULT 'HelpCircle', title VARCHAR(300) NOT NULL, description TEXT NOT NULL DEFAULT '', who_eligible TEXT NOT NULL DEFAULT '', benefits LONGTEXT NOT NULL DEFAULT '[]', published TINYINT NOT NULL DEFAULT 1)`)
 
+    // Seed pages
+    const defaultPages = [
+      { slug: 'about',     badge: 'About Us',       title: 'About the Office of Workers Compensation',  subtitle: 'A statutory office under the Department of Labour and Industrial Relations (DLIR), OWC administers and enforces the Workers\' Compensation Act 1978.', hero_image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1920&q=80' },
+      { slug: 'services',  badge: 'Our Services',   title: 'Workers Compensation Services',              subtitle: 'Comprehensive services to protect injured workers and guide employers across Papua New Guinea.', hero_image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1920&q=80' },
+      { slug: 'news',      badge: 'News & Updates', title: 'News & Announcements',                       subtitle: 'Stay informed with the latest updates, policy changes, and announcements from OWC.', hero_image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1920&q=80' },
+      { slug: 'events',    badge: 'Events',         title: 'Events & Workshops',                         subtitle: 'Join our outreach programs, training sessions, and community awareness events across PNG.', hero_image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1920&q=80' },
+      { slug: 'resources', badge: 'Resources',      title: 'Resources & Forms',                          subtitle: 'Download official OWC claim forms, guides, and policy documents.', hero_image: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1920&q=80' },
+      { slug: 'contact',   badge: 'Contact Us',     title: 'Get in Touch with OWC',                      subtitle: 'Our case officers are ready to assist you Monday to Friday, 8am to 4pm.', hero_image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80' },
+    ]
+    for (const p of defaultPages) {
+      await conn.execute('INSERT IGNORE INTO pages (slug, badge, title, subtitle, hero_image) VALUES (?, ?, ?, ?, ?)', [p.slug, p.badge, p.title, p.subtitle, p.hero_image])
+    }
+
     // Seed admin user
     const [rows] = await conn.execute('SELECT id FROM users WHERE username = ?', ['admin']) as any[]
     if ((rows as any[]).length === 0) {
