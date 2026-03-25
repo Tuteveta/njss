@@ -216,12 +216,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
 
           <div className="flex items-center gap-4">
-            {/* System status */}
-            <div className="hidden sm:flex items-center gap-1.5">
-              <span className="gf-status-dot online" />
-              <span className="text-[11px] text-gray-400 font-medium">All systems operational</span>
-            </div>
-            <span className="gf-divider hidden sm:inline-block text-gray-300" />
             <LiveClock />
             <span className="gf-divider text-gray-300" />
             <button
