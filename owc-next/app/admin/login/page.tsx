@@ -116,7 +116,7 @@ export default function AdminLogin() {
                   <div className="text-sm text-blue-800">
                     <p className="font-medium mb-1">Reset your password</p>
                     <p className="text-blue-700 leading-relaxed">
-                      Contact your system administrator to reset your password, or use the server environment variable <code className="bg-blue-100 px-1 rounded text-xs font-mono">ADMIN_INITIAL_PASSWORD</code> to set a new default.
+                      Contact your system administrator to reset your password, or use the server environment variable <code className="bg-blue-100 px-1 rounded text-xs">ADMIN_INITIAL_PASSWORD</code> to set a new default.
                     </p>
                   </div>
                 </div>

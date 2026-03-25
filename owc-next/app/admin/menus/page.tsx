@@ -148,7 +148,7 @@ export default function MenuManager() {
                               value={item.href}
                               onChange={e => update(i, "href", e.target.value)}
                               placeholder="/path"
-                              className="h-9 font-mono text-sm"
+                              className="h-9 text-sm"
                             />
                           </div>
                           <button
@@ -190,7 +190,7 @@ export default function MenuManager() {
                         className="flex items-center justify-between px-3 py-2.5 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors group"
                       >
                         <span className="text-sm font-medium text-gray-800">{item.label || <span className="text-gray-300 italic">Label</span>}</span>
-                        <span className="text-xs text-gray-400 font-mono">{item.href || "/"}</span>
+                        <span className="text-xs text-gray-400">{item.href || "/"}</span>
                       </div>
                     ))}
                   </nav>
@@ -201,7 +201,7 @@ export default function MenuManager() {
             <div className="bg-[hsl(210,70%,97%)] rounded-2xl border border-[hsl(210,70%,88%)] px-5 py-4">
               <p className="text-xs font-semibold text-[hsl(210,70%,30%)] mb-1">How it works</p>
               <p className="text-xs text-[hsl(210,70%,40%)] leading-relaxed">
-                Drag items to reorder. Set the label (display name) and path (e.g. <code className="font-mono">/about</code>). Click <strong>Save Menu</strong> to publish changes.
+                Drag items to reorder. Set the label (display name) and path (e.g. <code>/about</code>). Click <strong>Save Menu</strong> to publish changes.
               </p>
             </div>
           </div>

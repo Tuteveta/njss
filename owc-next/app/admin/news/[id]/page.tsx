@@ -196,9 +196,8 @@ export default function NewsEditor() {
                     value={slug}
                     onChange={e => { setSlug(e.target.value); setSlugManual(true) }}
                     placeholder="url-friendly-slug"
-                    className="font-mono"
                   />
-                  <p className="text-xs text-gray-400 mt-1.5">Public URL: <span className="font-mono">/news/{slug || "…"}</span></p>
+                  <p className="text-xs text-gray-400 mt-1.5">Public URL: /news/{slug || "…"}</p>
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Excerpt *</label>
