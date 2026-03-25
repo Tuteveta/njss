@@ -39,7 +39,7 @@ function formatDateForDisplay(isoDate: string): string {
 export default function NewsEditor() {
   const { id } = useParams<{ id: string }>()
   const router = useRouter()
-  const isNew = !id
+  const isNew = id === 'new'
 
   const [loading, setLoading] = useState(!isNew)
   const [saving, setSaving] = useState(false)
@@ -70,7 +70,7 @@ export default function NewsEditor() {
           setExcerpt(a.excerpt)
           setImage(a.image)
           setAuthor(a.author)
-          setReadTime(a.readTime)
+          setReadTime(a.read_time)
           setPublished(a.published)
           setBody(a.body?.length ? a.body : [{ heading: "", text: "" }])
           const d = new Date(a.date)

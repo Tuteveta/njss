@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import { useEffect, useState, useCallback } from "react"
-import { ArrowRight, Shield, Users, FileText, Clock, TrendingUp, CheckCircle, Phone, Download, AlertCircle, ChevronRight, ChevronLeft, CalendarDays, MapPin } from "lucide-react"
+import { ArrowRight, Shield, Users, FileText, Clock, TrendingUp, CheckCircle, Phone, Download, AlertCircle, ChevronRight, ChevronLeft, CalendarDays, MapPin, HelpCircle, Building2, Stethoscope, Scale, Briefcase, Heart, BookOpen, Star, Globe } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { useSettings } from "@/context/SettingsContext"
@@ -13,6 +13,14 @@ interface HomeEvent {
   eventTime: string
   location: string
   category: string
+}
+
+interface HomeService { id: number; tag: string; iconName: string; title: string; description: string; published: boolean }
+interface HomeArticle { id: number; slug: string; date: string; category: string; title: string; excerpt: string; image: string }
+
+const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+  Shield, Users, Building2, Stethoscope, Scale, HelpCircle,
+  Briefcase, Heart, BookOpen, FileText, Star, Globe, CheckCircle, TrendingUp, Clock,
 }
 
 const EVENT_COLORS: Record<string, string> = {
@@ -31,6 +39,19 @@ function formatShortDate(iso: string) {
 }
 
 const CLAIMS_URL = "https://portal.owc.gov.pg"
+
+const FALLBACK_SERVICES: HomeService[] = [
+  { id: 1, tag: "Workers", iconName: "Shield", title: "Workers Compensation", description: "Financial support covering medical expenses, lost wages, and permanent disability for workers injured on the job.", published: true },
+  { id: 2, tag: "Rehab", iconName: "Heart", title: "Injury Rehabilitation", description: "Structured recovery programs helping injured workers return to safe and meaningful employment.", published: true },
+  { id: 3, tag: "Claims", iconName: "FileText", title: "Claim Filing", description: "Simple and transparent online or in-person process to submit and track your compensation claim.", published: true },
+  { id: 4, tag: "Employers", iconName: "Briefcase", title: "Employer Registration", description: "Register your business and ensure full workforce coverage under PNG Workers Compensation legislation.", published: true },
+]
+
+const FALLBACK_NEWS: HomeArticle[] = [
+  { id: 1, slug: "#", date: "March 5, 2026", category: "Policy Update", title: "OWC Launches New Online Claims Portal for 2026", excerpt: "The Office of Workers Compensation is pleased to announce the launch of our improved digital claims system, making it easier for workers to file and track claims.", image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80" },
+  { id: 2, slug: "#", date: "February 18, 2026", category: "Workshop", title: "Employer Awareness Workshop — Port Moresby", excerpt: "Join us for a free workshop on employer obligations under the Workers Compensation Act 1978. All registered businesses are encouraged to attend.", image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80" },
+  { id: 3, slug: "#", date: "February 1, 2026", category: "Announcement", title: "Updated Medical Assessment Schedules for 2026", excerpt: "New medical fee schedules have been gazetted and take effect from February 1, 2026. Employers and insurers should review the updated rates.", image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600&q=80" },
+]
 
 interface ApiSlide {
   id: number
@@ -57,62 +78,6 @@ const STAT_DEFS = [
   { settingKey: "stat_benefits",   label: "Benefits Paid (2024)", icon: TrendingUp },
   { settingKey: "stat_processing", label: "Days Avg. Processing", icon: Clock },
   { settingKey: "stat_coverage",   label: "Nationwide Coverage",  icon: Users },
-]
-
-const services = [
-  {
-    icon: Shield,
-    color: "bg-blue-50 text-[hsl(210,70%,25%)]",
-    title: "Workers Compensation",
-    description: "Financial support covering medical expenses, lost wages, and permanent disability for workers injured on the job.",
-    href: "/services#compensation",
-  },
-  {
-    icon: Users,
-    color: "bg-emerald-50 text-emerald-800",
-    title: "Injury Rehabilitation",
-    description: "Structured recovery programs helping injured workers return to safe and meaningful employment.",
-    href: "/services#rehabilitation",
-  },
-  {
-    icon: FileText,
-    color: "bg-indigo-50 text-indigo-700",
-    title: "Claim Filing",
-    description: "Simple and transparent online or in-person process to submit and track your compensation claim.",
-    href: CLAIMS_URL,
-    external: true,
-  },
-  {
-    icon: CheckCircle,
-    color: "bg-emerald-50 text-emerald-700",
-    title: "Employer Registration",
-    description: "Register your business and ensure full workforce coverage under PNG Workers Compensation legislation.",
-    href: "/services#employer",
-  },
-]
-
-const news = [
-  {
-    date: "March 5, 2026",
-    category: "Policy Update",
-    title: "OWC Launches New Online Claims Portal for 2026",
-    excerpt: "The Office of Workers Compensation is pleased to announce the launch of our improved digital claims system.",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80",
-  },
-  {
-    date: "February 18, 2026",
-    category: "Workshop",
-    title: "Employer Awareness Workshop — Port Moresby",
-    excerpt: "Join us for a free workshop on employer obligations under the Workers Compensation Act 1978.",
-    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80",
-  },
-  {
-    date: "February 1, 2026",
-    category: "Announcement",
-    title: "Updated Medical Assessment Schedules for 2026",
-    excerpt: "New medical fee schedules have been gazetted and take effect from February 1, 2026.",
-    image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600&q=80",
-  },
 ]
 
 const process = [
@@ -270,6 +235,22 @@ export default function Home() {
       .catch(() => {})
   }, [])
 
+  const [homeServices, setHomeServices] = useState<HomeService[]>(FALLBACK_SERVICES)
+  useEffect(() => {
+    fetch("/api/services")
+      .then(r => r.json())
+      .then(d => { const s = (d.services ?? []).slice(0, 4); if (s.length) setHomeServices(s) })
+      .catch(() => {})
+  }, [])
+
+  const [homeNews, setHomeNews] = useState<HomeArticle[]>(FALLBACK_NEWS)
+  useEffect(() => {
+    fetch("/api/news")
+      .then(r => r.json())
+      .then(d => { const n = (d.news ?? []).slice(0, 3); if (n.length) setHomeNews(n) })
+      .catch(() => {})
+  }, [])
+
   return (
     <div>
       {/* Hero Slider */}
@@ -319,37 +300,24 @@ export default function Home() {
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {services.map((svc) => (
-              svc.external ? (
-              <a key={svc.title} href={svc.href} target="_blank" rel="noopener noreferrer"
-                className="group flex items-start gap-4 bg-white rounded-xl border border-gray-200 p-5 transition-colors">
-                <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${svc.color} group-hover:scale-110 transition-transform duration-300`}>
-                  <svc.icon className="w-5 h-5" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-bold text-gray-900 mb-1.5 group-hover:text-[hsl(210,70%,25%)] transition-colors">{svc.title}</h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">{svc.description}</p>
-                  <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-[hsl(210,70%,25%)] group-hover:gap-2 transition-all">
-                    Learn more <ChevronRight className="w-3.5 h-3.5" />
-                  </span>
-                </div>
-              </a>
-              ) : (
-              <Link key={svc.title} href={svc.href}
-                className="group flex items-start gap-4 bg-white rounded-xl border border-gray-200 p-5 transition-colors">
-                <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${svc.color} group-hover:scale-110 transition-transform duration-300`}>
-                  <svc.icon className="w-5 h-5" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-bold text-gray-900 mb-1.5 group-hover:text-[hsl(210,70%,25%)] transition-colors">{svc.title}</h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">{svc.description}</p>
-                  <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-[hsl(210,70%,25%)] group-hover:gap-2 transition-all">
-                    Learn more <ChevronRight className="w-3.5 h-3.5" />
-                  </span>
-                </div>
-              </Link>
+            {homeServices.map((svc) => {
+              const Icon = ICON_MAP[svc.iconName] ?? ICON_MAP.HelpCircle
+              return (
+                <Link key={svc.id} href="/services"
+                  className="group flex items-start gap-4 bg-white rounded-xl border border-gray-200 p-5 transition-colors">
+                  <div className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 bg-blue-50 text-[hsl(210,70%,25%)] group-hover:scale-110 transition-transform duration-300">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-bold text-gray-900 mb-1.5 group-hover:text-[hsl(210,70%,25%)] transition-colors">{svc.title}</h3>
+                    <p className="text-sm text-gray-500 leading-relaxed">{svc.description}</p>
+                    <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-[hsl(210,70%,25%)] group-hover:gap-2 transition-all">
+                      Learn more <ChevronRight className="w-3.5 h-3.5" />
+                    </span>
+                  </div>
+                </Link>
               )
-            ))}
+            })}
           </div>
         </div>
         </section>
@@ -410,27 +378,32 @@ export default function Home() {
               </Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              {news.map((n) => (
-                <Card key={n.title} className="hover:shadow-md hover:-translate-y-1 transition-all duration-300 overflow-hidden">
-                  <div className="h-36 overflow-hidden">
-                    <img src={n.image} alt={n.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                  </div>
-                  <CardHeader>
-                    <div className="flex items-center justify-between mb-2">
-                      <Badge variant="secondary" className="text-xs">{n.category}</Badge>
-                      <span className="text-xs text-gray-400">{n.date}</span>
+              {homeNews.map((n) => (
+                <Link key={n.id} href={`/news/${n.slug}`}>
+                  <Card className="hover:shadow-md hover:-translate-y-1 transition-all duration-300 overflow-hidden h-full">
+                    <div className="h-36 overflow-hidden">
+                      {n.image
+                        ? <img src={n.image} alt={n.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                        : <div className="w-full h-full bg-gray-100" />
+                      }
                     </div>
-                    <CardTitle className="text-base leading-snug hover:text-[hsl(210,70%,25%)] cursor-pointer">
-                      {n.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription>{n.excerpt}</CardDescription>
-                    <button className="mt-3 text-sm font-medium text-[hsl(210,70%,25%)] hover:underline flex items-center gap-1">
-                      Read more <ChevronRight className="w-4 h-4" />
-                    </button>
-                  </CardContent>
-                </Card>
+                    <CardHeader>
+                      <div className="flex items-center justify-between mb-2">
+                        <Badge variant="secondary" className="text-xs">{n.category}</Badge>
+                        <span className="text-xs text-gray-400">{n.date}</span>
+                      </div>
+                      <CardTitle className="text-base leading-snug hover:text-[hsl(210,70%,25%)]">
+                        {n.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription>{n.excerpt}</CardDescription>
+                      <span className="mt-3 text-sm font-medium text-[hsl(210,70%,25%)] hover:underline flex items-center gap-1">
+                        Read more <ChevronRight className="w-4 h-4" />
+                      </span>
+                    </CardContent>
+                  </Card>
+                </Link>
               ))}
             </div>
           </div>

@@ -8,14 +8,18 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   const [rows] = await pool.execute('SELECT * FROM events WHERE id=?', [id]) as any[]
   if (!(rows as any[]).length) return NextResponse.json({ error: 'not found' }, { status: 404 })
-  return NextResponse.json((rows as any[])[0])
+  const r = (rows as any[])[0]
+  return NextResponse.json({ ...r, eventDate: r.event_date, eventTime: r.event_time })
 }
 
 export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const user = requireAuth(req)
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  const { title, description, event_date, event_time, location, category, image, published } = await req.json()
+  const d = await req.json()
+  const event_date = d.eventDate ?? d.event_date
+  const event_time = d.eventTime ?? d.event_time
+  const { title, description, location, category, image, published } = d
   await pool.execute('UPDATE events SET title=?,description=?,event_date=?,event_time=?,location=?,category=?,image=?,published=? WHERE id=?',
     [title, description||'', event_date||'', event_time||'', location||'', category||'General', image||'', published??1, id])
   return NextResponse.json({ ok: true })

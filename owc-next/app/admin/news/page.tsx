@@ -39,7 +39,7 @@ export default function NewsManager() {
     setLoading(true)
     adminApi.getNews()
       .then(r => r.json())
-      .then(d => setArticles(d.articles || []))
+      .then(d => setArticles(d.news || []))
       .finally(() => setLoading(false))
   }
 
@@ -173,7 +173,7 @@ export default function NewsManager() {
                     {/* Actions */}
                     <div className="flex items-center gap-1">
                       <Link
-                        href={`/admin/news/${a.id}/edit`}
+                        href={`/admin/news/${a.id}`}
                         className="p-2 rounded-lg text-gray-400 hover:bg-blue-50 hover:text-[hsl(210,70%,25%)] transition-colors"
                         title="Edit"
                       >

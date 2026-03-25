@@ -6,7 +6,10 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
   const { id } = await params
   const user = requireAuth(req)
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  const { tag, icon_name, title, description, who_eligible, benefits, published, position } = await req.json()
+  const d = await req.json()
+  const { tag, title, description, benefits, published, position } = d
+  const icon_name = d.iconName ?? d.icon_name
+  const who_eligible = d.whoEligible ?? d.who_eligible
   await pool.execute('UPDATE services SET tag=?,icon_name=?,title=?,description=?,who_eligible=?,benefits=?,published=?,position=? WHERE id=?',
     [tag||'', icon_name||'HelpCircle', title, description||'', who_eligible||'', JSON.stringify(benefits||[]), published??1, position??0, id])
   return NextResponse.json({ ok: true })
