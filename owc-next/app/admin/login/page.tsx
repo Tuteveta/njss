@@ -48,8 +48,15 @@ export default function AdminLogin() {
 
           {/* Card header */}
           <div className="bg-[hsl(210,70%,20%)] px-8 pt-8 pb-6 text-center">
-            <div className="w-24 h-24 rounded-full border-4 border-white/30 flex items-center justify-center mx-auto mb-4">
-              <img src="/png-coa.png" alt="OWC Logo" className="w-16 h-16 object-contain drop-shadow-lg" />
+            <div className="relative flex items-center justify-center mx-auto mb-4 w-24 h-24">
+              {/* Ripple rings */}
+              <span className="absolute inset-0 rounded-full border border-white/20 animate-[ripple_2.4s_ease-out_infinite]" />
+              <span className="absolute inset-0 rounded-full border border-white/15 animate-[ripple_2.4s_ease-out_0.8s_infinite]" />
+              <span className="absolute inset-0 rounded-full border border-white/10 animate-[ripple_2.4s_ease-out_1.6s_infinite]" />
+              {/* Logo circle */}
+              <div className="relative w-24 h-24 rounded-full border-4 border-white/30 flex items-center justify-center z-10">
+                <img src="/png-coa.png" alt="OWC Logo" className="w-16 h-16 object-contain drop-shadow-lg" />
+              </div>
             </div>
             <h1 className="text-xl font-bold text-white">OWC Admin</h1>
             <p className="text-blue-200 text-sm mt-1">Sign in to the content management panel</p>
