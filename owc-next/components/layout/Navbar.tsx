@@ -18,7 +18,7 @@ function GovBanner() {
     <div className="bg-[hsl(210,70%,15%)] text-xs border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 lg:px-10 py-1.5 flex items-center justify-between gap-4">
         <div className="flex items-center gap-2">
-          <img src="https://flagcdn.com/h20/pg.png" alt="Papua New Guinea Flag" className="h-4 w-auto rounded-sm opacity-90" />
+          <img src="https://flagcdn.com/h20/pg.png" alt="Papua New Guinea Flag" className="h-5 w-auto rounded-sm opacity-90 shrink-0" />
           <span className="text-blue-200 font-medium">An Official Papua New Guinea Government Website</span>
           <button
             onClick={() => setOpen(o => !o)}
@@ -95,7 +95,10 @@ export default function Navbar() {
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 lg:px-10 flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-3 shrink-0 group">
-            <img src="/png-coa.png" alt="OWC Logo" className="h-11 w-auto transition-transform duration-200 group-hover:scale-105" />
+            <div className="relative">
+              <img src="/png-coa.png" alt="OWC Logo" className="h-11 w-auto transition-transform duration-200 group-hover:scale-105" />
+              <img src="https://flagcdn.com/h20/pg.png" alt="PNG Flag" className="absolute -bottom-1 -right-2 h-3.5 w-auto rounded-sm border border-white shadow-sm" />
+            </div>
             <div className="hidden sm:block">
               <div className="font-bold text-[hsl(210,70%,22%)] text-sm leading-tight tracking-tight">Office of Workers Compensation</div>
               <div className="text-[10px] text-gray-500 leading-tight tracking-widest uppercase font-medium">Papua New Guinea</div>
