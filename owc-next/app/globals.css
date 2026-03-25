@@ -20,3 +20,82 @@ body {
   color: #171717;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ── Grafana enterprise panel system ── */
+.gf-panel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+}
+
+.gf-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.gf-panel-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.gf-metric {
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* Status dot */
+.gf-status-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+.gf-status-dot.online  { background: #22c55e; box-shadow: 0 0 0 2px #bbf7d0; animation: gf-pulse 2.5s ease-in-out infinite; }
+.gf-status-dot.warn    { background: #f59e0b; box-shadow: 0 0 0 2px #fde68a; }
+.gf-status-dot.offline { background: #ef4444; box-shadow: 0 0 0 2px #fecaca; }
+
+@keyframes gf-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.55; }
+}
+
+/* Thin enterprise divider */
+.gf-divider {
+  width: 1px;
+  height: 12px;
+  background: currentColor;
+  opacity: 0.2;
+  display: inline-block;
+}
+
+/* Thin glassy scrollbar for the admin sidebar */
+.sidebar-scroll::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+.sidebar-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+}
+.sidebar-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+.sidebar-scroll::-webkit-scrollbar-corner {
+  background: transparent;
+}
+.sidebar-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}

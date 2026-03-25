@@ -2,8 +2,39 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { Menu, X, ChevronDown, ChevronUp, FileText, Lock, Search } from "lucide-react"
+import { Menu, X, ChevronDown, ChevronUp, FileText, Lock, Search, Phone, Clock } from "lucide-react"
 import { cn } from "@/lib/utils"
+
+function EnterpriseStrip() {
+  const [time, setTime] = useState("")
+  useEffect(() => {
+    const fmt = () => new Date().toLocaleTimeString("en-PG", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false })
+    setTime(fmt())
+    const t = setInterval(() => setTime(fmt()), 1000)
+    return () => clearInterval(t)
+  }, [])
+  return (
+    <div className="bg-[hsl(210,70%,12%)] border-b border-white/5 hidden sm:block">
+      <div className="max-w-7xl mx-auto px-4 lg:px-10 h-7 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-3 text-[11px] text-gray-400">
+          <span className="gf-status-dot online" />
+          <span className="font-medium text-gray-300">All services operational</span>
+          <span className="gf-divider text-gray-600" />
+          <Phone className="w-3 h-3 text-gray-500 shrink-0" />
+          <span>Hotline: <span className="text-gray-200 font-semibold gf-metric">1800-OWC</span></span>
+          <span className="gf-divider text-gray-600" />
+          <Clock className="w-3 h-3 text-gray-500 shrink-0" />
+          <span>Mon–Fri <span className="text-gray-200 font-semibold gf-metric">08:00–17:00</span> PGT</span>
+        </div>
+        <div className="flex items-center gap-3 text-[11px] text-gray-400">
+          <span className="hidden md:inline">Port Moresby, Papua New Guinea</span>
+          <span className="gf-divider text-gray-600 hidden md:inline-block" />
+          <span className="gf-metric tabular-nums text-gray-300">{time}</span>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 function GovBanner() {
   const [open, setOpen] = useState(false)
@@ -74,6 +105,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full">
       <GovBanner />
+      <EnterpriseStrip />
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 lg:px-10 flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-3 shrink-0 group">

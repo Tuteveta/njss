@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import {
@@ -10,6 +10,17 @@ import {
 } from "lucide-react"
 import { adminApi } from "@/lib/adminApi"
 import { cn } from "@/lib/utils"
+
+function LiveClock() {
+  const [time, setTime] = useState("")
+  useEffect(() => {
+    const fmt = () => new Date().toLocaleTimeString("en-PG", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false })
+    setTime(fmt())
+    const t = setInterval(() => setTime(fmt()), 1000)
+    return () => clearInterval(t)
+  }, [])
+  return <span className="gf-metric text-xs text-gray-400 tabular-nums">{time}</span>
+}
 
 interface NavGroup { label?: string; items: { label: string; href: string; icon: React.ElementType }[] }
 
@@ -74,7 +85,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   )?.label ?? "Admin"
 
   const SidebarContent = ({ slim }: { slim?: boolean }) => (
-    <div className="flex flex-col h-full bg-[hsl(210,70%,15%)] text-gray-300">
+    <div className="flex flex-col h-full bg-[hsl(210,70%,15%)] text-gray-300 overflow-hidden sidebar-scroll">
       {/* Logo */}
       <div className={cn("border-b border-white/10 flex items-center", slim ? "px-3 py-5 justify-center" : "px-5 py-5")}>
         {slim ? (
@@ -91,7 +102,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </div>
 
       {/* Nav */}
-      <nav className={cn("flex-1 py-3 overflow-y-auto", slim ? "px-2 space-y-0.5" : "px-3")}>
+      <nav className={cn("flex-1 py-3 overflow-y-auto overflow-x-hidden sidebar-scroll", slim ? "px-2 space-y-0.5" : "px-3")}>
         {navGroups.map((group, gi) => (
           <div key={gi} className={slim ? "" : "mb-4"}>
             {!slim && group.label && (
@@ -168,7 +179,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     <div className="min-h-screen bg-gray-50 flex">
 
       {/* Desktop sidebar */}
-      <aside className={cn("hidden lg:block shrink-0 fixed inset-y-0 left-0 z-30 transition-all duration-200", sidebarW)}>
+      <aside className={cn("hidden lg:block shrink-0 fixed inset-y-0 left-0 z-30 transition-all duration-200 overflow-hidden", sidebarW)}>
         <SidebarContent slim={collapsed} />
       </aside>
 
@@ -186,36 +197,40 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <div className={cn("flex-1 flex flex-col min-h-screen transition-all duration-200", collapsed ? "lg:ml-[60px]" : "lg:ml-56")}>
 
         {/* Top bar */}
-        <header className="bg-white border-b border-gray-200 sticky top-0 z-20 px-6 h-14 flex items-center justify-between gap-4">
+        <header className="bg-white border-b border-gray-200 sticky top-0 z-20 px-4 h-11 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            {/* Hamburger — always visible */}
             <button
-              className="p-2 rounded-xl hover:bg-gray-100 transition-colors text-gray-500"
+              className="p-1.5 rounded hover:bg-gray-100 transition-colors text-gray-500"
               onClick={() => {
-                if (window.innerWidth >= 1024) {
-                  setCollapsed(c => !c)
-                } else {
-                  setMobileOpen(o => !o)
-                }
+                if (window.innerWidth >= 1024) setCollapsed(c => !c)
+                else setMobileOpen(o => !o)
               }}
               aria-label="Toggle sidebar"
             >
-              {mobileOpen
-                ? <X className="w-5 h-5" />
-                : <Menu className="w-5 h-5" />
-              }
+              {mobileOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
-
-            {/* Page title */}
-            <div className="text-sm font-semibold text-gray-700">{currentLabel}</div>
+            <div className="flex items-center gap-1.5 text-xs text-gray-400">
+              <span className="text-gray-300">/</span>
+              <span className="font-semibold text-gray-700">{currentLabel}</span>
+            </div>
           </div>
 
-          <button
-            onClick={logout}
-            className="flex items-center gap-1.5 text-xs font-medium text-gray-500 hover:text-gray-800 transition-colors"
-          >
-            <LogOut className="w-3.5 h-3.5" /> Sign out
-          </button>
+          <div className="flex items-center gap-4">
+            {/* System status */}
+            <div className="hidden sm:flex items-center gap-1.5">
+              <span className="gf-status-dot online" />
+              <span className="text-[11px] text-gray-400 font-medium">All systems operational</span>
+            </div>
+            <span className="gf-divider hidden sm:inline-block text-gray-300" />
+            <LiveClock />
+            <span className="gf-divider text-gray-300" />
+            <button
+              onClick={logout}
+              className="flex items-center gap-1.5 text-[11px] font-medium text-gray-400 hover:text-gray-700 transition-colors"
+            >
+              <LogOut className="w-3.5 h-3.5" /> Sign out
+            </button>
+          </div>
         </header>
 
         {/* Page content */}

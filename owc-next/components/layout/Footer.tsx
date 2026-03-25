@@ -124,6 +124,21 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
+      {/* Grafana-style status bar */}
+      <div className="border-t border-white/5 bg-[hsl(210,70%,10%)]">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10 h-7 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2.5 text-[10px] text-gray-600">
+            <span className="gf-status-dot online" />
+            <span className="text-gray-500 font-medium">All systems operational</span>
+            <span className="gf-divider text-gray-700" />
+            <span className="gf-metric">owc.gov.pg</span>
+          </div>
+          <div className="text-[10px] text-gray-600 gf-metric hidden sm:block">
+            Department of Labour &amp; Industrial Relations · PNG
+          </div>
+        </div>
+      </div>
     </footer>
   )
 }
