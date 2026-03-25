@@ -30,12 +30,12 @@ function GovBanner() {
         </div>
         <div className="hidden sm:flex items-center gap-3 text-[11px] text-blue-300/70">
           <Phone className="w-3 h-3 shrink-0" />
-          <span>Hotline: <span className="text-blue-200 font-semibold gf-metric">1800-OWC</span></span>
+          <span>Hotline: <span className="text-blue-200 font-semibold">1800-OWC</span></span>
           <span className="gf-divider text-blue-300/30" />
           <Clock className="w-3 h-3 shrink-0" />
-          <span>Mon–Fri <span className="text-blue-200 font-semibold gf-metric">08:00–17:00</span> PGT</span>
+          <span>Mon–Fri <span className="text-blue-200 font-semibold">08:00–17:00</span> PGT</span>
           <span className="gf-divider text-blue-300/30" />
-          <span className="gf-metric tabular-nums text-blue-200">{time}</span>
+          <span className="text-blue-200">{time}</span>
         </div>
       </div>
       {open && (
