@@ -5,6 +5,7 @@ import { ArrowRight, Shield, Users, FileText, Clock, TrendingUp, CheckCircle, Ph
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { useSettings } from "@/context/SettingsContext"
+import ScrollNav from "@/components/ScrollNav"
 
 interface HomeEvent {
   id: number
@@ -71,6 +72,15 @@ const FALLBACK_SLIDES: ApiSlide[] = [
   { id: 2, badge: "Workers Compensation", title: "Fair Compensation for Every Injured Worker", subtitle: "From medical expenses to lost wages and permanent disability — OWC ensures you receive every benefit you are entitled to under Papua New Guinea law.", image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1920&q=80", ctaLabel: "Check Your Eligibility", ctaHref: "/services", ctaExternal: false, secondaryLabel: "View Services", secondaryHref: "/services" },
   { id: 3, badge: "Employer Compliance", title: "Supporting PNG Employers in Meeting Their Obligations", subtitle: "Register your business, understand your coverage requirements, and ensure your workforce is protected under the Workers Compensation Act 1978.", image: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1920&q=80", ctaLabel: "Register Now", ctaHref: "/services#employer", ctaExternal: false, secondaryLabel: "Resources", secondaryHref: "/resources" },
   { id: 4, badge: "Rehabilitation Services", title: "A Safe Path Back to Employment", subtitle: "OWC's structured rehabilitation programs help injured workers recover and return to safe, meaningful work — supporting their families and communities.", image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1920&q=80", ctaLabel: "Learn About Rehab", ctaHref: "/services#rehabilitation", ctaExternal: false, secondaryLabel: "Contact Us", secondaryHref: "/contact" },
+]
+
+const HOME_SECTIONS = [
+  { id: "stats",         label: "Statistics" },
+  { id: "home-services", label: "Services" },
+  { id: "process",       label: "Claims Process" },
+  { id: "home-news",     label: "News" },
+  { id: "home-events",   label: "Events" },
+  { id: "cta",           label: "Contact" },
 ]
 
 const STAT_DEFS = [
@@ -253,6 +263,7 @@ export default function Home() {
 
   return (
     <div>
+      <ScrollNav sections={HOME_SECTIONS} />
       {/* Hero Slider */}
       <HeroSlider slides={heroSlides} />
 
