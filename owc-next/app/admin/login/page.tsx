@@ -48,7 +48,9 @@ export default function AdminLogin() {
 
           {/* Card header */}
           <div className="bg-[hsl(210,70%,20%)] px-8 pt-8 pb-6 text-center">
-            <img src="/png-coa.png" alt="OWC Logo" className="w-20 h-20 object-contain mx-auto mb-4 drop-shadow-lg" />
+            <div className="w-24 h-24 rounded-full border-4 border-white/30 flex items-center justify-center mx-auto mb-4">
+              <img src="/png-coa.png" alt="OWC Logo" className="w-16 h-16 object-contain drop-shadow-lg" />
+            </div>
             <h1 className="text-xl font-bold text-white">OWC Admin</h1>
             <p className="text-blue-200 text-sm mt-1">Sign in to the content management panel</p>
           </div>
