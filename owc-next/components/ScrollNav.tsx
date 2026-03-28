@@ -8,22 +8,36 @@ export default function ScrollNav({ sections, faded = false }: ScrollNavProps) {
   const [active, setActive] = useState(sections[0]?.id ?? "")
 
   useEffect(() => {
-    const observers: IntersectionObserver[] = []
-    sections.forEach(({ id }) => {
-      const el = document.getElementById(id)
-      if (!el) return
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActive(id) },
-        { rootMargin: "-35% 0px -55% 0px" }
-      )
-      obs.observe(el)
-      observers.push(obs)
-    })
-    return () => observers.forEach(o => o.disconnect())
+    const getNavHeight = () =>
+      (document.querySelector("header") as HTMLElement)?.offsetHeight ?? 80
+
+    const update = () => {
+      const offset = getNavHeight() + 32
+      let closest = sections[0]?.id ?? ""
+      let minDist = Infinity
+      for (const { id } of sections) {
+        const el = document.getElementById(id)
+        if (!el) continue
+        const dist = Math.abs(el.getBoundingClientRect().top - offset)
+        if (dist < minDist) {
+          minDist = dist
+          closest = id
+        }
+      }
+      setActive(closest)
+    }
+
+    update()
+    window.addEventListener("scroll", update, { passive: true })
+    return () => window.removeEventListener("scroll", update)
   }, [sections])
 
   const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })
+    const el = document.getElementById(id)
+    if (!el) return
+    const navHeight = (document.querySelector("header") as HTMLElement)?.offsetHeight ?? 80
+    const top = el.getBoundingClientRect().top + window.scrollY - navHeight
+    window.scrollTo({ top, behavior: "smooth" })
   }
 
   return (
@@ -37,10 +51,19 @@ export default function ScrollNav({ sections, faded = false }: ScrollNavProps) {
             <button
               onClick={() => scrollTo(section.id)}
               aria-label={section.label}
-              className={`rounded-full border-2 transition-all duration-200 ${faded ? active === section.id ? "w-2.5 h-2.5 bg-[hsl(210,70%,25%)]/60 border-[hsl(210,70%,25%)]/60 scale-125" : "w-2 h-2 bg-transparent border-gray-300/60 hover:border-[hsl(210,70%,25%)]/50" : active === section.id ? "w-2.5 h-2.5 bg-[hsl(210,70%,25%)] border-[hsl(210,70%,25%)] scale-125" : "w-2.5 h-2.5 bg-white border-gray-300 hover:border-[hsl(210,70%,25%)]"}`}
+              className={`rounded-full border-2 transition-all duration-200 ${faded
+                ? active === section.id
+                  ? "w-2.5 h-2.5 bg-[hsl(210,70%,25%)]/60 border-[hsl(210,70%,25%)]/60 scale-125"
+                  : "w-2 h-2 bg-transparent border-gray-300/60 hover:border-[hsl(210,70%,25%)]/50"
+                : active === section.id
+                  ? "w-2.5 h-2.5 bg-[hsl(210,70%,25%)] border-[hsl(210,70%,25%)] scale-125"
+                  : "w-2.5 h-2.5 bg-white border-gray-300 hover:border-[hsl(210,70%,25%)]"
+              }`}
             />
           </div>
-          {i < sections.length - 1 && <div className={`w-px h-6 ${faded ? "bg-gray-200/40" : "bg-gray-200"}`} />}
+          {i < sections.length - 1 && (
+            <div className={`w-px h-6 ${faded ? "bg-gray-200/40" : "bg-gray-200"}`} />
+          )}
         </div>
       ))}
     </div>

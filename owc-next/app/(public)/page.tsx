@@ -1,7 +1,8 @@
 "use client"
 import Link from "next/link"
-import { useEffect, useState, useCallback } from "react"
-import { ArrowRight, Shield, Users, FileText, Clock, TrendingUp, CheckCircle, Phone, Download, AlertCircle, ChevronRight, ChevronLeft, CalendarDays, MapPin, HelpCircle, Building2, Stethoscope, Scale, Briefcase, Heart, BookOpen, Star, Globe } from "lucide-react"
+import { useEffect, useState, useCallback, useRef } from "react"
+import { useRouter } from "next/navigation"
+import { ArrowRight, Shield, Users, FileText, Clock, TrendingUp, CheckCircle, Phone, Download, AlertCircle, ChevronRight, ChevronLeft, CalendarDays, MapPin, HelpCircle, Building2, Stethoscope, Scale, Briefcase, Heart, BookOpen, Star, Globe, Search, Newspaper, CalendarCheck, Layers } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { useSettings } from "@/context/SettingsContext"
@@ -97,6 +98,143 @@ const process = [
   { step: "04", title: "Assessment", desc: "OWC reviews and assesses your claim with a case officer assigned to you." },
   { step: "05", title: "Receive Benefits", desc: "Approved claims receive compensation payments directly or through your employer's insurer." },
 ]
+
+interface SearchResult { type: 'news' | 'event' | 'service'; id: number; title: string; meta: string; url: string }
+
+const RESULT_ICONS: Record<string, React.ElementType> = {
+  news:    Newspaper,
+  event:   CalendarCheck,
+  service: Layers,
+}
+const RESULT_LABELS: Record<string, string> = {
+  news:    'News',
+  event:   'Event',
+  service: 'Service',
+}
+const RESULT_COLORS: Record<string, string> = {
+  news:    'text-blue-600 bg-blue-50',
+  event:   'text-emerald-600 bg-emerald-50',
+  service: 'text-purple-600 bg-purple-50',
+}
+
+function HeroSearch() {
+  const [query,   setQuery]   = useState('')
+  const [results, setResults] = useState<SearchResult[]>([])
+  const [loading, setLoading] = useState(false)
+  const [open,    setOpen]    = useState(false)
+  const router = useRouter()
+  const wrapRef = useRef<HTMLDivElement>(null)
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
+  // Debounced fetch
+  useEffect(() => {
+    if (query.trim().length < 2) { setResults([]); setOpen(false); return }
+    const t = setTimeout(() => {
+      setLoading(true)
+      fetch(`/api/search?q=${encodeURIComponent(query.trim())}`)
+        .then(r => r.json())
+        .then((d: { results?: SearchResult[] }) => {
+          setResults(d.results ?? [])
+          setOpen(true)
+        })
+        .catch(() => {})
+        .finally(() => setLoading(false))
+    }, 280)
+    return () => clearTimeout(t)
+  }, [query])
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (!query.trim()) return
+    setOpen(false)
+    router.push(`/news?q=${encodeURIComponent(query.trim())}`)
+  }
+
+  const grouped = ['news', 'event', 'service'].map(type => ({
+    type,
+    items: results.filter(r => r.type === type),
+  })).filter(g => g.items.length > 0)
+
+  return (
+    <div ref={wrapRef} className="relative w-full max-w-2xl mx-auto">
+      <form onSubmit={handleSubmit}>
+        <div className="flex items-center bg-white rounded-xl shadow-2xl shadow-black/30 overflow-visible ring-1 ring-white/20">
+          <Search className="w-5 h-5 text-gray-400 ml-4 shrink-0" />
+          <input
+            type="text"
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            onFocus={() => results.length > 0 && setOpen(true)}
+            placeholder="Search services, news, events, forms…"
+            className="flex-1 px-3 py-3.5 text-gray-800 text-sm outline-none bg-transparent placeholder:text-gray-400"
+          />
+          {loading && (
+            <div className="w-4 h-4 border-2 border-gray-200 border-t-gray-400 rounded-full animate-spin mr-3 shrink-0" />
+          )}
+          <button
+            type="submit"
+            className="m-1.5 h-9 px-5 rounded-lg text-sm font-semibold bg-[hsl(210,70%,22%)] hover:bg-[hsl(210,70%,18%)] text-white transition-colors shrink-0"
+          >
+            Search
+          </button>
+        </div>
+      </form>
+
+      {/* Results dropdown */}
+      {open && grouped.length > 0 && (
+        <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-50">
+          {grouped.map(({ type, items }) => {
+            const Icon = RESULT_ICONS[type]
+            return (
+              <div key={type}>
+                <div className="px-4 pt-3 pb-1 flex items-center gap-2">
+                  <span className={`inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${RESULT_COLORS[type]}`}>
+                    <Icon className="w-3 h-3" /> {RESULT_LABELS[type]}
+                  </span>
+                </div>
+                {items.map(r => (
+                  <Link
+                    key={`${r.type}-${r.id}`}
+                    href={r.url}
+                    onClick={() => setOpen(false)}
+                    className="flex items-center justify-between gap-3 px-4 py-2.5 hover:bg-gray-50 transition-colors"
+                  >
+                    <span className="text-sm text-gray-800 font-medium leading-snug line-clamp-1">{r.title}</span>
+                    {r.meta && <span className="text-xs text-gray-400 shrink-0">{r.meta}</span>}
+                  </Link>
+                ))}
+              </div>
+            )
+          })}
+          <div className="border-t border-gray-100 px-4 py-2.5 flex items-center justify-between">
+            <span className="text-xs text-gray-400">{results.length} result{results.length !== 1 ? 's' : ''} found</span>
+            <button
+              onClick={handleSubmit as unknown as React.MouseEventHandler}
+              className="text-xs font-semibold text-[hsl(210,70%,25%)] hover:underline flex items-center gap-1"
+            >
+              View all results <ArrowRight className="w-3 h-3" />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {open && query.trim().length >= 2 && results.length === 0 && !loading && (
+        <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 px-4 py-5 text-center z-50">
+          <p className="text-sm text-gray-500">No results found for <strong className="text-gray-700">"{query}"</strong></p>
+          <p className="text-xs text-gray-400 mt-1">Try searching for a service, claim form, or news topic.</p>
+        </div>
+      )}
+    </div>
+  )
+}
 
 function HeroSlider({ slides }: { slides: ApiSlide[] }) {
   const [current, setCurrent] = useState(0)

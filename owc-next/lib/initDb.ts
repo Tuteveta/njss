@@ -1,5 +1,6 @@
 import pool from './db'
 import bcrypt from 'bcryptjs'
+import { SEED_DOCUMENTS, SEED_SERVICES, SEED_NEWS, SEED_EVENTS } from './seedData'
 
 let initialized = false
 
@@ -82,6 +83,53 @@ export async function initDb() {
     }
     for (const [k, v] of Object.entries(defaultSettings)) {
       await conn.execute('INSERT IGNORE INTO site_settings (`key`, value) VALUES (?, ?)', [k, v])
+    }
+
+    // Seed Documents
+    for (const d of SEED_DOCUMENTS) {
+      const [docExists] = await conn.execute('SELECT id FROM documents WHERE title = ? LIMIT 1', [d.title]) as any[]
+      if ((docExists as any[]).length === 0) {
+        await conn.execute(
+          'INSERT INTO documents (title, category, filename, original_name, file_size) VALUES (?, ?, ?, ?, ?)',
+          [d.title, d.category, d.filename, d.original_name, d.file_size]
+        )
+      }
+    }
+
+    // Remove duplicate services (keep lowest id per title)
+    await conn.execute(`
+      DELETE s1 FROM services s1
+      INNER JOIN services s2 ON s1.title = s2.title AND s1.id > s2.id
+    `)
+
+    // Seed Services
+    for (const s of SEED_SERVICES) {
+      const [exists] = await conn.execute('SELECT id FROM services WHERE title = ? LIMIT 1', [s.title]) as any[]
+      if ((exists as any[]).length === 0) {
+        await conn.execute(
+          'INSERT INTO services (position, tag, icon_name, title, description, who_eligible, benefits, published) VALUES (?, ?, ?, ?, ?, ?, ?, 1)',
+          [s.position, s.tag, s.icon_name, s.title, s.description, s.who_eligible, JSON.stringify(s.benefits)]
+        )
+      }
+    }
+
+    // Seed News Articles
+    for (const a of SEED_NEWS) {
+      await conn.execute(
+        'INSERT IGNORE INTO news_articles (slug, date, month, year, category, title, excerpt, image, author, read_time, body, published) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)',
+        [a.slug, a.date, a.month, a.year, a.category, a.title, a.excerpt, a.image, a.author, a.read_time, JSON.stringify(a.body)]
+      )
+    }
+
+    // Seed Events
+    for (const e of SEED_EVENTS) {
+      const [eExists] = await conn.execute('SELECT id FROM events WHERE title = ? LIMIT 1', [e.title]) as any[]
+      if ((eExists as any[]).length === 0) {
+        await conn.execute(
+          'INSERT INTO events (title, description, event_date, event_time, location, category, image, published) VALUES (?, ?, ?, ?, ?, ?, ?, 1)',
+          [e.title, e.description, e.event_date, e.event_time, e.location, e.category, e.image]
+        )
+      }
     }
 
     console.log('Database ready: MySQL owc_db')
