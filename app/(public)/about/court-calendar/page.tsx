@@ -2,6 +2,7 @@ import Link from "next/link"
 import { BookOpen, Download, Calendar, Info, ArrowRight } from "lucide-react"
 import PageHero from "@/components/PageHero"
 import SectionNav from "@/components/SectionNav"
+import SectionTabs from "@/components/SectionTabs"
 
 const SITTINGS = [
   { term: "Term 1", period: "5 February – 29 March 2018",    weeks: 8,  note: "Includes Ash Wednesday recess (14 Feb)" },
@@ -41,7 +42,7 @@ export default function CourtCalendar2018() {
         crumbs={[{ label: "About the Courts", href: "/about" }, { label: "Court Calendar 2018" }]}
         image="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1920&q=80"
       />
-
+      <SectionTabs section="about" />
       <div className="bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 lg:px-10 py-12">
           <div className="flex items-start gap-8">

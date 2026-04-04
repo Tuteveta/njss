@@ -1,6 +1,7 @@
 "use client"
 import PageHero from "@/components/PageHero"
 import SectionNav from "@/components/SectionNav"
+import SectionTabs from "@/components/SectionTabs"
 import { CalendarDays, Clock, MapPin, User, ChevronRight } from "lucide-react"
 
 const TODAY = new Date().toLocaleDateString("en-PG", { weekday: "long", year: "numeric", month: "long", day: "numeric" })
@@ -71,7 +72,7 @@ export default function DailyCourtDiaryPage() {
         crumbs={[{ label: "Supreme Court", href: "/services#supreme-court" }, { label: "Daily Court Diary" }]}
         image="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1920&q=80"
       />
-
+      <SectionTabs section="supreme-court" />
       <section className="py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-start gap-8">

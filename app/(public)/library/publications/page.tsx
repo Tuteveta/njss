@@ -2,6 +2,7 @@ import { BookMarked, Download, ArrowRight, FileText, Newspaper, BarChart2, Scrol
 import Link from "next/link"
 import PageHero from "@/components/PageHero"
 import SectionNav from "@/components/SectionNav"
+import SectionTabs from "@/components/SectionTabs"
 
 const ANNUAL_REPORTS = [
   { year: "2025", title: "NJSS Annual Report 2025", pages: "148 pages", size: "5.0 MB", available: true },
@@ -57,7 +58,7 @@ export default function PublicationsPage() {
         subtitle="Official publications of the National Judicial Staff Service — annual reports, journals, bulletins, and practice directions."
         image="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1920&q=80"
       />
-
+      <SectionTabs section="library" />
       <div className="bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 lg:px-10 py-12">
           <div className="flex items-start gap-8">

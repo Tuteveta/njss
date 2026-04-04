@@ -2,6 +2,7 @@ import Link from "next/link"
 import { Briefcase, FileText, Clock, CheckCircle, AlertTriangle, ArrowRight, Download, Mail, Phone } from "lucide-react"
 import PageHero from "@/components/PageHero"
 import SectionNav from "@/components/SectionNav"
+import SectionTabs from "@/components/SectionTabs"
 
 const CURRENT_TENDERS = [
   {
@@ -72,7 +73,7 @@ export default function TendersBoardPage() {
         crumbs={[{ label: "About the Courts", href: "/about" }, { label: "NJSS Tenders Board" }]}
         image="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1920&q=80"
       />
-
+      <SectionTabs section="about" />
       <div className="bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 lg:px-10 py-12">
           <div className="flex items-start gap-8">

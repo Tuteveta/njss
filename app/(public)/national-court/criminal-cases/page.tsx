@@ -1,6 +1,7 @@
 import Link from "next/link"
 import PageHero from "@/components/PageHero"
 import SectionNav from "@/components/SectionNav"
+import SectionTabs from "@/components/SectionTabs"
 import { Gavel, Scale, BookOpen, ArrowRight, CheckCircle, AlertTriangle } from "lucide-react"
 
 const JURISDICTION = [
@@ -49,7 +50,7 @@ export default function CriminalCasesPage() {
         subtitle="The National Court has unlimited criminal jurisdiction and hears all serious indictable offences in Papua New Guinea."
         image="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1920&q=80"
       />
-
+      <SectionTabs section="national-court" />
       <div className="bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 lg:px-10 py-12">
           <div className="flex items-start gap-8">

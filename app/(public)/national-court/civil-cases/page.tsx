@@ -2,6 +2,7 @@ import Link from "next/link"
 import { Scale, ArrowRight, BookOpen, CheckCircle, Users, Gavel, Building2 } from "lucide-react"
 import PageHero from "@/components/PageHero"
 import SectionNav from "@/components/SectionNav"
+import SectionTabs from "@/components/SectionTabs"
 
 const DIVISIONS = [
   {
@@ -97,7 +98,7 @@ export default function CivilCasesPage() {
         subtitle="The National Court has unlimited civil jurisdiction. Civil matters are organised across specialist divisions — ADR, Equity, Common Law, and Other Tribunals — each with its own practice and procedure."
         image="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1920&q=80"
       />
-
+      <SectionTabs section="national-court" />
       <div className="bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 lg:px-10 py-12">
           <div className="flex items-start gap-8">

@@ -2,6 +2,7 @@
 import { useState } from "react"
 import PageHero from "@/components/PageHero"
 import SectionNav from "@/components/SectionNav"
+import SectionTabs from "@/components/SectionTabs"
 import { Search, FileText, Download, ChevronDown, ChevronUp } from "lucide-react"
 
 const determinations = [
@@ -108,7 +109,7 @@ export default function SummaryDeterminationsPage() {
         crumbs={[{ label: "Supreme Court", href: "/services#supreme-court" }, { label: "Summary Determinations" }]}
         image="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1920&q=80"
       />
-
+      <SectionTabs section="supreme-court" />
       <section className="py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-start gap-8">

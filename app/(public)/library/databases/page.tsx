@@ -2,6 +2,7 @@ import { Database, ExternalLink, Lock, Globe, CheckCircle, ArrowRight, Shield, C
 import Link from "next/link"
 import PageHero from "@/components/PageHero"
 import SectionNav from "@/components/SectionNav"
+import SectionTabs from "@/components/SectionTabs"
 
 const DATABASES = [
   {
@@ -110,7 +111,7 @@ export default function DatabasesPage() {
         subtitle="Online legal databases available to NJSS Court Library members and the public — PNG case law, legislation, journals, and comparative materials."
         image="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1920&q=80"
       />
-
+      <SectionTabs section="library" />
       <div className="bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 lg:px-10 py-12">
           <div className="flex items-start gap-8">

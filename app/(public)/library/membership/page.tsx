@@ -2,6 +2,7 @@ import { Users, CheckCircle, ArrowRight, FileText, Shield, GraduationCap, Scale,
 import Link from "next/link"
 import PageHero from "@/components/PageHero"
 import SectionNav from "@/components/SectionNav"
+import SectionTabs from "@/components/SectionTabs"
 
 const MEMBER_TYPES = [
   {
@@ -95,7 +96,7 @@ export default function MembershipPage() {
         subtitle="Membership provides access to PNG's most comprehensive legal collection — open to judges, practitioners, students, and researchers."
         image="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1920&q=80"
       />
-
+      <SectionTabs section="library" />
       <div className="bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 lg:px-10 py-12">
           <div className="flex items-start gap-8">

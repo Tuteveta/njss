@@ -1,6 +1,7 @@
 import Link from "next/link"
 import PageHero from "@/components/PageHero"
 import SectionNav from "@/components/SectionNav"
+import SectionTabs from "@/components/SectionTabs"
 import { Shield, Phone, Mail, AlertTriangle, ArrowRight } from "lucide-react"
 
 const SERVICES = [
@@ -33,7 +34,7 @@ export default function SheriffPage() {
         subtitle="Service of court process, execution of court orders, seizure and sale of property, and court security services."
         image="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1920&q=80"
       />
-
+      <SectionTabs section="national-court" />
       <div className="bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 lg:px-10 py-12">
           <div className="flex items-start gap-8">

@@ -2,6 +2,7 @@ import Link from "next/link"
 import { MessageSquareWarning, CheckCircle, AlertTriangle, ArrowRight, Mail, Phone, FileText, XCircle, Clock } from "lucide-react"
 import PageHero from "@/components/PageHero"
 import SectionNav from "@/components/SectionNav"
+import SectionTabs from "@/components/SectionTabs"
 
 const PROCESS_STEPS = [
   { step: "01", title: "Check Eligibility",        desc: "Confirm your complaint relates to judicial conduct — not the outcome of a case, a legal argument, or a sentence. The Committee cannot review decisions made by judges in their judicial capacity." },
@@ -48,7 +49,7 @@ export default function ComplaintsCommitteePage() {
         crumbs={[{ label: "About the Courts", href: "/about" }, { label: "Judicial Complaints Committee" }]}
         image="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1920&q=80"
       />
-
+      <SectionTabs section="about" />
       <div className="bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 lg:px-10 py-12">
           <div className="flex items-start gap-8">

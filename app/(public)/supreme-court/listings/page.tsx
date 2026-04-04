@@ -2,6 +2,7 @@
 import { useState } from "react"
 import PageHero from "@/components/PageHero"
 import SectionNav from "@/components/SectionNav"
+import SectionTabs from "@/components/SectionTabs"
 import { Search, Filter, CalendarDays, ChevronRight } from "lucide-react"
 
 const allListings = [
@@ -60,7 +61,7 @@ export default function SupremeCourtListingsPage() {
         crumbs={[{ label: "Supreme Court", href: "/services#supreme-court" }, { label: "Listings" }]}
         image="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1920&q=80"
       />
-
+      <SectionTabs section="supreme-court" />
       <section className="py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-start gap-8">

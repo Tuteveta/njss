@@ -2,6 +2,7 @@ import Link from "next/link"
 import { GraduationCap, BookOpen, Users, Calendar, Award, ArrowRight, Mail, Phone, Globe, CheckCircle } from "lucide-react"
 import PageHero from "@/components/PageHero"
 import SectionNav from "@/components/SectionNav"
+import SectionTabs from "@/components/SectionTabs"
 
 const PROGRAMS = [
   {
@@ -84,7 +85,7 @@ export default function PNGCJEPage() {
         subtitle="The judicial education and training arm of the NJSS, responsible for the ongoing professional development of judges, magistrates, and court staff across Papua New Guinea."
         image="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1920&q=80"
       />
-
+      <SectionTabs section="about" />
       <div className="bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 lg:px-10 py-12">
           <div className="flex items-start gap-8">
