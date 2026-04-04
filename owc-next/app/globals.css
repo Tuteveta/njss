@@ -15,6 +15,12 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@layer base {
+  *, *::before, *::after {
+    border-color: #e5e7eb;
+  }
+}
+
 body {
   background: #ffffff;
   color: #171717;
@@ -80,6 +86,10 @@ body {
   display: inline-block;
 }
 
+/* Hide scrollbar utility (overflow still works) */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
 /* Thin faded scrollbar for the public site (html/body) */
 html::-webkit-scrollbar {
   width: 4px;
@@ -121,3 +131,5 @@ html {
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
 }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }

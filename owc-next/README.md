@@ -1,10 +1,10 @@
-# Office of Workers Compensation — Official Website
+# National Judicial Staff Service — Official Website
 
-The official public website and content management system for the **Office of Workers Compensation (OWC)**, Papua New Guinea. Built to provide workers, employers, and the public with clear information about compensation services, claims processes, events, and news.
+The official public website and content management system for the **National Judicial Staff Service (NJSS)**, Papua New Guinea. Built to provide the public, legal practitioners, and stakeholders with information about the Supreme Court, National Court, court listings, registry services, and judicial resources.
 
 ## Overview
 
-This is a full-stack Next.js application with a built-in admin CMS. Content managed through the admin panel — hero slides, news articles, events, services, FAQs, leadership, and office locations — is reflected live on the public-facing site.
+Full-stack Next.js application with a built-in admin CMS. Content managed through the admin panel — hero slides, news articles, events, services, FAQs, leadership, office locations — is reflected live on the public-facing site.
 
 ## Tech Stack
 
@@ -22,10 +22,13 @@ This is a full-stack Next.js application with a built-in admin CMS. Content mana
 
 **Public Site**
 - Hero carousel (DB-driven, with fallback content)
-- Services, news, events, FAQs, leadership, office locations
+- Supreme Court & National Court pages with dropdowns
+- Daily Court Diary, Listings, Acts & Rules, Summary Determinations
+- News, events, FAQs, leadership, office locations
 - Contact form with admin inbox
-- Document/resource downloads
+- Document/resource downloads (court forms, guides, legislation, reports)
 - Alert banner (toggle from admin)
+- Back-to-top button, skip-to-content (WCAG)
 
 **Admin CMS** (`/admin`)
 - News article editor with multi-section body builder
@@ -38,6 +41,12 @@ This is a full-stack Next.js application with a built-in admin CMS. Content mana
 - Site settings (name, contact info, stats, banner, theme)
 - Audit log and contact message inbox
 - Password change
+
+**Security**
+- HTTP security headers (CSP, HSTS, X-Frame-Options, etc.)
+- Rate limiting on login (5 attempts → 30-min lockout)
+- Input sanitisation on all API boundaries
+- JWT + bcrypt authentication
 
 ## Getting Started
 
@@ -52,10 +61,7 @@ This is a full-stack Next.js application with a built-in admin CMS. Content mana
 npm install
 ```
 
-2. Start MySQL and create the database:
-```sql
-CREATE DATABASE owc_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-```
+2. Start MySQL. The database is auto-created on first run (`njss_db`).
 
 3. (Optional) Create a `.env.local` file if your MySQL config differs from defaults:
 ```env
@@ -63,8 +69,8 @@ DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_USER=root
 DB_PASSWORD=
-DB_NAME=owc_db
-ADMIN_INITIAL_PASSWORD=ChangeMe@OWC2026!
+DB_NAME=njss_db
+ADMIN_INITIAL_PASSWORD=ChangeMe@NJSS2026!
 JWT_SECRET=your-secret-key
 ```
 
@@ -80,7 +86,7 @@ The app auto-creates all tables and seeds the default admin user and site settin
 
 ### Default Admin Credentials
 - **Username:** `admin`
-- **Password:** `ChangeMe@OWC2026!` (change after first login)
+- **Password:** `ChangeMe@NJSS2026!` (change immediately after first login)
 
 ## Production
 

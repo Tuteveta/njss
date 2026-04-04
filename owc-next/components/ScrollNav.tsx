@@ -45,7 +45,7 @@ export default function ScrollNav({ sections, faded = false }: ScrollNavProps) {
       {sections.map((section, i) => (
         <div key={section.id} className="flex flex-col items-center">
           <div className="group relative flex items-center">
-            <span className={`absolute right-6 text-xs px-2.5 py-1 rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-md ${faded ? "bg-white/90 text-gray-700 border border-gray-200" : "bg-[hsl(210,70%,18%)] text-white"}`}>
+            <span className={`absolute right-6 text-xs px-2.5 py-1 rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none ${faded ? "bg-white/90 text-gray-700 border border-gray-200" : "bg-[hsl(352,83%,38%)] text-white"}`}>
               {section.label}
             </span>
             <button
@@ -53,11 +53,11 @@ export default function ScrollNav({ sections, faded = false }: ScrollNavProps) {
               aria-label={section.label}
               className={`rounded-full border-2 transition-all duration-200 ${faded
                 ? active === section.id
-                  ? "w-2.5 h-2.5 bg-[hsl(210,70%,25%)]/60 border-[hsl(210,70%,25%)]/60 scale-125"
-                  : "w-2 h-2 bg-transparent border-gray-300/60 hover:border-[hsl(210,70%,25%)]/50"
+                  ? "w-2.5 h-2.5 bg-[hsl(352,83%,48%)]/60 border-[hsl(352,83%,48%)]/60 scale-125"
+                  : "w-2 h-2 bg-transparent border-gray-300/60 hover:border-[hsl(352,83%,48%)]/50"
                 : active === section.id
-                  ? "w-2.5 h-2.5 bg-[hsl(210,70%,25%)] border-[hsl(210,70%,25%)] scale-125"
-                  : "w-2.5 h-2.5 bg-white border-gray-300 hover:border-[hsl(210,70%,25%)]"
+                  ? "w-2.5 h-2.5 bg-[hsl(352,83%,48%)] border-[hsl(352,83%,48%)] scale-125"
+                  : "w-2.5 h-2.5 bg-white border-gray-300 hover:border-[hsl(352,83%,48%)]"
               }`}
             />
           </div>

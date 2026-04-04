@@ -30,7 +30,7 @@ function ImagePickerModal({ onSelect, onClose }: { onSelect: (url: string) => vo
         <div className="overflow-y-auto flex-1 p-6">
           {loading ? (
             <div className="flex items-center justify-center h-40">
-              <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin" />
+              <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(352,83%,48%)] rounded-full animate-spin" />
             </div>
           ) : images.length === 0 ? (
             <div className="text-center py-16">
@@ -44,7 +44,7 @@ function ImagePickerModal({ onSelect, onClose }: { onSelect: (url: string) => vo
                 <button
                   key={img.filename}
                   onClick={() => { onSelect(img.url); onClose() }}
-                  className="group relative aspect-video rounded-xl overflow-hidden bg-gray-100 border-2 border-transparent hover:border-[hsl(210,70%,25%)] transition-all"
+                  className="group relative aspect-video rounded-xl overflow-hidden bg-gray-100 border-2 border-transparent hover:border-[hsl(352,83%,48%)] transition-all"
                 >
                   <img src={img.url} alt={img.filename} className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
@@ -60,7 +60,7 @@ function ImagePickerModal({ onSelect, onClose }: { onSelect: (url: string) => vo
   )
 }
 
-interface OWCEvent {
+interface CourtEvent {
   id: number
   title: string
   description: string
@@ -72,7 +72,7 @@ interface OWCEvent {
   published: boolean
 }
 
-const EMPTY: Omit<OWCEvent, "id"> = {
+const EMPTY: Omit<CourtEvent, "id"> = {
   title: "", description: "", eventDate: "", eventTime: "",
   location: "", category: "Workshop", image: "", published: true,
 }
@@ -80,7 +80,7 @@ const EMPTY: Omit<OWCEvent, "id"> = {
 const CATEGORIES = ["Workshop", "Training", "Awareness", "Consultation", "Conference", "Outreach", "General"]
 
 const CATEGORY_COLORS: Record<string, string> = {
-  Workshop:     "bg-blue-100 text-blue-700",
+  Workshop:     "bg-red-100 text-red-800",
   Training:     "bg-indigo-100 text-indigo-700",
   Awareness:    "bg-emerald-100 text-emerald-700",
   Consultation: "bg-amber-100 text-amber-700",
@@ -96,11 +96,11 @@ function isPast(iso: string) {
 type Toast = { type: "success" | "error"; msg: string } | null
 
 export default function EventsManager() {
-  const [events, setEvents] = useState<OWCEvent[]>([])
+  const [events, setEvents] = useState<CourtEvent[]>([])
   const [loading, setLoading] = useState(true)
-  const [editing, setEditing] = useState<OWCEvent | null>(null)
+  const [editing, setEditing] = useState<CourtEvent | null>(null)
   const [creating, setCreating] = useState(false)
-  const [form, setForm] = useState<Omit<OWCEvent, "id">>(EMPTY)
+  const [form, setForm] = useState<Omit<CourtEvent, "id">>(EMPTY)
   const [saving, setSaving] = useState(false)
   const [toast, setToast] = useState<Toast>(null)
   const [deleteId, setDeleteId] = useState<number | null>(null)
@@ -118,7 +118,7 @@ export default function EventsManager() {
   useEffect(() => { load() }, [])
 
   const startCreate = () => { setForm(EMPTY); setEditing(null); setCreating(true) }
-  const startEdit = (e: OWCEvent) => {
+  const startEdit = (e: CourtEvent) => {
     setForm({ title: e.title, description: e.description, eventDate: e.eventDate, eventTime: e.eventTime, location: e.location, category: e.category, image: e.image, published: e.published })
     setEditing(e); setCreating(false)
   }
@@ -148,7 +148,7 @@ export default function EventsManager() {
     } finally { setSaving(false) }
   }
 
-  const togglePublish = async (e: OWCEvent) => {
+  const togglePublish = async (e: CourtEvent) => {
     await adminApi.updateEvent(e.id, { ...e, published: !e.published })
     load()
   }
@@ -171,7 +171,7 @@ export default function EventsManager() {
   return (
     <AdminLayout>
       {toast && (
-        <div className={`fixed top-4 right-4 z-50 flex items-center gap-2 px-4 py-3 rounded-xl shadow-lg text-white text-sm font-medium ${toast.type === "success" ? "bg-emerald-600" : "bg-red-600"}`}>
+        <div className={`fixed top-4 right-4 z-50 flex items-center gap-2 px-4 py-3 rounded-xl shadow-lg text-white text-sm font-medium ${toast.type === "success" ? "bg-amber-600" : "bg-red-600"}`}>
           {toast.type === "success" ? <CheckCircle className="w-4 h-4 shrink-0" /> : <AlertCircle className="w-4 h-4 shrink-0" />}
           {toast.msg}
         </div>
@@ -231,14 +231,14 @@ export default function EventsManager() {
                 <select
                   value={form.category}
                   onChange={e => set("category", e.target.value)}
-                  className="w-full h-10 rounded-md border border-gray-200 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-[hsl(210,70%,25%)]/20"
+                  className="w-full h-10 rounded-md border border-gray-200 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-[hsl(352,83%,48%)]/20"
                 >
                   {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
                 </select>
               </div>
               <div className="sm:col-span-2">
                 <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Description</label>
-                <textarea rows={3} className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(210,70%,25%)]" value={form.description} onChange={e => set("description", e.target.value)} placeholder="Event details…" />
+                <textarea rows={3} className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(352,83%,48%)]" value={form.description} onChange={e => set("description", e.target.value)} placeholder="Event details…" />
               </div>
               <div className="sm:col-span-2">
                 <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Image</label>
@@ -277,7 +277,7 @@ export default function EventsManager() {
         <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
           {loading ? (
             <div className="p-16 text-center">
-              <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto mb-3" />
+              <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(352,83%,48%)] rounded-full animate-spin mx-auto mb-3" />
               <p className="text-gray-400 text-sm">Loading events…</p>
             </div>
           ) : events.length === 0 ? (
@@ -335,7 +335,7 @@ export default function EventsManager() {
                         <button onClick={() => togglePublish(e)} className="p-2 rounded-lg text-gray-400 hover:bg-gray-50 hover:text-gray-700 transition-colors" title={e.published ? "Hide" : "Publish"}>
                           {e.published ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                         </button>
-                        <button onClick={() => startEdit(e)} className="p-2 rounded-lg text-gray-400 hover:bg-blue-50 hover:text-[hsl(210,70%,25%)] transition-colors" title="Edit">
+                        <button onClick={() => startEdit(e)} className="p-2 rounded-lg text-gray-400 hover:bg-red-50 hover:text-[hsl(352,83%,48%)] transition-colors" title="Edit">
                           <Pencil className="w-4 h-4" />
                         </button>
                         <button onClick={() => setDeleteId(e.id)} className="p-2 rounded-lg text-gray-400 hover:bg-red-50 hover:text-red-600 transition-colors" title="Delete">

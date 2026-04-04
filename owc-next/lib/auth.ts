@@ -1,15 +1,29 @@
 import { NextRequest } from 'next/server'
 import jwt from 'jsonwebtoken'
 
-const JWT_SECRET = process.env.JWT_SECRET || 'owc-secret-change-in-prod'
+function getSecret(): string {
+  const secret = process.env.JWT_SECRET
+  if (!secret || secret.length < 32) {
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error('JWT_SECRET environment variable must be set to at least 32 characters in production')
+    }
+    // Dev fallback — never used in production
+    return 'njss-dev-secret-not-for-production-use'
+  }
+  return secret
+}
 
 export function signToken(payload: object) {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: '24h' })
+  return jwt.sign(payload, getSecret(), { expiresIn: '8h', algorithm: 'HS256' })
 }
 
 export function verifyToken(token: string) {
   try {
-    return jwt.verify(token, JWT_SECRET) as { id: number; username: string; role: string }
+    return jwt.verify(token, getSecret(), { algorithms: ['HS256'] }) as {
+      id: number
+      username: string
+      role: string
+    }
   } catch {
     return null
   }
@@ -17,9 +31,10 @@ export function verifyToken(token: string) {
 
 export function getAuth(req: NextRequest) {
   const authHeader = req.headers.get('authorization')
-  const bearerToken = authHeader?.replace('Bearer ', '')
+  const bearerToken = authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : null
   const cookieToken = req.cookies.get('token')?.value
-  const token = bearerToken || cookieToken
+  // Prefer cookie (HttpOnly) over Authorization header
+  const token = cookieToken || bearerToken
   if (!token) return null
   return verifyToken(token)
 }

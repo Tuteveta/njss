@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
   const slug = d.slug || d.title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')
   const [r] = await pool.execute(
     'INSERT INTO news_articles (slug,date,month,year,category,title,excerpt,image,author,read_time,body,published) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
-    [slug, d.date||'', d.month||'', d.year||'', d.category||'General', d.title, d.excerpt||'', d.image||'', d.author||'OWC Communications', d.read_time||'3 min read', JSON.stringify(d.body||[]), d.published??1]
+    [slug, d.date||'', d.month||'', d.year||'', d.category||'General', d.title, d.excerpt||'', d.image||'', d.author||'NJSS Communications', d.read_time||'3 min read', JSON.stringify(d.body||[]), d.published??1]
   ) as any[]
   return NextResponse.json({ id: (r as any).insertId, slug })
 }

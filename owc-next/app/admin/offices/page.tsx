@@ -79,7 +79,7 @@ export default function OfficesManager() {
   return (
     <AdminLayout>
       {toast && (
-        <div className={`fixed top-4 right-4 z-50 flex items-center gap-2 px-4 py-3 rounded-xl shadow-lg text-white text-sm font-medium ${toast.type === "success" ? "bg-emerald-600" : "bg-red-600"}`}>
+        <div className={`fixed top-4 right-4 z-50 flex items-center gap-2 px-4 py-3 rounded-xl shadow-lg text-white text-sm font-medium ${toast.type === "success" ? "bg-amber-600" : "bg-red-600"}`}>
           {toast.type === "success" ? <CheckCircle className="w-4 h-4 shrink-0" /> : <AlertCircle className="w-4 h-4 shrink-0" />}
           {toast.msg}
         </div>
@@ -124,11 +124,11 @@ export default function OfficesManager() {
               </div>
               <div>
                 <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Phone</label>
-                <Input value={form.phone} onChange={e => set("phone", e.target.value)} placeholder="(+675) 313 5000" />
+                <Input value={form.phone} onChange={e => set("phone", e.target.value)} placeholder="+675 325 7902" />
               </div>
               <div>
                 <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Email</label>
-                <Input value={form.email} onChange={e => set("email", e.target.value)} placeholder="workerscomp@owc.gov.pg" />
+                <Input value={form.email} onChange={e => set("email", e.target.value)} placeholder="info@judiciary.gov.pg" />
               </div>
               <div className="sm:col-span-2">
                 <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Office Hours</label>
@@ -149,7 +149,7 @@ export default function OfficesManager() {
         <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
           {loading ? (
             <div className="p-16 text-center">
-              <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto mb-3" />
+              <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(352,83%,48%)] rounded-full animate-spin mx-auto mb-3" />
               <p className="text-gray-400 text-sm">Loading offices…</p>
             </div>
           ) : offices.length === 0 ? (
@@ -177,7 +177,7 @@ export default function OfficesManager() {
                     <div className="hidden md:block px-4 text-sm text-gray-500 whitespace-nowrap">{o.phone}</div>
                     <div className="hidden lg:block px-4 text-sm text-gray-500 whitespace-nowrap">{o.hours}</div>
                     <div className="flex items-center gap-1">
-                      <button onClick={() => startEdit(o)} className="p-2 rounded-lg text-gray-400 hover:bg-blue-50 hover:text-[hsl(210,70%,25%)] transition-colors" title="Edit">
+                      <button onClick={() => startEdit(o)} className="p-2 rounded-lg text-gray-400 hover:bg-red-50 hover:text-[hsl(352,83%,48%)] transition-colors" title="Edit">
                         <Pencil className="w-4 h-4" />
                       </button>
                       <button onClick={() => setDeleteId(o.id)} className="p-2 rounded-lg text-gray-400 hover:bg-red-50 hover:text-red-600 transition-colors" title="Delete">

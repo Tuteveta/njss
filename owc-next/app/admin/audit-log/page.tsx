@@ -25,9 +25,9 @@ function timeAgo(iso: string) {
 }
 
 const ACTION_COLORS: Record<string, string> = {
-  login:  "bg-emerald-50 text-emerald-700",
+  login:  "bg-amber-50 text-amber-700",
   logout: "bg-gray-100 text-gray-600",
-  create: "bg-blue-50 text-blue-700",
+  create: "bg-red-50 text-red-800",
   update: "bg-amber-50 text-amber-700",
   delete: "bg-red-50 text-red-700",
 }
@@ -69,7 +69,7 @@ export default function AuditLog() {
         <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
           {loading ? (
             <div className="p-16 text-center">
-              <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto mb-3" />
+              <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(352,83%,48%)] rounded-full animate-spin mx-auto mb-3" />
               <p className="text-gray-400 text-sm">Loading log…</p>
             </div>
           ) : entries.length === 0 ? (

@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import {
-  Palette, Phone, Layout, Code, Save, CheckCircle, RefreshCw,
+  Palette, Phone, Layout, Save, CheckCircle, RefreshCw,
   Building2, BarChart3,
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -12,7 +12,7 @@ import { useSettingsCtx } from "@/context/SettingsContext"
 import AdminLayout from "@/components/admin/AdminLayout"
 import { cn } from "@/lib/utils"
 
-type Tab = "appearance" | "organisation" | "contact" | "sections" | "statistics" | "code"
+type Tab = "appearance" | "organisation" | "contact" | "sections" | "statistics"
 
 const THEMES = [
   { id: "navy",    label: "Navy Blue",    bg: "hsl(210 70% 25%)", dark: "hsl(210 70% 15%)" },
@@ -82,7 +82,6 @@ export default function SiteSettings() {
     { id: "contact",      label: "Contact Info",  icon: Phone },
     { id: "sections",     label: "Home Sections", icon: Layout },
     { id: "statistics",   label: "Statistics",    icon: BarChart3 },
-    { id: "code",         label: "Custom CSS",    icon: Code },
   ]
 
   const SaveBtn = () => (
@@ -116,7 +115,7 @@ export default function SiteSettings() {
               className={cn(
                 "flex items-center gap-2 px-4 py-2.5 text-sm font-medium border-b-2 transition-colors whitespace-nowrap",
                 tab === t.id
-                  ? "border-[hsl(var(--owc-p))] text-[hsl(var(--owc-p))]"
+                  ? "border-[hsl(var(--njss-p))] text-[hsl(var(--njss-p))]"
                   : "border-transparent text-gray-500 hover:text-gray-700"
               )}
             >
@@ -141,7 +140,7 @@ export default function SiteSettings() {
                     onClick={() => set("theme", t.id)}
                     className={cn(
                       "rounded-xl border p-3 text-left transition-all",
-                      form.theme === t.id ? "border-[hsl(210,70%,25%)] bg-[hsl(210,70%,25%)]/5" : "border-gray-200 hover:border-gray-300"
+                      form.theme === t.id ? "border-[hsl(352,83%,48%)] bg-[hsl(352,83%,48%)]/5" : "border-gray-200 hover:border-gray-300"
                     )}
                   >
                     <div className="flex gap-1.5 mb-2">
@@ -149,7 +148,7 @@ export default function SiteSettings() {
                       <div className="w-6 h-6 rounded-full" style={{ background: t.dark }} />
                     </div>
                     <div className="text-xs font-medium text-gray-700">{t.label}</div>
-                    {form.theme === t.id && <div className="text-[10px] text-[hsl(210,70%,25%)] font-semibold mt-0.5">Active</div>}
+                    {form.theme === t.id && <div className="text-[10px] text-[hsl(352,83%,48%)] font-semibold mt-0.5">Active</div>}
                   </button>
                 ))}
               </div>
@@ -159,11 +158,11 @@ export default function SiteSettings() {
                   <div className="px-4 py-3 flex items-center gap-3 font-semibold"
                     style={{ background: THEMES.find(t => t.id === form.theme)?.bg }}>
                     <div className="w-5 h-5 rounded bg-white/20" />
-                    {form.site_name || "Office of Workers Compensation"}
+                    {form.site_name || "National Judicial Staff Service"}
                   </div>
                   <div className="px-4 py-3 text-xs"
                     style={{ background: THEMES.find(t => t.id === form.theme)?.dark }}>
-                    Footer · {form.contact_email || "workerscomp@owc.gov.pg"}
+                    Footer · {form.contact_email || "info@judiciary.gov.pg"}
                   </div>
                 </div>
               </div>
@@ -184,7 +183,7 @@ export default function SiteSettings() {
                 <Input
                   value={form.site_name}
                   onChange={e => set("site_name", e.target.value)}
-                  placeholder="Office of Workers Compensation"
+                  placeholder="National Judicial Staff Service"
                 />
                 <p className="text-xs text-gray-400 mt-1">Displayed in the navbar logo and browser tab title.</p>
               </div>
@@ -211,17 +210,17 @@ export default function SiteSettings() {
             <CardContent className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-                <Input value={form.contact_phone} onChange={e => set("contact_phone", e.target.value)} placeholder="(+675) 313 5000" />
+                <Input value={form.contact_phone} onChange={e => set("contact_phone", e.target.value)} placeholder="+675 325 7902" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                <Input value={form.contact_email} onChange={e => set("contact_email", e.target.value)} placeholder="workerscomp@owc.gov.pg" />
+                <Input value={form.contact_email} onChange={e => set("contact_email", e.target.value)} placeholder="info@judiciary.gov.pg" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">HQ Address</label>
                 <textarea
                   rows={3}
-                  className="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(210,70%,25%)]"
+                  className="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(352,83%,48%)]"
                   value={form.contact_address}
                   onChange={e => set("contact_address", e.target.value)}
                   placeholder="Gaukara Rumana, Wards Rd..."
@@ -249,7 +248,7 @@ export default function SiteSettings() {
                     <Input
                       value={form.banner_link}
                       onChange={e => set("banner_link", e.target.value)}
-                      placeholder="/claims"
+                      placeholder="/contact"
                     />
                     <p className="text-xs text-gray-400">Leave link empty to show text only.</p>
                   </div>
@@ -270,7 +269,7 @@ export default function SiteSettings() {
               <CardContent className="space-y-3">
                 {[
                   { key: "home_show_stats",    label: "Statistics Bar",       desc: "Live stats: claims lodged, benefits paid, processing time, coverage" },
-                  { key: "home_show_services", label: "Our Services",         desc: "Workers Compensation, Rehabilitation, Employer Registration, Claim Filing" },
+                  { key: "home_show_services", label: "Our Services",         desc: "Judicial Services, Rehabilitation, Employer Registration, Claim Filing" },
                   { key: "home_show_process",  label: "Claims Process Steps", desc: "5-step visual guide to filing a claim" },
                   { key: "home_show_news",     label: "Latest News",          desc: "3 most recent published news article cards" },
                   { key: "home_show_events",   label: "Upcoming Events",      desc: "Next 3 upcoming events from the Events calendar" },
@@ -298,10 +297,10 @@ export default function SiteSettings() {
             </CardHeader>
             <CardContent className="space-y-4">
               {[
-                { key: "stat_claims",     label: "Stat 1 — Value",    placeholder: "1,732",    hint: 'e.g. "1,732" — Claims Lodged' },
-                { key: "stat_benefits",   label: "Stat 2 — Value",    placeholder: "K3.2M+",   hint: 'e.g. "K3.2M+" — Benefits Paid' },
+                { key: "stat_cases",      label: "Stat 1 — Value",    placeholder: "12,400+",  hint: 'e.g. "12,400+" — Cases Filed' },
+                { key: "stat_benefits",   label: "Stat 2 — Value",    placeholder: "98%",      hint: 'e.g. "98%" — Judgments Delivered' },
                 { key: "stat_processing", label: "Stat 3 — Value",    placeholder: "60–90",    hint: 'e.g. "60–90" — Avg. Processing Days' },
-                { key: "stat_coverage",   label: "Stat 4 — Value",    placeholder: "All PLOs", hint: 'e.g. "All PLOs" — Nationwide Coverage' },
+                { key: "stat_coverage",   label: "Stat 4 — Value",    placeholder: "All Provinces", hint: 'e.g. "All Provinces" — Nationwide Coverage' },
               ].map(s => (
                 <div key={s.key}>
                   <label className="block text-sm font-medium text-gray-700 mb-1">{s.label}</label>
@@ -318,27 +317,6 @@ export default function SiteSettings() {
                   These values display on the homepage stats bar. The labels (Claims Lodged, Benefits Paid, etc.) are fixed. Only the values are configurable here.
                 </p>
               </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* ── Custom CSS ── */}
-        {tab === "code" && (
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-base">Custom CSS</CardTitle>
-              <p className="text-sm text-gray-500">Injected into the public site's <code>&lt;head&gt;</code>. Use to fine-tune colours, spacing, or branding without a code deployment.</p>
-            </CardHeader>
-            <CardContent>
-              <textarea
-                rows={16}
-                spellCheck={false}
-                className="w-full rounded-md border border-gray-200 bg-gray-50 text-gray-800 px-4 py-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(210,70%,25%)] resize-y"
-                value={form.custom_css}
-                onChange={e => set("custom_css", e.target.value)}
-                placeholder={`/* Example: change accent colour */\n.btn-primary { background: #0d7a4e !important; }\n\n/* Hide a specific section */\n#stats { display: none; }`}
-              />
-              <p className="text-xs text-gray-400 mt-2">Changes take effect immediately on the public site after saving.</p>
             </CardContent>
           </Card>
         )}

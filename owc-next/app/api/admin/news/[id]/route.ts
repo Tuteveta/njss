@@ -20,7 +20,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
   const read_time = d.readTime ?? d.read_time
   await pool.execute(
     'UPDATE news_articles SET date=?,month=?,year=?,category=?,title=?,excerpt=?,image=?,author=?,read_time=?,body=?,published=? WHERE id=?',
-    [d.date||'', d.month||'', d.year||'', d.category||'General', d.title, d.excerpt||'', d.image||'', d.author||'OWC Communications', read_time||'3 min read', JSON.stringify(d.body||[]), d.published??1, id]
+    [d.date||'', d.month||'', d.year||'', d.category||'General', d.title, d.excerpt||'', d.image||'', d.author||'NJSS Communications', read_time||'3 min read', JSON.stringify(d.body||[]), d.published??1, id]
   )
   return NextResponse.json({ ok: true })
 }

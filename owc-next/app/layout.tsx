@@ -6,8 +6,8 @@ import { SettingsProvider } from "@/context/SettingsContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Office of Workers Compensation — Papua New Guinea",
-  description: "Official website of the Office of Workers Compensation, Papua New Guinea",
+  title: "National Judicial Staff Service — Papua New Guinea",
+  description: "Official website of the National Judicial Staff Service (NJSS), the administrative arm of the Supreme Court and National Court of Papua New Guinea.",
   icons: {
     icon: "/png-coa.png",
     apple: "/png-coa.png",

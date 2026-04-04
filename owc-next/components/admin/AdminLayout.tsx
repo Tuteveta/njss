@@ -6,10 +6,11 @@ import {
   LayoutDashboard, Newspaper,
   LogOut, Menu, ExternalLink, ChevronRight,
   Image, FolderOpen, BookOpen, Navigation, X, Settings, CalendarDays,
-  MapPin, Users, HelpCircle, Layers, ShieldAlert, Briefcase, Info,
+  MapPin, Users, HelpCircle, Layers, ShieldAlert, Briefcase, Info, UserCog,
 } from "lucide-react"
 import { adminApi } from "@/lib/adminApi"
 import { cn } from "@/lib/utils"
+import { ROLE_LABELS, ROLE_COLORS, canAccess, type Role } from "@/lib/roles"
 
 function LiveClock() {
   const [time, setTime] = useState("")
@@ -61,6 +62,7 @@ const navGroups: NavGroup[] = [
     label: "System",
     items: [
       { label: "Site Settings", href: "/admin/settings", icon: Settings },
+      { label: "Users", href: "/admin/users", icon: UserCog },
       { label: "Audit Log", href: "/admin/audit-log", icon: ShieldAlert },
     ],
   },
@@ -72,8 +74,13 @@ const navItems = navGroups.flatMap(g => g.items)
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const router = useRouter()
-  const [collapsed, setCollapsed] = useState(false)   // desktop collapse
-  const [mobileOpen, setMobileOpen] = useState(false) // mobile overlay
+  const [collapsed, setCollapsed] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const [role, setRole] = useState<string>("")
+
+  useEffect(() => {
+    adminApi.me().then(r => r.json()).then(d => setRole(d.role ?? ""))
+  }, [])
 
   const logout = () => {
     adminApi.logout().finally(() => router.push("/admin/login"))
@@ -84,17 +91,23 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     (n.href !== "/admin" && pathname.startsWith(n.href))
   )?.label ?? "Admin"
 
+  // Filter nav groups based on role
+  const filteredGroups = navGroups.map(g => ({
+    ...g,
+    items: g.items.filter(item => !role || canAccess(role, item.href)),
+  })).filter(g => g.items.length > 0)
+
   const SidebarContent = ({ slim }: { slim?: boolean }) => (
-    <div className="flex flex-col h-full bg-[hsl(210,70%,15%)] text-gray-300 overflow-hidden sidebar-scroll">
+    <div className="flex flex-col h-full bg-[hsl(352,75%,15%)] text-gray-300 overflow-hidden sidebar-scroll">
       {/* Logo */}
       <div className={cn("border-b border-white/10 flex items-center", slim ? "px-3 py-5 justify-center" : "px-5 py-5")}>
         {slim ? (
-          <img src="/png-coa.png" alt="OWC" className="w-9 h-9 object-contain" />
+          <img src="/png-coa.png" alt="NJSS" className="w-9 h-9 object-contain" />
         ) : (
           <div className="flex items-center gap-3">
-            <img src="/png-coa.png" alt="OWC Logo" className="w-9 h-9 object-contain shrink-0" />
+            <img src="/png-coa.png" alt="NJSS Logo" className="w-9 h-9 object-contain shrink-0" />
             <div>
-              <div className="text-white font-bold text-sm leading-tight">OWC Admin</div>
+              <div className="text-white font-bold text-sm leading-tight">NJSS Admin</div>
               <div className="text-xs text-gray-400 leading-tight">Content Management</div>
             </div>
           </div>
@@ -103,7 +116,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       {/* Nav */}
       <nav className={cn("flex-1 py-3 overflow-y-auto overflow-x-hidden sidebar-scroll", slim ? "px-2 space-y-0.5" : "px-3")}>
-        {navGroups.map((group, gi) => (
+        {filteredGroups.map((group, gi) => (
           <div key={gi} className={slim ? "" : "mb-4"}>
             {!slim && group.label && (
               <div className="text-[10px] font-bold uppercase tracking-widest text-gray-500 px-3 mb-1 mt-1">
@@ -215,8 +228,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <LiveClock />
+            {role && (
+              <span className={`hidden sm:inline-flex items-center text-[10px] font-semibold px-2 py-0.5 rounded-full ${ROLE_COLORS[role as Role] ?? "bg-gray-100 text-gray-600"}`}>
+                {ROLE_LABELS[role as Role] ?? role}
+              </span>
+            )}
             <span className="gf-divider text-gray-300" />
             <button
               onClick={logout}

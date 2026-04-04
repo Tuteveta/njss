@@ -33,7 +33,7 @@ function ImagePickerModal({ onSelect, onClose }: { onSelect: (url: string) => vo
             <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
               {images.map(img => (
                 <button key={img.filename} onClick={() => { onSelect(img.url); onClose() }}
-                  className="aspect-video rounded-lg overflow-hidden border-2 border-transparent hover:border-[hsl(210,70%,25%)] transition-all group relative">
+                  className="aspect-video rounded-lg overflow-hidden border-2 border-transparent hover:border-[hsl(352,83%,48%)] transition-all group relative">
                   <img src={img.url} alt={img.filename} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                 </button>
               ))}
@@ -108,7 +108,7 @@ export default function PagesManager() {
 
         {loading ? (
           <div className="bg-white rounded-2xl border border-gray-200 p-16 text-center">
-            <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto mb-3" />
+            <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(352,83%,48%)] rounded-full animate-spin mx-auto mb-3" />
             <p className="text-gray-400 text-sm">Loading pages…</p>
           </div>
         ) : (
@@ -123,7 +123,7 @@ export default function PagesManager() {
                     className="w-full flex items-center gap-5 px-6 py-5 text-left hover:bg-gray-50 transition-colors"
                   >
                     <div className="w-10 h-10 rounded-xl bg-[hsl(210,70%,93%)] flex items-center justify-center shrink-0">
-                      <BookOpen className="w-5 h-5 text-[hsl(210,70%,30%)]" />
+                      <BookOpen className="w-5 h-5 text-[hsl(352,75%,33%)]" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="text-sm font-bold text-gray-900 capitalize">{page.slug}</div>

@@ -53,7 +53,7 @@ export default function NewsEditor() {
   const [category, setCategory] = useState(CATEGORIES[0])
   const [excerpt, setExcerpt] = useState("")
   const [image, setImage] = useState("")
-  const [author, setAuthor] = useState("OWC Communications")
+  const [author, setAuthor] = useState("NJSS Communications")
   const [readTime, setReadTime] = useState("3 min read")
   const [published, setPublished] = useState(true)
   const [body, setBody] = useState<BodyBlock[]>([{ heading: "", text: "" }])
@@ -121,7 +121,7 @@ export default function NewsEditor() {
   if (loading) return (
     <AdminLayout>
       <div className="p-16 text-center">
-        <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto mb-3" />
+        <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(352,83%,48%)] rounded-full animate-spin mx-auto mb-3" />
         <p className="text-gray-400 text-sm">Loading article…</p>
       </div>
     </AdminLayout>
@@ -218,7 +218,7 @@ export default function NewsEditor() {
                   <button
                     type="button"
                     onClick={addBlock}
-                    className="flex items-center gap-1.5 text-sm font-semibold text-[hsl(210,70%,25%)] hover:underline"
+                    className="flex items-center gap-1.5 text-sm font-semibold text-[hsl(352,83%,48%)] hover:underline"
                   >
                     <Plus className="w-4 h-4" /> Add Section
                   </button>
@@ -269,7 +269,7 @@ export default function NewsEditor() {
                     id="published"
                     checked={published}
                     onChange={e => setPublished(e.target.checked)}
-                    className="w-4 h-4 accent-[hsl(210,70%,25%)]"
+                    className="w-4 h-4 accent-[hsl(352,83%,48%)]"
                   />
                   <label htmlFor="published" className="text-sm font-semibold text-gray-700 cursor-pointer">
                     Published
@@ -285,7 +285,7 @@ export default function NewsEditor() {
                   <select
                     value={category}
                     onChange={e => setCategory(e.target.value)}
-                    className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(210,70%,25%)] h-10"
+                    className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(352,83%,48%)] h-10"
                   >
                     {CATEGORIES.map(c => <option key={c}>{c}</option>)}
                   </select>

@@ -17,14 +17,14 @@ export async function initDb() {
       user: process.env.DB_USER || 'root',
       password: process.env.DB_PASSWORD || '',
     })
-    await tmp.execute('CREATE DATABASE IF NOT EXISTS owc_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci')
+    await tmp.execute('CREATE DATABASE IF NOT EXISTS njss_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci')
     await tmp.end()
   } catch {}
 
   const conn = await pool.getConnection()
   try {
     await conn.execute(`CREATE TABLE IF NOT EXISTS users (id INT PRIMARY KEY AUTO_INCREMENT, username VARCHAR(200) UNIQUE NOT NULL, password_hash VARCHAR(255) NOT NULL, role VARCHAR(50) NOT NULL DEFAULT 'admin', created_at DATETIME DEFAULT CURRENT_TIMESTAMP)`)
-    await conn.execute(`CREATE TABLE IF NOT EXISTS news_articles (id INT PRIMARY KEY AUTO_INCREMENT, slug VARCHAR(300) UNIQUE NOT NULL, date VARCHAR(50) NOT NULL, month VARCHAR(20) NOT NULL, year VARCHAR(10) NOT NULL, category VARCHAR(100) NOT NULL, title TEXT NOT NULL, excerpt TEXT NOT NULL, image TEXT, author VARCHAR(200) NOT NULL DEFAULT 'OWC Communications', read_time VARCHAR(50) NOT NULL DEFAULT '3 min read', body LONGTEXT, published TINYINT NOT NULL DEFAULT 1, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)`)
+    await conn.execute(`CREATE TABLE IF NOT EXISTS news_articles (id INT PRIMARY KEY AUTO_INCREMENT, slug VARCHAR(300) UNIQUE NOT NULL, date VARCHAR(50) NOT NULL, month VARCHAR(20) NOT NULL, year VARCHAR(10) NOT NULL, category VARCHAR(100) NOT NULL, title TEXT NOT NULL, excerpt TEXT NOT NULL, image TEXT, author VARCHAR(200) NOT NULL DEFAULT 'NJSS Communications', read_time VARCHAR(50) NOT NULL DEFAULT '3 min read', body LONGTEXT, published TINYINT NOT NULL DEFAULT 1, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)`)
     await conn.execute("CREATE TABLE IF NOT EXISTS contact_messages (id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(200) NOT NULL, email VARCHAR(200) NOT NULL, subject VARCHAR(300) NOT NULL, message TEXT NOT NULL, `read` TINYINT NOT NULL DEFAULT 0, received_at DATETIME DEFAULT CURRENT_TIMESTAMP)")
     await conn.execute(`CREATE TABLE IF NOT EXISTS pages (id INT PRIMARY KEY AUTO_INCREMENT, slug VARCHAR(200) UNIQUE NOT NULL, badge VARCHAR(200) NOT NULL DEFAULT '', title VARCHAR(300) NOT NULL, subtitle TEXT, hero_image TEXT, updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)`)
     await conn.execute(`CREATE TABLE IF NOT EXISTS menu_items (id INT PRIMARY KEY AUTO_INCREMENT, label VARCHAR(200) NOT NULL, href VARCHAR(500) NOT NULL, position INT NOT NULL DEFAULT 0)`)
@@ -40,12 +40,12 @@ export async function initDb() {
 
     // Seed pages
     const defaultPages = [
-      { slug: 'about',     badge: 'About Us',       title: 'About the Office of Workers Compensation',  subtitle: 'A statutory office under the Department of Labour and Industrial Relations (DLIR), OWC administers and enforces the Workers\' Compensation Act 1978.', hero_image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1920&q=80' },
-      { slug: 'services',  badge: 'Our Services',   title: 'Workers Compensation Services',              subtitle: 'Comprehensive services to protect injured workers and guide employers across Papua New Guinea.', hero_image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1920&q=80' },
-      { slug: 'news',      badge: 'News & Updates', title: 'News & Announcements',                       subtitle: 'Stay informed with the latest updates, policy changes, and announcements from OWC.', hero_image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1920&q=80' },
-      { slug: 'events',    badge: 'Events',         title: 'Events & Workshops',                         subtitle: 'Join our outreach programs, training sessions, and community awareness events across PNG.', hero_image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1920&q=80' },
-      { slug: 'resources', badge: 'Resources',      title: 'Resources & Forms',                          subtitle: 'Download official OWC claim forms, guides, and policy documents.', hero_image: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1920&q=80' },
-      { slug: 'contact',   badge: 'Contact Us',     title: 'Get in Touch with OWC',                      subtitle: 'Our case officers are ready to assist you Monday to Friday, 8am to 4pm.', hero_image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80' },
+      { slug: 'about',     badge: 'About Us',       title: 'About the National Judicial Staff Service',  subtitle: 'The National Judicial Staff Service (NJSS) provides efficient and effective administrative support to the Supreme Court and National Court of Papua New Guinea.', hero_image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1920&q=80' },
+      { slug: 'services',  badge: 'Our Services',   title: 'Courts & Judicial Services',                 subtitle: 'Comprehensive court and registry services supporting access to justice for all people of Papua New Guinea.', hero_image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1920&q=80' },
+      { slug: 'news',      badge: 'News & Updates', title: 'News & Announcements',                       subtitle: 'Stay informed with the latest updates, judicial notices, and announcements from the NJSS and PNG Judiciary.', hero_image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1920&q=80' },
+      { slug: 'events',    badge: 'Events',         title: 'Events & Programs',                          subtitle: 'Judicial outreach programs, training sessions, law week activities, and community legal awareness events across Papua New Guinea.', hero_image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1920&q=80' },
+      { slug: 'resources', badge: 'Resources',      title: 'Resources & Court Forms',                    subtitle: 'Download official court forms, practice directions, procedural guides, and judicial policy documents.', hero_image: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1920&q=80' },
+      { slug: 'contact',   badge: 'Contact Us',     title: 'Contact the NJSS',                           subtitle: 'Our registry officers and staff are available Monday to Friday, 8:00 AM to 4:00 PM to assist you.', hero_image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80' },
     ]
     for (const p of defaultPages) {
       await conn.execute('INSERT IGNORE INTO pages (slug, badge, title, subtitle, hero_image) VALUES (?, ?, ?, ?, ?)', [p.slug, p.badge, p.title, p.subtitle, p.hero_image])
@@ -54,35 +54,38 @@ export async function initDb() {
     // Seed admin user
     const [rows] = await conn.execute('SELECT id FROM users WHERE username = ?', ['admin']) as any[]
     if ((rows as any[]).length === 0) {
-      const initialPass = process.env.ADMIN_INITIAL_PASSWORD || 'ChangeMe@OWC2026!'
+      const initialPass = process.env.ADMIN_INITIAL_PASSWORD || 'ChangeMe@NJSS2026!'
       const hash = await bcrypt.hash(initialPass, 12)
       await conn.execute('INSERT INTO users (username, password_hash, role) VALUES (?, ?, ?)', ['admin', hash, 'superadmin'])
     }
 
     // Seed default settings
     const defaultSettings: Record<string, string> = {
-      site_name: 'Office of Workers Compensation',
-      site_tagline: "Protecting Papua New Guinea's Workforce",
-      contact_phone: '(+675) 313 5000 / Toll-Free: 180 1100',
-      contact_email: 'workerscomp@owc.gov.pg',
-      contact_address: 'Gaukara Rumana, Wards Rd\nPort Moresby, NCD\nPapua New Guinea',
+      site_name: 'National Judicial Staff Service',
+      site_tagline: 'Serving Justice for All People of Papua New Guinea',
+      contact_phone: '+675 325 7902',
+      contact_email: 'info@judiciary.gov.pg',
+      contact_address: 'Waigani Court Complex\nWaigani Drive, Waigani\nNational Capital District, Papua New Guinea',
       contact_hours: 'Mon–Fri, 8:00 AM – 4:00 PM',
       banner_enabled: 'true',
-      banner_text: 'For claims assistance call (+675) 313 5000 or Toll-Free 180 1100. Email: workerscomp@owc.gov.pg',
-      banner_link: '/claims',
+      banner_text: 'Court registry enquiries: +675 325 7902 | Email: info@judiciary.gov.pg | Waigani Court Complex, NCD',
+      banner_link: '/contact',
       home_show_stats: 'true',
       home_show_services: 'true',
       home_show_process: 'true',
       home_show_news: 'true',
       home_show_events: 'true',
       home_show_cta: 'true',
-      stat_claims: '1,732',
-      stat_benefits: 'K3.2M+',
-      stat_processing: '60–90',
-      stat_coverage: 'All PLOs',
+      stat_cases: '12,400+',
+      stat_benefits: '3,200+',
+      stat_processing: '22',
+      stat_coverage: '120+',
     }
     for (const [k, v] of Object.entries(defaultSettings)) {
-      await conn.execute('INSERT IGNORE INTO site_settings (`key`, value) VALUES (?, ?)', [k, v])
+      await conn.execute(
+        'INSERT INTO site_settings (`key`, value) VALUES (?, ?) ON DUPLICATE KEY UPDATE value = VALUES(value)',
+        [k, v]
+      )
     }
 
     // Seed Documents
@@ -132,7 +135,7 @@ export async function initDb() {
       }
     }
 
-    console.log('Database ready: MySQL owc_db')
+    console.log('Database ready: MySQL njss_db')
   } finally {
     conn.release()
   }

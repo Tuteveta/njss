@@ -6,7 +6,7 @@ import {
   ArrowRight, Plus, BookOpen, Image,
   Navigation, ExternalLink, CalendarDays,
   MapPin, Users, HelpCircle, Layers, Briefcase, Info,
-  Mail, Activity,
+  Mail, Activity, UserCog,
 } from "lucide-react"
 import { adminApi } from "@/lib/adminApi"
 import AdminLayout from "@/components/admin/AdminLayout"
@@ -43,10 +43,11 @@ export default function Dashboard() {
   const [stats, setStats] = useState<Stats | null>(null)
   const [articles, setArticles] = useState<RecentArticle[]>([])
   const [username, setUsername] = useState("")
+  const [role, setRole] = useState("")
 
   useEffect(() => {
     adminApi.stats().then(r => r.json()).then(setStats)
-    adminApi.me().then(r => r.json()).then(d => setUsername(d.username))
+    adminApi.me().then(r => r.json()).then(d => { setUsername(d.username); setRole(d.role ?? "") })
     adminApi.getNews().then(r => r.json()).then(d => setArticles(d.news || []))
   }, [])
 
@@ -58,8 +59,8 @@ export default function Dashboard() {
     {
       label: "News Articles", value: totalNews,
       sub: `${publishedNews} published · ${totalNews - publishedNews} drafts`,
-      pct, bar: "bg-[hsl(210,70%,40%)]",
-      icon: Newspaper, fg: "text-[hsl(210,70%,30%)]", href: "/admin/news",
+      pct, bar: "bg-[hsl(352,83%,55%)]",
+      icon: Newspaper, fg: "text-[hsl(352,75%,33%)]", href: "/admin/news",
     },
     {
       label: "Documents", value: stats.documentCount,
@@ -89,6 +90,9 @@ export default function Dashboard() {
     { label: "Media Library",    desc: "Upload and manage site images",                href: "/admin/media",       icon: Image,       primary: false },
     { label: "Documents",        desc: "Upload and publish PDF resources",             href: "/admin/documents",   icon: FolderOpen,  primary: false },
     { label: "Navigation",       desc: "Edit and reorder the site menu",               href: "/admin/menus",       icon: Navigation,  primary: false },
+    ...(role === "superadmin" ? [
+      { label: "User Management", desc: "Create and manage admin user accounts",         href: "/admin/users",       icon: UserCog,     primary: false },
+    ] : []),
   ]
 
   return (
@@ -99,7 +103,7 @@ export default function Dashboard() {
         <div className="flex items-center justify-between border-b border-gray-200 pb-4">
           <div>
             <div className="flex items-center gap-2 mb-0.5">
-              <Activity className="w-4 h-4 text-[hsl(210,70%,35%)]" />
+              <Activity className="w-4 h-4 text-[hsl(352,83%,55%)]" />
               <h1 className="text-base font-bold text-gray-900 tracking-tight">
                 Welcome back{username ? `, ${username}` : ""}
               </h1>
@@ -110,7 +114,7 @@ export default function Dashboard() {
           </div>
           <Link
             href="/admin/news/new"
-            className="hidden sm:flex items-center gap-2 bg-[hsl(210,70%,25%)] text-white text-xs font-semibold px-3 py-2 rounded hover:bg-[hsl(210,70%,20%)] transition-colors"
+            className="hidden sm:flex items-center gap-2 bg-[hsl(352,83%,48%)] text-white text-xs font-semibold px-3 py-2 rounded hover:bg-[hsl(352,75%,23%)] transition-colors"
           >
             <Plus className="w-3.5 h-3.5" /> New Article
           </Link>
@@ -125,7 +129,7 @@ export default function Dashboard() {
                   <card.icon className={`w-3.5 h-3.5 ${card.fg}`} />
                   {card.label}
                 </span>
-                <ArrowRight className="w-3.5 h-3.5 text-gray-300 group-hover:text-[hsl(210,70%,40%)] transition-colors" />
+                <ArrowRight className="w-3.5 h-3.5 text-gray-300 group-hover:text-[hsl(352,83%,55%)] transition-colors" />
               </div>
               <div className="p-4">
                 <div className={`text-4xl font-bold text-gray-900 gf-metric mb-1`}>{card.value}</div>
@@ -153,7 +157,7 @@ export default function Dashboard() {
           <div className="xl:col-span-2 gf-panel overflow-hidden">
             <div className="gf-panel-header">
               <span className="gf-panel-title">Recent Articles</span>
-              <Link href="/admin/news" className="text-[11px] font-medium text-[hsl(210,70%,35%)] hover:underline flex items-center gap-1">
+              <Link href="/admin/news" className="text-[11px] font-medium text-[hsl(352,83%,55%)] hover:underline flex items-center gap-1">
                 View all <ArrowRight className="w-3 h-3" />
               </Link>
             </div>
@@ -177,7 +181,7 @@ export default function Dashboard() {
             </div>
             <div className="px-4 py-3 border-t border-gray-100 bg-gray-50/60">
               <Link href="/admin/news/new"
-                className="flex items-center justify-center gap-2 w-full py-2 bg-[hsl(210,70%,25%)] text-white text-xs font-semibold hover:bg-[hsl(210,70%,20%)] transition-colors rounded"
+                className="flex items-center justify-center gap-2 w-full py-2 bg-[hsl(352,83%,48%)] text-white text-xs font-semibold hover:bg-[hsl(352,75%,23%)] transition-colors rounded"
               >
                 <Plus className="w-3.5 h-3.5" /> Write New Article
               </Link>
@@ -204,7 +208,7 @@ export default function Dashboard() {
                   className="flex items-center justify-between px-4 py-2.5 hover:bg-gray-50 transition-colors group"
                 >
                   <span className="text-xs text-gray-600 group-hover:text-gray-900 font-medium">{link.label}</span>
-                  <ExternalLink className="w-3 h-3 text-gray-300 group-hover:text-[hsl(210,70%,40%)]" />
+                  <ExternalLink className="w-3 h-3 text-gray-300 group-hover:text-[hsl(352,83%,55%)]" />
                 </a>
               ))}
             </div>
@@ -221,11 +225,11 @@ export default function Dashboard() {
               <Link key={action.label} href={action.href}
                 className={`flex flex-col gap-2 p-3 rounded border transition-all group ${
                   action.primary
-                    ? "bg-[hsl(210,70%,25%)] border-[hsl(210,70%,20%)] hover:bg-[hsl(210,70%,20%)]"
-                    : "bg-white border-gray-200 hover:border-[hsl(210,70%,50%)] hover:bg-blue-50/30"
+                    ? "bg-[hsl(352,83%,48%)] border-[hsl(352,75%,23%)] hover:bg-[hsl(352,75%,23%)]"
+                    : "bg-white border-gray-200 hover:border-[hsl(210,70%,50%)] hover:bg-red-50/30"
                 }`}
               >
-                <action.icon className={`w-4 h-4 ${action.primary ? "text-white" : "text-gray-400 group-hover:text-[hsl(210,70%,35%)]"}`} />
+                <action.icon className={`w-4 h-4 ${action.primary ? "text-white" : "text-gray-400 group-hover:text-[hsl(352,83%,55%)]"}`} />
                 <div className={`text-[11px] font-bold leading-tight ${action.primary ? "text-white" : "text-gray-700"}`}>{action.label}</div>
               </Link>
             ))}

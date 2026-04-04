@@ -19,7 +19,7 @@ interface Article {
 }
 
 const CATEGORY_COLORS: Record<string, string> = {
-  Technology: "bg-blue-50 text-blue-700",
+  Technology: "bg-red-50 text-red-800",
   Policy: "bg-purple-50 text-purple-700",
   Workshop: "bg-orange-50 text-orange-700",
   Announcement: "bg-red-50 text-red-800",
@@ -101,7 +101,7 @@ export default function NewsManager() {
                 onClick={() => setFilter(f)}
                 className={`px-4 py-2 text-sm font-medium capitalize transition-colors ${
                   filter === f
-                    ? "bg-[hsl(210,70%,25%)] text-white"
+                    ? "bg-[hsl(352,83%,48%)] text-white"
                     : "text-gray-500 hover:bg-gray-50"
                 }`}
               >
@@ -115,7 +115,7 @@ export default function NewsManager() {
         <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
           {loading ? (
             <div className="p-16 text-center">
-              <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto mb-3" />
+              <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(352,83%,48%)] rounded-full animate-spin mx-auto mb-3" />
               <p className="text-gray-400 text-sm">Loading articles…</p>
             </div>
           ) : filtered.length === 0 ? (
@@ -174,7 +174,7 @@ export default function NewsManager() {
                     <div className="flex items-center gap-1">
                       <Link
                         href={`/admin/news/${a.id}`}
-                        className="p-2 rounded-lg text-gray-400 hover:bg-blue-50 hover:text-[hsl(210,70%,25%)] transition-colors"
+                        className="p-2 rounded-lg text-gray-400 hover:bg-red-50 hover:text-[hsl(352,83%,48%)] transition-colors"
                         title="Edit"
                       >
                         <Pencil className="w-4 h-4" />

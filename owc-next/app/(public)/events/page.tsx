@@ -13,7 +13,7 @@ const SECTIONS = [
 ]
 
 const CATEGORY_COLORS: Record<string, string> = {
-  Workshop:     "bg-blue-100 text-blue-700",
+  Workshop:     "bg-red-100 text-red-800",
   Training:     "bg-indigo-100 text-indigo-700",
   Awareness:    "bg-emerald-100 text-emerald-700",
   Consultation: "bg-amber-100 text-amber-700",
@@ -22,7 +22,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   General:      "bg-gray-100 text-gray-600",
 }
 
-interface OWCEvent {
+interface CourtEvent {
   id: number
   title: string
   description: string
@@ -43,11 +43,11 @@ function isPast(iso: string) {
   return new Date(iso + "T23:59:59") < new Date()
 }
 
-function EventCard({ event }: { event: OWCEvent }) {
+function EventCard({ event }: { event: CourtEvent }) {
   const past = isPast(event.eventDate)
   const colorClass = CATEGORY_COLORS[event.category] ?? CATEGORY_COLORS.General
   return (
-    <Card className={`overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 ${past ? "opacity-70" : ""}`}>
+    <Card className={`overflow-hidden hover:-translate-y-1 transition-all duration-300 ${past ? "opacity-70" : ""}`}>
       {event.image && (
         <div className="h-44 overflow-hidden relative">
           <img src={event.image} alt={event.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
@@ -70,13 +70,13 @@ function EventCard({ event }: { event: OWCEvent }) {
         <div className="space-y-1.5 pt-1">
           {event.eventTime && (
             <div className="flex items-center gap-2 text-xs text-gray-500">
-              <Clock className="w-3.5 h-3.5 text-[hsl(210,70%,25%)] shrink-0" />
+              <Clock className="w-3.5 h-3.5 text-[hsl(352,83%,48%)] shrink-0" />
               {event.eventTime}
             </div>
           )}
           {event.location && (
             <div className="flex items-start gap-2 text-xs text-gray-500">
-              <MapPin className="w-3.5 h-3.5 text-[hsl(210,70%,25%)] shrink-0 mt-0.5" />
+              <MapPin className="w-3.5 h-3.5 text-[hsl(352,83%,48%)] shrink-0 mt-0.5" />
               {event.location}
             </div>
           )}
@@ -87,7 +87,7 @@ function EventCard({ event }: { event: OWCEvent }) {
 }
 
 export default function Events() {
-  const [events, setEvents] = useState<OWCEvent[]>([])
+  const [events, setEvents] = useState<CourtEvent[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState("")
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
@@ -118,7 +118,7 @@ export default function Events() {
       <PageHero
         badge="Events"
         title="Upcoming Events"
-        subtitle="Workshops, awareness campaigns, public consultations, and training sessions hosted by the Office of Workers' Compensation across Papua New Guinea."
+        subtitle="Workshops, awareness campaigns, public consultations, and training sessions hosted by the National Judicial Staff Service across Papua New Guinea."
         crumbs={[{ label: "Events" }]}
         image="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1920&q=80"
       />
@@ -145,8 +145,8 @@ export default function Events() {
                 onClick={() => setActiveCategory(null)}
                 className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${
                   activeCategory === null
-                    ? "bg-[hsl(210,70%,25%)] text-white"
-                    : "bg-white border border-gray-200 text-gray-600 hover:border-[hsl(210,70%,25%)]"
+                    ? "bg-[hsl(352,83%,48%)] text-white"
+                    : "bg-white border border-gray-200 text-gray-600 hover:border-[hsl(352,83%,48%)]"
                 }`}
               >
                 All
@@ -157,8 +157,8 @@ export default function Events() {
                   onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
                   className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${
                     activeCategory === cat
-                      ? "bg-[hsl(210,70%,25%)] text-white"
-                      : "bg-white border border-gray-200 text-gray-600 hover:border-[hsl(210,70%,25%)]"
+                      ? "bg-[hsl(352,83%,48%)] text-white"
+                      : "bg-white border border-gray-200 text-gray-600 hover:border-[hsl(352,83%,48%)]"
                   }`}
                 >
                   {cat}
@@ -195,7 +195,7 @@ export default function Events() {
                 {(search || activeCategory) && (
                   <button
                     onClick={() => { setSearch(""); setActiveCategory(null) }}
-                    className="mt-4 text-sm font-medium text-[hsl(210,70%,25%)] hover:underline"
+                    className="mt-4 text-sm font-medium text-[hsl(352,83%,48%)] hover:underline"
                   >
                     Clear filters
                   </button>
@@ -223,7 +223,7 @@ export default function Events() {
           )}
 
           {/* Subscribe CTA */}
-          <div className="mt-14 relative overflow-hidden rounded-2xl bg-[hsl(210,70%,20%)] text-white">
+          <div className="mt-14 relative overflow-hidden rounded-2xl bg-[hsl(352,75%,23%)] text-white">
             <div className="absolute inset-0 pointer-events-none">
               <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/5" />
               <div className="absolute -bottom-8 -left-8 w-36 h-36 rounded-full bg-white/5" />
@@ -232,25 +232,25 @@ export default function Events() {
               <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                 <div className="flex items-center gap-4">
                   <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/10 border border-white/20 shrink-0">
-                    <Bell className="w-4 h-4 text-blue-300" />
+                    <Bell className="w-4 h-4 text-red-300" />
                   </div>
                   <div>
                     <h3 className="text-base font-bold leading-tight">Stay Informed</h3>
-                    <p className="text-blue-200 text-xs leading-relaxed mt-0.5 max-w-sm">
-                      Contact your nearest Provincial Labour Office or OWC headquarters for event updates.
+                    <p className="text-red-200 text-xs leading-relaxed mt-0.5 max-w-sm">
+                      Contact your nearest Court Registry or the NJSS for event updates.
                     </p>
                   </div>
                 </div>
                 <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
-                  <a href="mailto:workerscomp@owc.gov.pg"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white text-[hsl(210,70%,22%)] font-semibold text-sm hover:bg-blue-50 transition-colors">
+                  <a href="mailto:info@judiciary.gov.pg"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white text-[hsl(352,83%,44%)] font-semibold text-sm hover:bg-red-50 transition-colors">
                     <Mail className="w-3.5 h-3.5 shrink-0" />
-                    workerscomp@owc.gov.pg
+                    info@judiciary.gov.pg
                   </a>
                   <a href="tel:+6753135000"
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white/10 border border-white/20 text-white font-semibold text-sm hover:bg-white/20 transition-colors">
-                    <Phone className="w-3.5 h-3.5 shrink-0 text-blue-300" />
-                    (+675) 313 5000
+                    <Phone className="w-3.5 h-3.5 shrink-0 text-red-300" />
+                    +675 325 7902
                   </a>
                 </div>
               </div>

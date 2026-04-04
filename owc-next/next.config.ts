@@ -1,7 +1,60 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from "next"
+
+const isProd = process.env.NODE_ENV === 'production'
+
+const securityHeaders = [
+  { key: "X-DNS-Prefetch-Control",  value: "on" },
+  { key: "X-Frame-Options",         value: "DENY" },
+  { key: "X-Content-Type-Options",  value: "nosniff" },
+  { key: "Referrer-Policy",         value: "strict-origin-when-cross-origin" },
+  { key: "Permissions-Policy",      value: "camera=(), microphone=(), geolocation=(), payment=()" },
+  {
+    key: "Strict-Transport-Security",
+    value: "max-age=63072000; includeSubDomains; preload",
+  },
+  {
+    key: "Content-Security-Policy",
+    value: [
+      "default-src 'self'",
+      // Next.js requires nonce-based inline scripts in prod; unsafe-inline only in dev
+      isProd
+        ? "script-src 'self'"
+        : "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+      "style-src 'self' 'unsafe-inline'",           // Next.js CSS-in-JS requires this
+      "img-src 'self' data: blob: https://images.unsplash.com https://flagcdn.com https://upload.wikimedia.org",
+      "font-src 'self' data:",
+      "connect-src 'self'",
+      "frame-src 'none'",
+      "frame-ancestors 'none'",
+      "base-uri 'self'",
+      "form-action 'self'",
+      "object-src 'none'",
+      "upgrade-insecure-requests",
+    ].join("; "),
+  },
+]
 
 const nextConfig: NextConfig = {
   images: { unoptimized: true },
-};
+  compress: true,
+  poweredByHeader: false,
 
-export default nextConfig;
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: securityHeaders,
+      },
+      // Cache-control for uploads — prevent direct execution
+      {
+        source: "/uploads/:path*",
+        headers: [
+          { key: "Content-Disposition", value: "attachment" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+        ],
+      },
+    ]
+  },
+}
+
+export default nextConfig

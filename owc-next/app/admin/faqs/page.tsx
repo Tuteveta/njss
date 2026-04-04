@@ -88,7 +88,7 @@ export default function FAQManager() {
   return (
     <AdminLayout>
       {toast && (
-        <div className={`fixed top-4 right-4 z-50 flex items-center gap-2 px-4 py-3 rounded-xl shadow-lg text-white text-sm font-medium ${toast.type === "success" ? "bg-emerald-600" : "bg-red-600"}`}>
+        <div className={`fixed top-4 right-4 z-50 flex items-center gap-2 px-4 py-3 rounded-xl shadow-lg text-white text-sm font-medium ${toast.type === "success" ? "bg-amber-600" : "bg-red-600"}`}>
           {toast.type === "success" ? <CheckCircle className="w-4 h-4 shrink-0" /> : <AlertCircle className="w-4 h-4 shrink-0" />}
           {toast.msg}
         </div>
@@ -130,7 +130,7 @@ export default function FAQManager() {
               <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Answer *</label>
               <textarea
                 rows={4}
-                className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(210,70%,25%)]"
+                className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(352,83%,48%)]"
                 value={form.answer}
                 onChange={e => setForm(p => ({ ...p, answer: e.target.value }))}
                 placeholder="Enter the answer…"
@@ -154,7 +154,7 @@ export default function FAQManager() {
         <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
           {loading ? (
             <div className="p-16 text-center">
-              <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto mb-3" />
+              <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(352,83%,48%)] rounded-full animate-spin mx-auto mb-3" />
               <p className="text-gray-400 text-sm">Loading FAQs…</p>
             </div>
           ) : faqs.length === 0 ? (
@@ -201,7 +201,7 @@ export default function FAQManager() {
                       <button onClick={() => togglePublish(f)} className="p-2 rounded-lg text-gray-400 hover:bg-gray-50 hover:text-gray-700 transition-colors" title={f.published ? "Hide" : "Publish"}>
                         {f.published ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                       </button>
-                      <button onClick={() => startEdit(f)} className="p-2 rounded-lg text-gray-400 hover:bg-blue-50 hover:text-[hsl(210,70%,25%)] transition-colors" title="Edit">
+                      <button onClick={() => startEdit(f)} className="p-2 rounded-lg text-gray-400 hover:bg-red-50 hover:text-[hsl(352,83%,48%)] transition-colors" title="Edit">
                         <Pencil className="w-4 h-4" />
                       </button>
                       <button onClick={() => setDeleteId(f.id)} className="p-2 rounded-lg text-gray-400 hover:bg-red-50 hover:text-red-600 transition-colors" title="Delete">

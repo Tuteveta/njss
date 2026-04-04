@@ -37,7 +37,7 @@ function StringList({ label, items, onChange }: { label: string; items: string[]
             </button>
           </div>
         ))}
-        <button type="button" onClick={() => onChange([...items, ""])} className="text-xs font-medium text-[hsl(210,70%,25%)] hover:underline flex items-center gap-1">
+        <button type="button" onClick={() => onChange([...items, ""])} className="text-xs font-medium text-[hsl(352,83%,48%)] hover:underline flex items-center gap-1">
           <Plus className="w-3 h-3" /> Add item
         </button>
       </div>
@@ -58,10 +58,10 @@ function KVList({ label, items, onChange }: { label: string; items: KV[]; onChan
                 <X className="w-4 h-4" />
               </button>
             </div>
-            <textarea rows={2} className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(210,70%,25%)]" value={item.desc} onChange={e => { const n = [...items]; n[i] = { ...n[i], desc: e.target.value }; onChange(n) }} placeholder="Description" />
+            <textarea rows={2} className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(352,83%,48%)]" value={item.desc} onChange={e => { const n = [...items]; n[i] = { ...n[i], desc: e.target.value }; onChange(n) }} placeholder="Description" />
           </div>
         ))}
-        <button type="button" onClick={() => onChange([...items, { title: "", desc: "" }])} className="text-xs font-medium text-[hsl(210,70%,25%)] hover:underline flex items-center gap-1">
+        <button type="button" onClick={() => onChange([...items, { title: "", desc: "" }])} className="text-xs font-medium text-[hsl(352,83%,48%)] hover:underline flex items-center gap-1">
           <Plus className="w-3 h-3" /> Add item
         </button>
       </div>
@@ -110,7 +110,7 @@ export default function AboutManager() {
     <AdminLayout>
       <div className="w-full space-y-6 pb-6">
         {toast && (
-          <div className="fixed bottom-6 right-6 z-50 bg-emerald-600 text-white text-sm px-5 py-3 rounded-xl shadow-lg flex items-center gap-2">
+          <div className="fixed bottom-6 right-6 z-50 bg-amber-600 text-white text-sm px-5 py-3 rounded-xl shadow-lg flex items-center gap-2">
             <Check className="w-4 h-4" /> {toast}
           </div>
         )}
@@ -128,7 +128,7 @@ export default function AboutManager() {
 
         {loading ? (
           <div className="bg-white rounded-2xl border border-gray-200 p-16 text-center">
-            <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto mb-3" />
+            <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(352,83%,48%)] rounded-full animate-spin mx-auto mb-3" />
             <p className="text-gray-400 text-sm">Loading…</p>
           </div>
         ) : (
@@ -139,7 +139,7 @@ export default function AboutManager() {
                 <button
                   key={tab.key}
                   onClick={() => setActiveTab(tab.key)}
-                  className={`shrink-0 px-5 py-3.5 text-sm font-medium border-b-2 transition-colors ${activeTab === tab.key ? "border-[hsl(210,70%,25%)] text-[hsl(210,70%,25%)]" : "border-transparent text-gray-500 hover:text-gray-800"}`}
+                  className={`shrink-0 px-5 py-3.5 text-sm font-medium border-b-2 transition-colors ${activeTab === tab.key ? "border-[hsl(352,83%,48%)] text-[hsl(352,83%,48%)]" : "border-transparent text-gray-500 hover:text-gray-800"}`}
                 >
                   {tab.label}
                 </button>
@@ -151,11 +151,11 @@ export default function AboutManager() {
                 <>
                   <div>
                     <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Mission Statement</label>
-                    <textarea rows={4} className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(210,70%,25%)]" value={data.mission} onChange={e => set("mission", e.target.value)} placeholder="Our mission…" />
+                    <textarea rows={4} className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(352,83%,48%)]" value={data.mission} onChange={e => set("mission", e.target.value)} placeholder="Our mission…" />
                   </div>
                   <div>
                     <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Vision Statement</label>
-                    <textarea rows={4} className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(210,70%,25%)]" value={data.vision} onChange={e => set("vision", e.target.value)} placeholder="Our vision…" />
+                    <textarea rows={4} className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(352,83%,48%)]" value={data.vision} onChange={e => set("vision", e.target.value)} placeholder="Our vision…" />
                   </div>
                 </>
               )}
@@ -166,7 +166,7 @@ export default function AboutManager() {
 
               {activeTab === "highlights" && (
                 <div>
-                  <p className="text-xs text-gray-400 mb-4">Each highlight shows a bold value (e.g. "1,732") and a descriptive label below it.</p>
+                  <p className="text-xs text-gray-400 mb-4">Each highlight shows a bold value (e.g. "12,400+") and a descriptive label below it.</p>
                   <KVList label="Highlights" items={data.highlights.map(h => ({ title: h.title ?? (h as { value?: string }).value ?? "", desc: h.desc ?? (h as { label?: string }).label ?? "" }))} onChange={v => set("highlights", v.map(i => ({ title: i.title, desc: i.desc })))} />
                   <p className="text-xs text-gray-400 mt-2">Note: "Title" = the bold number/value. "Description" = the label below.</p>
                 </div>

@@ -40,26 +40,21 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="min-h-screen bg-[hsl(210,70%,15%)] flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gray-900 flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
 
         {/* Card — contains everything */}
         <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
 
           {/* Card header */}
-          <div className="bg-[hsl(210,70%,20%)] px-8 pt-8 pb-6 text-center">
-            <div className="relative flex items-center justify-center mx-auto mb-4 w-24 h-24">
-              {/* Ripple rings */}
-              <span className="absolute inset-0 rounded-full border border-white/20 animate-[ripple_2.4s_ease-out_infinite]" />
-              <span className="absolute inset-0 rounded-full border border-white/15 animate-[ripple_2.4s_ease-out_0.8s_infinite]" />
-              <span className="absolute inset-0 rounded-full border border-white/10 animate-[ripple_2.4s_ease-out_1.6s_infinite]" />
-              {/* Logo circle */}
-              <div className="relative w-24 h-24 rounded-full border-4 border-white/30 flex items-center justify-center z-10">
-                <img src="/png-coa.png" alt="OWC Logo" className="w-16 h-16 object-contain drop-shadow-lg" />
+          <div className="bg-[hsl(352,75%,23%)] px-8 pt-8 pb-6 text-center">
+            <div className="flex items-center justify-center mx-auto mb-4 w-24 h-24">
+              <div className="w-24 h-24 rounded-full border-4 border-white/30 flex items-center justify-center">
+                <img src="/png-coa.png" alt="NJSS Logo" className="w-16 h-16 object-contain drop-shadow-lg" />
               </div>
             </div>
-            <h1 className="text-xl font-bold text-white">OWC Admin</h1>
-            <p className="text-blue-200 text-sm mt-1">Sign in to the content management panel</p>
+            <h1 className="text-xl font-bold text-white">NJSS Admin</h1>
+            <p className="text-red-200 text-sm mt-1">Sign in to the content management panel</p>
           </div>
 
           {/* Card body */}
@@ -90,7 +85,7 @@ export default function AdminLogin() {
                       <button
                         type="button"
                         onClick={() => { setShowForgot(true); setError("") }}
-                        className="text-xs text-[hsl(210,70%,40%)] hover:text-[hsl(210,70%,25%)] transition-colors"
+                        className="text-xs text-[hsl(352,83%,55%)] hover:text-[hsl(352,83%,48%)] transition-colors"
                       >
                         Forgot password?
                       </button>
@@ -120,12 +115,12 @@ export default function AdminLogin() {
               </>
             ) : (
               <div className="space-y-4">
-                <div className="flex items-start gap-3 bg-blue-50 border border-blue-200 rounded-lg px-4 py-3">
-                  <KeyRound className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
-                  <div className="text-sm text-blue-800">
+                <div className="flex items-start gap-3 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+                  <KeyRound className="w-4 h-4 text-red-700 shrink-0 mt-0.5" />
+                  <div className="text-sm text-red-900">
                     <p className="font-medium mb-1">Reset your password</p>
-                    <p className="text-blue-700 leading-relaxed">
-                      Contact your system administrator to reset your password, or use the server environment variable <code className="bg-blue-100 px-1 rounded text-xs">ADMIN_INITIAL_PASSWORD</code> to set a new default.
+                    <p className="text-red-800 leading-relaxed">
+                      Contact your system administrator to reset your password, or use the server environment variable <code className="bg-red-100 px-1 rounded text-xs">ADMIN_INITIAL_PASSWORD</code> to set a new default.
                     </p>
                   </div>
                 </div>

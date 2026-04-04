@@ -109,7 +109,7 @@ export default function ServicesManager() {
   return (
     <AdminLayout>
       {toast && (
-        <div className={`fixed top-4 right-4 z-50 flex items-center gap-2 px-4 py-3 rounded-xl shadow-lg text-white text-sm font-medium ${toast.type === "success" ? "bg-emerald-600" : "bg-red-600"}`}>
+        <div className={`fixed top-4 right-4 z-50 flex items-center gap-2 px-4 py-3 rounded-xl shadow-lg text-white text-sm font-medium ${toast.type === "success" ? "bg-amber-600" : "bg-red-600"}`}>
           {toast.type === "success" ? <CheckCircle className="w-4 h-4 shrink-0" /> : <AlertCircle className="w-4 h-4 shrink-0" />}
           {toast.msg}
         </div>
@@ -153,22 +153,22 @@ export default function ServicesManager() {
                 <select
                   value={form.iconName}
                   onChange={e => setForm(p => ({ ...p, iconName: e.target.value }))}
-                  className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(210,70%,25%)]"
+                  className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(352,83%,48%)]"
                 >
                   {ICON_OPTIONS.map(ico => <option key={ico} value={ico}>{ico}</option>)}
                 </select>
               </div>
               <div className="sm:col-span-2">
                 <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Title *</label>
-                <Input value={form.title} onChange={e => setForm(p => ({ ...p, title: e.target.value }))} placeholder="Workers Compensation" />
+                <Input value={form.title} onChange={e => setForm(p => ({ ...p, title: e.target.value }))} placeholder="Judicial Services" />
               </div>
               <div className="sm:col-span-2">
                 <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Description</label>
-                <textarea rows={3} className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(210,70%,25%)]" value={form.description} onChange={e => setForm(p => ({ ...p, description: e.target.value }))} placeholder="Brief description of this service…" />
+                <textarea rows={3} className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(352,83%,48%)]" value={form.description} onChange={e => setForm(p => ({ ...p, description: e.target.value }))} placeholder="Brief description of this service…" />
               </div>
               <div className="sm:col-span-2">
                 <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Who Is Eligible</label>
-                <textarea rows={2} className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(210,70%,25%)]" value={form.whoEligible} onChange={e => setForm(p => ({ ...p, whoEligible: e.target.value }))} placeholder="Any worker employed under a contract of service…" />
+                <textarea rows={2} className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(352,83%,48%)]" value={form.whoEligible} onChange={e => setForm(p => ({ ...p, whoEligible: e.target.value }))} placeholder="Any worker employed under a contract of service…" />
               </div>
               <div className="sm:col-span-2">
                 <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Benefits / What's Included</label>
@@ -183,7 +183,7 @@ export default function ServicesManager() {
                       )}
                     </div>
                   ))}
-                  <button type="button" onClick={addBenefit} className="text-xs font-medium text-[hsl(210,70%,25%)] hover:underline flex items-center gap-1 mt-1">
+                  <button type="button" onClick={addBenefit} className="text-xs font-medium text-[hsl(352,83%,48%)] hover:underline flex items-center gap-1 mt-1">
                     <Plus className="w-3 h-3" /> Add benefit
                   </button>
                 </div>
@@ -207,7 +207,7 @@ export default function ServicesManager() {
         <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
           {loading ? (
             <div className="p-16 text-center">
-              <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto mb-3" />
+              <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(352,83%,48%)] rounded-full animate-spin mx-auto mb-3" />
               <p className="text-gray-400 text-sm">Loading services…</p>
             </div>
           ) : services.length === 0 ? (
@@ -257,7 +257,7 @@ export default function ServicesManager() {
                       <button onClick={() => togglePublish(s)} className="p-2 rounded-lg text-gray-400 hover:bg-gray-50 hover:text-gray-700 transition-colors" title={s.published ? "Hide" : "Publish"}>
                         {s.published ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                       </button>
-                      <button onClick={() => startEdit(s)} className="p-2 rounded-lg text-gray-400 hover:bg-blue-50 hover:text-[hsl(210,70%,25%)] transition-colors" title="Edit">
+                      <button onClick={() => startEdit(s)} className="p-2 rounded-lg text-gray-400 hover:bg-red-50 hover:text-[hsl(352,83%,48%)] transition-colors" title="Edit">
                         <Pencil className="w-4 h-4" />
                       </button>
                       <button onClick={() => setDeleteId(s.id)} className="p-2 rounded-lg text-gray-400 hover:bg-red-50 hover:text-red-600 transition-colors" title="Delete">

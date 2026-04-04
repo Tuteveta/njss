@@ -19,10 +19,10 @@ interface Document {
 const CATEGORIES = ["Policy", "Form", "Report", "Guide", "Regulation", "Other"]
 
 const CATEGORY_COLORS: Record<string, string> = {
-  Policy: "bg-blue-50 text-blue-700",
+  Policy: "bg-red-50 text-red-800",
   Form: "bg-red-50 text-red-800",
   Report: "bg-purple-50 text-purple-700",
-  Guide: "bg-emerald-50 text-emerald-700",
+  Guide: "bg-amber-50 text-amber-700",
   Regulation: "bg-orange-50 text-orange-700",
   Other: "bg-gray-100 text-gray-600",
 }
@@ -118,7 +118,7 @@ export default function PDFManager() {
               <select
                 value={category}
                 onChange={e => setCategory(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(210,70%,25%)] h-10"
+                className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(352,83%,48%)] h-10"
               >
                 {CATEGORIES.map(c => <option key={c}>{c}</option>)}
               </select>
@@ -149,7 +149,7 @@ export default function PDFManager() {
         {/* Document list */}
         {loading ? (
           <div className="bg-white rounded-2xl border border-gray-200 p-16 text-center">
-            <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto mb-3" />
+            <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(352,83%,48%)] rounded-full animate-spin mx-auto mb-3" />
             <p className="text-gray-400 text-sm">Loading documents…</p>
           </div>
         ) : docs.length === 0 ? (
@@ -184,7 +184,7 @@ export default function PDFManager() {
                           href={`/uploads/documents/${doc.filename}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-2 rounded-lg text-gray-400 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                          className="p-2 rounded-lg text-gray-400 hover:bg-red-50 hover:text-red-700 transition-colors"
                           title="Download"
                         >
                           <Download className="w-4 h-4" />

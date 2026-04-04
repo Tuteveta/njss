@@ -55,7 +55,7 @@ export default function News() {
       <PageHero
         badge="Updates"
         title="News & Announcements"
-        subtitle="Stay up to date with the latest news, policy changes, and events from the Office of Workers Compensation."
+        subtitle="Stay up to date with the latest news, policy changes, and events from the National Judicial Staff Service."
         crumbs={[{ label: "News & Updates" }]}
         image="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1920&q=80"
       />
@@ -82,7 +82,7 @@ export default function News() {
               {/* Categories */}
               <div className="bg-white rounded-xl border border-gray-100 p-4">
                 <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2 text-sm">
-                  <Tag className="w-4 h-4 text-[hsl(210,70%,25%)]" /> Categories
+                  <Tag className="w-4 h-4 text-[hsl(352,83%,48%)]" /> Categories
                 </h3>
                 <ul className="space-y-1">
                   <li>
@@ -90,7 +90,7 @@ export default function News() {
                       onClick={() => setActiveCategory(null)}
                       className={`w-full text-left text-sm px-2 py-1.5 rounded-md flex items-center justify-between transition-colors ${
                         !activeCategory
-                          ? "bg-[hsl(210,70%,96%)] text-[hsl(210,70%,25%)] font-medium"
+                          ? "bg-[hsl(352,75%,97%)] text-[hsl(352,83%,48%)] font-medium"
                           : "text-gray-600 hover:bg-gray-50"
                       }`}
                     >
@@ -104,7 +104,7 @@ export default function News() {
                         onClick={() => setActiveCategory(cat === activeCategory ? null : cat)}
                         className={`w-full text-left text-sm px-2 py-1.5 rounded-md flex items-center justify-between transition-colors ${
                           activeCategory === cat
-                            ? "bg-[hsl(210,70%,96%)] text-[hsl(210,70%,25%)] font-medium"
+                            ? "bg-[hsl(352,75%,97%)] text-[hsl(352,83%,48%)] font-medium"
                             : "text-gray-600 hover:bg-gray-50"
                         }`}
                       >
@@ -121,7 +121,7 @@ export default function News() {
               {/* Archive */}
               <div className="bg-white rounded-xl border border-gray-100 p-4">
                 <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2 text-sm">
-                  <Archive className="w-4 h-4 text-[hsl(210,70%,25%)]" /> Archive
+                  <Archive className="w-4 h-4 text-[hsl(352,83%,48%)]" /> Archive
                 </h3>
                 <div className="space-y-1">
                   {Object.keys(archiveMap)
@@ -156,7 +156,7 @@ export default function News() {
                                   }
                                   className={`w-full text-left text-sm px-2 py-1.5 rounded-md flex items-center justify-between transition-colors ${
                                     activeMonth === month
-                                      ? "bg-[hsl(210,70%,96%)] text-[hsl(210,70%,25%)] font-medium"
+                                      ? "bg-[hsl(352,75%,97%)] text-[hsl(352,83%,48%)] font-medium"
                                       : "text-gray-500 hover:bg-gray-50"
                                   }`}
                                 >
@@ -200,7 +200,7 @@ export default function News() {
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {filtered.map((n) => (
                   <Link key={n.id} href={`/news/${n.slug}`} className="group block">
-                    <Card className="h-full group-hover:shadow-md group-hover:-translate-y-1 transition-all duration-300 overflow-hidden">
+                    <Card className="h-full group-hover:-translate-y-1 transition-all duration-300 overflow-hidden">
                       <div className="h-44 overflow-hidden">
                         <img src={n.image} alt={n.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                       </div>
@@ -213,11 +213,11 @@ export default function News() {
                             <Calendar className="w-3 h-3" />{n.date}
                           </span>
                         </div>
-                        <CardTitle className="text-base leading-snug mt-2 group-hover:text-[hsl(210,70%,25%)] transition-colors">{n.title}</CardTitle>
+                        <CardTitle className="text-base leading-snug mt-2 group-hover:text-[hsl(352,83%,48%)] transition-colors">{n.title}</CardTitle>
                       </CardHeader>
                       <CardContent>
                         <CardDescription className="text-sm">{n.excerpt}</CardDescription>
-                        <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-[hsl(210,70%,25%)] group-hover:gap-2 transition-all">
+                        <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-[hsl(352,83%,48%)] group-hover:gap-2 transition-all">
                           Read more <ChevronRight className="w-3.5 h-3.5" />
                         </span>
                       </CardContent>

@@ -99,7 +99,7 @@ export default function MenuManager() {
           <div className="xl:col-span-2 space-y-3">
             {loading ? (
               <div className="bg-white rounded-2xl border border-gray-200 p-16 text-center">
-                <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto mb-3" />
+                <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(352,83%,48%)] rounded-full animate-spin mx-auto mb-3" />
                 <p className="text-gray-400 text-sm">Loading menu…</p>
               </div>
             ) : (
@@ -164,7 +164,7 @@ export default function MenuManager() {
                 </div>
                 <button
                   onClick={add}
-                  className="flex items-center gap-2 text-sm font-semibold text-[hsl(210,70%,25%)] hover:underline"
+                  className="flex items-center gap-2 text-sm font-semibold text-[hsl(352,83%,48%)] hover:underline"
                 >
                   <Plus className="w-4 h-4" /> Add Menu Item
                 </button>
@@ -199,8 +199,8 @@ export default function MenuManager() {
             </div>
 
             <div className="bg-[hsl(210,70%,97%)] rounded-2xl border border-[hsl(210,70%,88%)] px-5 py-4">
-              <p className="text-xs font-semibold text-[hsl(210,70%,30%)] mb-1">How it works</p>
-              <p className="text-xs text-[hsl(210,70%,40%)] leading-relaxed">
+              <p className="text-xs font-semibold text-[hsl(352,75%,33%)] mb-1">How it works</p>
+              <p className="text-xs text-[hsl(352,83%,55%)] leading-relaxed">
                 Drag items to reorder. Set the label (display name) and path (e.g. <code>/about</code>). Click <strong>Save Menu</strong> to publish changes.
               </p>
             </div>

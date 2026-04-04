@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 import { Download, FileText, BookOpen, BarChart2, Scale, HelpCircle, ChevronDown, ChevronUp, ArrowRight } from "lucide-react"
 import PageHero from "@/components/PageHero"
 import ScrollNav from "@/components/ScrollNav"
@@ -20,7 +21,7 @@ interface Doc {
 
 // ── Sections ──────────────────────────────────────────────────────────────────
 const SECTIONS = [
-  { id: "forms",       label: "Claim Forms" },
+  { id: "forms",       label: "Court Forms" },
   { id: "guides",      label: "Guides & Publications" },
   { id: "reports",     label: "Reports & Statistics" },
   { id: "legislation", label: "Legislation" },
@@ -29,41 +30,43 @@ const SECTIONS = [
 
 // ── Fallback data (shown when backend has no entries yet) ─────────────────────
 const FALLBACK_FORMS: Doc[] = [
-  { id: 1, title: "WCA Form 1 — Employee's Claim for Compensation",       category: "Form", url: "#", originalName: "WCA-Form-1.pdf",      fileSize: 214016,  uploadedAt: "" },
-  { id: 2, title: "WCA Form 2 — Employer's Report of Work-Related Injury", category: "Form", url: "#", originalName: "WCA-Form-2.pdf",      fileSize: 187392,  uploadedAt: "" },
-  { id: 3, title: "WCA Form 3 — Medical Certificate & Assessment Report",  category: "Form", url: "#", originalName: "WCA-Form-3.pdf",      fileSize: 229376,  uploadedAt: "" },
-  { id: 4, title: "WCA Form 4 — Application for Rehabilitation Services",  category: "Form", url: "#", originalName: "WCA-Form-4.pdf",      fileSize: 196608,  uploadedAt: "" },
-  { id: 5, title: "WCA Form 5 — Employer Registration Form",              category: "Form", url: "#", originalName: "WCA-Form-5.pdf",      fileSize: 172032,  uploadedAt: "" },
+  { id: 1, title: "SC Form 1 — Notice of Appeal (Supreme Court)",             category: "Form", url: "#", originalName: "SC-Form-1-Notice-of-Appeal.pdf",      fileSize: 214016,  uploadedAt: "" },
+  { id: 2, title: "SC Form 2 — Application for Leave to Appeal",              category: "Form", url: "#", originalName: "SC-Form-2-Leave-to-Appeal.pdf",        fileSize: 187392,  uploadedAt: "" },
+  { id: 3, title: "NC Form 1 — Writ of Summons (National Court)",             category: "Form", url: "#", originalName: "NC-Form-1-Writ-of-Summons.pdf",        fileSize: 229376,  uploadedAt: "" },
+  { id: 4, title: "NC Form 2 — Statement of Claim",                           category: "Form", url: "#", originalName: "NC-Form-2-Statement-of-Claim.pdf",     fileSize: 196608,  uploadedAt: "" },
+  { id: 5, title: "NC Form 3 — Notice of Motion",                             category: "Form", url: "#", originalName: "NC-Form-3-Notice-of-Motion.pdf",       fileSize: 172032,  uploadedAt: "" },
+  { id: 6, title: "Registry Form — Request for Certified Copy of Judgment",   category: "Form", url: "#", originalName: "Registry-Certified-Copy-Request.pdf",  fileSize: 158720,  uploadedAt: "" },
 ]
 
 const FALLBACK_GUIDES: Doc[] = [
-  { id: 6,  title: "Worker's Guide to Filing a Compensation Claim (2025)",          category: "Guide", url: "#", originalName: "OWC-Workers-Guide-2025.pdf",         fileSize: 1572864, uploadedAt: "" },
-  { id: 7,  title: "Employer's Handbook on Workers Compensation Obligations (2025)", category: "Guide", url: "#", originalName: "OWC-Employer-Handbook-2025.pdf",        fileSize: 2097152, uploadedAt: "" },
-  { id: 8,  title: "Rehabilitation & Return-to-Work Guidelines 2024",               category: "Guide", url: "#", originalName: "OWC-Rehab-Guidelines-2024.pdf",         fileSize: 1310720, uploadedAt: "" },
-  { id: 9,  title: "Understanding Medical Benefits Under Workers Compensation",      category: "Guide", url: "#", originalName: "OWC-Medical-Benefits-Guide.pdf",        fileSize: 983040,  uploadedAt: "" },
+  { id: 7,  title: "Guide to Filing in the National Court (2025)",            category: "Guide", url: "#", originalName: "NJSS-National-Court-Filing-Guide-2025.pdf",  fileSize: 1572864, uploadedAt: "" },
+  { id: 8,  title: "Self-Represented Litigants Handbook (2025)",              category: "Guide", url: "#", originalName: "NJSS-Self-Rep-Handbook-2025.pdf",             fileSize: 2097152, uploadedAt: "" },
+  { id: 9,  title: "Guide to Mediation & Alternative Dispute Resolution",     category: "Guide", url: "#", originalName: "NJSS-Mediation-Guide-2024.pdf",               fileSize: 1310720, uploadedAt: "" },
+  { id: 10, title: "Court Fees Schedule 2025",                                category: "Guide", url: "#", originalName: "NJSS-Court-Fees-Schedule-2025.pdf",           fileSize: 983040,  uploadedAt: "" },
 ]
 
 const FALLBACK_REPORTS: Doc[] = [
-  { id: 10, title: "OWC Annual Report 2025",           category: "Report", url: "#", originalName: "OWC-Annual-Report-2025.pdf",         fileSize: 5242880, uploadedAt: "" },
-  { id: 11, title: "OWC Statistical Bulletin Q4 2025", category: "Report", url: "#", originalName: "OWC-Statistical-Bulletin-Q4-2025.pdf", fileSize: 2621440, uploadedAt: "" },
-  { id: 12, title: "OWC Annual Report 2024",           category: "Report", url: "#", originalName: "OWC-Annual-Report-2024.pdf",         fileSize: 4718592, uploadedAt: "" },
+  { id: 11, title: "NJSS Annual Report 2025",               category: "Report", url: "#", originalName: "NJSS-Annual-Report-2025.pdf",          fileSize: 5242880, uploadedAt: "" },
+  { id: 12, title: "PNG Judiciary Statistical Bulletin Q4 2025", category: "Report", url: "#", originalName: "NJSS-Statistical-Bulletin-Q4-2025.pdf", fileSize: 2621440, uploadedAt: "" },
+  { id: 13, title: "NJSS Annual Report 2024",               category: "Report", url: "#", originalName: "NJSS-Annual-Report-2024.pdf",          fileSize: 4718592, uploadedAt: "" },
 ]
 
 const FALLBACK_LEGISLATION: Doc[] = [
-  { id: 13, title: "Workers' Compensation Act 1978 (Consolidated 2023)",          category: "Regulation", url: "#", originalName: "WC-Act-1978-Consolidated-2023.pdf",        fileSize: 3670016, uploadedAt: "" },
-  { id: 14, title: "Workers' Compensation (Medical Fees) Regulation 2025",        category: "Regulation", url: "#", originalName: "WC-Medical-Fees-Regulation-2025.pdf",       fileSize: 1048576, uploadedAt: "" },
-  { id: 15, title: "Workers' Compensation (Claims Procedures) Regulation 2022",   category: "Regulation", url: "#", originalName: "WC-Claims-Procedures-Regulation-2022.pdf",  fileSize: 1310720, uploadedAt: "" },
+  { id: 14, title: "Supreme Court Act (Chapter 37)",                          category: "Regulation", url: "#", originalName: "Supreme-Court-Act-Ch37.pdf",            fileSize: 3670016, uploadedAt: "" },
+  { id: 15, title: "National Court Act (Chapter 38)",                         category: "Regulation", url: "#", originalName: "National-Court-Act-Ch38.pdf",           fileSize: 1048576, uploadedAt: "" },
+  { id: 16, title: "National Judicial Staff Service Act 1987",                category: "Regulation", url: "#", originalName: "NJSS-Act-1987.pdf",                     fileSize: 1310720, uploadedAt: "" },
+  { id: 17, title: "Evidence Act (Chapter 48)",                               category: "Regulation", url: "#", originalName: "Evidence-Act-Ch48.pdf",                 fileSize: 983040,  uploadedAt: "" },
 ]
 
 const FALLBACK_FAQS: FAQ[] = [
-  { id: 1, question: "Is compensation mandatory for all employers?",            answer: "Yes. All employers are required by law to insure their employees against work-related injury or death under the Workers' Compensation Act 1978." },
-  { id: 2, question: "Can compensation be claimed for casual or informal workers?", answer: "Eligibility depends on the employment arrangement. OWC will assess each case individually — contact your nearest Provincial Labour Office or OWC HQ for guidance." },
-  { id: 3, question: "How long does a claim take to be processed?",             answer: "Most claims are resolved within 60–90 days, depending on the completeness of documentation and availability of medical reports." },
-  { id: 4, question: "Who is eligible for workers compensation?",               answer: "Any worker employed under a contract of service in PNG who suffers injury, disease, or death arising out of and in the course of employment is eligible." },
-  { id: 5, question: "How long do I have to file a claim?",                     answer: "Claims must be lodged within 12 months of the injury date. Latent injury claims must be filed within 3 years of diagnosis." },
-  { id: 6, question: "What if my employer refuses to report my injury?",        answer: "You can report directly to OWC. We will investigate and assist you in pursuing your claim." },
-  { id: 7, question: "Do I need a lawyer to file a claim?",                     answer: "No, you can file directly with OWC. However, for complex disputes you may choose to engage legal representation." },
-  { id: 8, question: "How is compensation calculated?",                         answer: "Weekly benefits are based on your pre-injury earnings. Lump sum amounts depend on the degree of permanent disability as assessed by a certified medical board." },
+  { id: 1, question: "How do I file a matter in the National Court?",         answer: "You can file in person at any National Court Registry. Complete the relevant court form, attach supporting documents, and pay the applicable filing fee. Registry staff can assist with the process." },
+  { id: 2, question: "Where is the Waigani Court Complex?",                   answer: "The Waigani Court Complex is located on Waigani Drive, Waigani, National Capital District. It houses the Supreme Court and National Court Head Registry." },
+  { id: 3, question: "How can I get a certified copy of a court order?",      answer: "Submit a Request for Certified Copy form at the Registry, pay the applicable fee, and allow 3–5 business days for processing. Contact the Registry for current fee schedules." },
+  { id: 4, question: "Can I represent myself in the National Court?",         answer: "Yes. Self-represented litigants are entitled to appear before the National Court. Download our Self-Represented Litigants Handbook for guidance on court procedures and filing requirements." },
+  { id: 5, question: "How do I find out when my case is listed?",             answer: "Check the Daily Court Diary on this website or contact the relevant Registry with your case number. You can also check directly with the associate of the presiding judge." },
+  { id: 6, question: "What are the court filing fees?",                       answer: "Filing fees vary by matter type and court. Download the current Court Fees Schedule from the Resources section or contact the Registry for the latest fee information." },
+  { id: 7, question: "How do I appeal a National Court decision?",            answer: "Appeals from the National Court lie to the Supreme Court. You must file a Notice of Appeal (SC Form 1) within the prescribed time limit — generally 40 days from the date of judgment. Legal advice is strongly recommended." },
+  { id: 8, question: "How do I contact a specific Registry?",                 answer: "Contact details for all NJSS registries are listed on the Contact Us page. The Waigani Head Registry can be reached on +675 325 7902 or info@judiciary.gov.pg." },
 ]
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -77,25 +80,27 @@ function formatSize(bytes: number) {
 function isMockUrl(url: string) { return !url || url === "#" }
 
 // ── Sub-components ────────────────────────────────────────────────────────────
-function FaqItem({ faq, index }: { faq: FAQ; index: number }) {
+function FaqItem({ faq }: { faq: FAQ }) {
   const [open, setOpen] = useState(false)
   return (
-    <div className={`rounded-xl border transition-all duration-200 overflow-hidden ${open ? "border-[hsl(210,70%,25%)]/30 shadow-sm" : "border-gray-100"}`}>
+    <div className={`rounded-2xl border transition-all duration-200 overflow-hidden ${open ? "border-[hsl(352,83%,44%)]/25 bg-white" : "border-gray-200 bg-white hover:border-gray-300"}`}>
       <button
         onClick={() => setOpen(!open)}
-        className={`w-full flex items-center gap-4 px-5 py-4 text-left transition-colors ${open ? "bg-[hsl(210,70%,25%)]/5" : "bg-white hover:bg-gray-50"}`}
+        className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
+        aria-expanded={open}
       >
-        <span className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-black transition-colors ${open ? "bg-[hsl(210,70%,25%)] text-white" : "bg-gray-100 text-gray-500"}`}>
-          {String(index + 1).padStart(2, "0")}
+        <span className={`flex-1 font-semibold text-[15px] leading-snug transition-colors ${open ? "text-[hsl(352,83%,38%)]" : "text-gray-800"}`}>
+          {faq.question}
         </span>
-        <span className={`flex-1 font-semibold text-sm leading-snug ${open ? "text-[hsl(210,70%,18%)]" : "text-gray-900"}`}>{faq.question}</span>
-        {open
-          ? <ChevronUp className="w-4 h-4 text-[hsl(210,70%,25%)] shrink-0" />
-          : <ChevronDown className="w-4 h-4 text-gray-400 shrink-0" />}
+        <span className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors ${open ? "bg-[hsl(352,83%,44%)] text-white" : "bg-gray-100 text-gray-400"}`} aria-hidden="true">
+          {open
+            ? <ChevronUp className="w-3.5 h-3.5" />
+            : <ChevronDown className="w-3.5 h-3.5" />}
+        </span>
       </button>
       {open && (
-        <div className="px-5 pb-5 pt-3 text-sm text-gray-600 leading-relaxed border-t border-[hsl(210,70%,25%)]/10 bg-white">
-          <div className="pl-11">{faq.answer}</div>
+        <div className="px-6 pb-6 text-sm text-gray-600 leading-relaxed">
+          <div className="pt-4 border-t border-gray-100">{faq.answer}</div>
         </div>
       )}
     </div>
@@ -105,7 +110,7 @@ function FaqItem({ faq, index }: { faq: FAQ; index: number }) {
 function DocCard({ doc, accent = "red" }: { doc: Doc; accent?: "red" | "blue" | "emerald" | "purple" }) {
   const colors = {
     red:     { bg: "bg-red-50",     icon: "text-red-400" },
-    blue:    { bg: "bg-blue-50",    icon: "text-blue-500" },
+    blue:    { bg: "bg-red-50",     icon: "text-blue-500" },
     emerald: { bg: "bg-emerald-50", icon: "text-emerald-600" },
     purple:  { bg: "bg-purple-50",  icon: "text-purple-500" },
   }
@@ -113,9 +118,9 @@ function DocCard({ doc, accent = "red" }: { doc: Doc; accent?: "red" | "blue" | 
   const mock = isMockUrl(doc.url)
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-4 flex items-start gap-3 hover:border-gray-300 hover:shadow-sm transition-all">
+    <div className="bg-white rounded-xl border border-gray-200 p-4 flex items-start gap-3 hover:border-gray-300 transition-all">
       <div className={`w-10 h-10 rounded-lg ${c.bg} flex items-center justify-center shrink-0`}>
-        <FileText className={`w-5 h-5 ${c.icon}`} />
+        <FileText className={`w-5 h-5 ${c.icon}`} aria-hidden="true" />
       </div>
       <div className="flex-1 min-w-0">
         <div className="font-semibold text-sm text-gray-900 leading-snug">{doc.title}</div>
@@ -125,8 +130,8 @@ function DocCard({ doc, accent = "red" }: { doc: Doc; accent?: "red" | "blue" | 
       {mock ? (
         <Link
           href="/contact"
-          className="shrink-0 inline-flex items-center gap-1 text-[11px] font-semibold text-[hsl(210,70%,25%)] hover:underline mt-0.5"
-          title="Contact OWC to request this document"
+          className="shrink-0 inline-flex items-center gap-1 text-[11px] font-semibold text-[hsl(352,83%,48%)] hover:underline mt-0.5"
+          title="Contact the Registry to request this document"
         >
           Request <ArrowRight className="w-3 h-3" />
         </Link>
@@ -136,8 +141,9 @@ function DocCard({ doc, accent = "red" }: { doc: Doc; accent?: "red" | "blue" | 
           download
           target="_blank"
           rel="noopener noreferrer"
-          className="shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-lg border border-gray-200 hover:border-[hsl(210,70%,25%)] hover:bg-[hsl(210,70%,25%)]/5 transition-colors"
+          className="shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-lg border border-gray-200 hover:border-[hsl(352,83%,48%)] hover:bg-[hsl(352,83%,48%)]/5 transition-colors"
           title="Download"
+          aria-label={`Download ${doc.title}`}
         >
           <Download className="w-3.5 h-3.5 text-gray-500" />
         </a>
@@ -152,7 +158,7 @@ function SectionHeader({ icon: Icon, label, description, color = "blue" }: {
   return (
     <div className="flex items-start gap-4 mb-8">
       <div className={`w-11 h-11 rounded-xl bg-${color}-50 flex items-center justify-center shrink-0`}>
-        <Icon className={`w-5 h-5 text-${color}-600`} />
+        <Icon className={`w-5 h-5 text-${color}-600`} aria-hidden="true" />
       </div>
       <div>
         <h2 className="text-xl font-bold text-gray-900">{label}</h2>
@@ -164,11 +170,11 @@ function SectionHeader({ icon: Icon, label, description, color = "blue" }: {
 
 // ── Main Page ─────────────────────────────────────────────────────────────────
 export default function Resources() {
-  const [faqs,       setFaqs]       = useState<FAQ[]>(FALLBACK_FAQS)
-  const [forms,      setForms]      = useState<Doc[]>(FALLBACK_FORMS)
-  const [guides,     setGuides]     = useState<Doc[]>(FALLBACK_GUIDES)
-  const [reports,    setReports]    = useState<Doc[]>(FALLBACK_REPORTS)
-  const [legislation,setLegislation]= useState<Doc[]>(FALLBACK_LEGISLATION)
+  const [faqs,        setFaqs]        = useState<FAQ[]>(FALLBACK_FAQS)
+  const [forms,       setForms]       = useState<Doc[]>(FALLBACK_FORMS)
+  const [guides,      setGuides]      = useState<Doc[]>(FALLBACK_GUIDES)
+  const [reports,     setReports]     = useState<Doc[]>(FALLBACK_REPORTS)
+  const [legislation, setLegislation] = useState<Doc[]>(FALLBACK_LEGISLATION)
 
   useEffect(() => {
     fetch("/api/faqs")
@@ -196,39 +202,39 @@ export default function Resources() {
     <div>
       <PageHero
         badge="Downloads & Info"
-        title="Resources & Forms"
-        subtitle="Download official OWC claim forms, guides, reports and legislation. Find answers to frequently asked questions about workers compensation in PNG."
+        title="Resources & Court Forms"
+        subtitle="Download official court forms, guides, annual reports, and legislation. Find answers to frequently asked questions about the PNG Judiciary."
         crumbs={[{ label: "Resources" }]}
         image="https://images.unsplash.com/photo-1568667256549-094345857637?w=1920&q=80"
       />
 
       <ScrollNav sections={SECTIONS} />
 
-      {/* Claim Forms */}
+      {/* Court Forms */}
       <section id="forms" className="py-14 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <SectionHeader
             icon={FileText}
-            label="Downloadable Claim Forms"
-            description="Official OWC forms for lodging compensation claims, reporting injuries, and employer registration. All forms are in PDF format."
+            label="Downloadable Court Forms"
+            description="Official Supreme Court and National Court forms for filing appeals, originating processes, motions, and registry requests. All forms are in PDF format."
             color="red"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {forms.map(f => <DocCard key={f.id} doc={f} accent="red" />)}
           </div>
           <p className="mt-5 text-xs text-gray-400">
-            Need help completing a form? <Link href="/contact" className="text-[hsl(210,70%,25%)] hover:underline font-medium">Contact an OWC case officer →</Link>
+            Need help completing a form? <Link href="/contact" className="text-[hsl(352,83%,48%)] hover:underline font-medium">Contact your nearest Registry →</Link>
           </p>
         </div>
       </section>
 
       {/* Guides & Publications */}
-      <section id="guides" className="py-14 bg-gray-50 border-t border-gray-100">
+      <section id="guides" className="py-14 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <SectionHeader
             icon={BookOpen}
             label="Guides & Publications"
-            description="Plain-language guides for workers and employers on compensation entitlements, claim procedures, and rehabilitation services."
+            description="Plain-language guides for litigants, self-represented parties, and legal practitioners on court procedures, filing requirements, and mediation services."
             color="blue"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -238,12 +244,12 @@ export default function Resources() {
       </section>
 
       {/* Reports & Statistics */}
-      <section id="reports" className="py-14 bg-white border-t border-gray-100">
+      <section id="reports" className="py-14 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <SectionHeader
             icon={BarChart2}
             label="Reports & Statistics"
-            description="OWC annual reports, statistical bulletins, and performance data on workers compensation claims across Papua New Guinea."
+            description="NJSS annual reports, statistical bulletins, and performance data on court operations and judicial services across Papua New Guinea."
             color="emerald"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -253,22 +259,22 @@ export default function Resources() {
       </section>
 
       {/* Legislation */}
-      <section id="legislation" className="py-14 bg-gray-50 border-t border-gray-100">
+      <section id="legislation" className="py-14 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <SectionHeader
             icon={Scale}
             label="Legislation & Regulations"
-            description="The primary legislation governing workers compensation in Papua New Guinea, including the Workers' Compensation Act 1978 and subsidiary regulations."
+            description="Primary legislation governing the Supreme Court, National Court, and the National Judicial Staff Service of Papua New Guinea."
             color="purple"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {legislation.map(l => <DocCard key={l.id} doc={l} accent="purple" />)}
           </div>
           <div className="mt-6 bg-purple-50 border border-purple-100 rounded-xl p-4 flex items-start gap-3">
-            <Scale className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
+            <Scale className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" aria-hidden="true" />
             <p className="text-xs text-purple-700 leading-relaxed">
-              The full text of the Workers' Compensation Act 1978 is also available via the{" "}
-              <a href="https://www.paclii.org" target="_blank" rel="noopener noreferrer" className="font-semibold underline">
+              Full text legislation is freely available via the{" "}
+              <a href="https://www.paclii.org/pg/" target="_blank" rel="noopener noreferrer" className="font-semibold underline">
                 Pacific Islands Legal Information Institute (PacLII)
               </a>.
             </p>
@@ -277,27 +283,28 @@ export default function Resources() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="py-14 bg-white border-t border-gray-100">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-start gap-4 mb-8">
-            <div className="w-11 h-11 rounded-xl bg-amber-50 flex items-center justify-center shrink-0">
-              <HelpCircle className="w-5 h-5 text-amber-500" />
-            </div>
+      <section id="faq" className="py-16 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="mb-10">
+            <Badge variant="outline" className="mb-2">Frequently Asked Questions</Badge>
+            <h2 className="text-2xl lg:text-3xl font-extrabold text-gray-900 mb-3">Common Questions</h2>
+            <p className="text-sm text-gray-500 leading-relaxed">
+              Common questions about the PNG courts, filing procedures, and registry services.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3">
+            {faqs.map((f) => <FaqItem key={f.id} faq={f} />)}
+          </div>
+          <div className="mt-10 bg-white rounded-2xl border border-gray-200 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
-              <h2 className="text-xl font-bold text-gray-900">Frequently Asked Questions</h2>
-              <p className="text-sm text-gray-500 mt-0.5">Common questions about workers compensation in Papua New Guinea.</p>
+              <p className="font-semibold text-gray-800 text-sm">Can't find what you're looking for?</p>
+              <p className="text-xs text-gray-500 mt-0.5">Our registry staff are available Monday to Friday, 8:00 AM – 4:00 PM.</p>
             </div>
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-            {faqs.map((f, i) => <FaqItem key={f.id} faq={f} index={i} />)}
-          </div>
-          <div className="mt-8 text-center">
-            <p className="text-sm text-gray-500 mb-3">Can't find what you're looking for?</p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 h-10 px-6 rounded-lg text-sm font-semibold bg-[hsl(210,70%,22%)] hover:bg-[hsl(210,70%,18%)] text-white transition-colors"
+              className="shrink-0 inline-flex items-center gap-2 h-10 px-6 rounded-lg text-sm font-semibold bg-[hsl(352,83%,44%)] hover:bg-[hsl(352,83%,38%)] text-white transition-colors"
             >
-              Contact OWC <ArrowRight className="w-4 h-4" />
+              Contact the Registry <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>

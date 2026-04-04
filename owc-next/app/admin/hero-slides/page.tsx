@@ -46,7 +46,7 @@ function ImagePickerModal({ onSelect, onClose }: { onSelect: (url: string) => vo
         <div className="overflow-y-auto flex-1 p-6">
           {loading ? (
             <div className="flex items-center justify-center h-40">
-              <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin" />
+              <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(352,83%,48%)] rounded-full animate-spin" />
             </div>
           ) : images.length === 0 ? (
             <div className="text-center py-16">
@@ -60,7 +60,7 @@ function ImagePickerModal({ onSelect, onClose }: { onSelect: (url: string) => vo
                 <button
                   key={img.filename}
                   onClick={() => { onSelect(img.url); onClose() }}
-                  className="group relative aspect-video rounded-xl overflow-hidden bg-gray-100 border-2 border-transparent hover:border-[hsl(210,70%,25%)] transition-all focus:outline-none focus:border-[hsl(210,70%,25%)]"
+                  className="group relative aspect-video rounded-xl overflow-hidden bg-gray-100 border-2 border-transparent hover:border-[hsl(352,83%,48%)] transition-all focus:outline-none focus:border-[hsl(352,83%,48%)]"
                 >
                   <img src={img.url} alt={img.filename} className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
@@ -164,7 +164,7 @@ export default function HeroSlidesManager() {
   return (
     <AdminLayout>
       {toast && (
-        <div className={`fixed top-4 right-4 z-50 flex items-center gap-2 px-4 py-3 rounded-xl shadow-lg text-white text-sm font-medium ${toast.type === "success" ? "bg-emerald-600" : "bg-red-600"}`}>
+        <div className={`fixed top-4 right-4 z-50 flex items-center gap-2 px-4 py-3 rounded-xl shadow-lg text-white text-sm font-medium ${toast.type === "success" ? "bg-amber-600" : "bg-red-600"}`}>
           {toast.type === "success" ? <CheckCircle className="w-4 h-4 shrink-0" /> : <AlertCircle className="w-4 h-4 shrink-0" />}
           {toast.msg}
         </div>
@@ -212,7 +212,7 @@ export default function HeroSlidesManager() {
               </div>
               <div className="sm:col-span-2">
                 <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Subtitle</label>
-                <textarea rows={2} className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(210,70%,25%)]" value={form.subtitle} onChange={e => set("subtitle", e.target.value)} placeholder="Short description…" />
+                <textarea rows={2} className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(352,83%,48%)]" value={form.subtitle} onChange={e => set("subtitle", e.target.value)} placeholder="Short description…" />
               </div>
               <div className="sm:col-span-2">
                 <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Background Image</label>
@@ -233,11 +233,11 @@ export default function HeroSlidesManager() {
               </div>
               <div>
                 <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Primary Button Label</label>
-                <Input value={form.ctaLabel} onChange={e => set("ctaLabel", e.target.value)} placeholder="File a Claim" />
+                <Input value={form.ctaLabel} onChange={e => set("ctaLabel", e.target.value)} placeholder="Court Diary" />
               </div>
               <div>
                 <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Primary Button URL</label>
-                <Input value={form.ctaHref} onChange={e => set("ctaHref", e.target.value)} placeholder="/services or https://portal.owc.gov.pg" />
+                <Input value={form.ctaHref} onChange={e => set("ctaHref", e.target.value)} placeholder="/services or /supreme-court/daily-diary" />
               </div>
               <div>
                 <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Secondary Button Label</label>
@@ -272,7 +272,7 @@ export default function HeroSlidesManager() {
         <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
           {loading ? (
             <div className="p-16 text-center">
-              <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto mb-3" />
+              <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(352,83%,48%)] rounded-full animate-spin mx-auto mb-3" />
               <p className="text-gray-400 text-sm">Loading slides…</p>
             </div>
           ) : slides.length === 0 ? (
@@ -329,7 +329,7 @@ export default function HeroSlidesManager() {
                       <button onClick={() => togglePublish(s)} className="p-2 rounded-lg text-gray-400 hover:bg-gray-50 hover:text-gray-700 transition-colors" title={s.published ? "Hide" : "Publish"}>
                         {s.published ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                       </button>
-                      <button onClick={() => startEdit(s)} className="p-2 rounded-lg text-gray-400 hover:bg-blue-50 hover:text-[hsl(210,70%,25%)] transition-colors" title="Edit">
+                      <button onClick={() => startEdit(s)} className="p-2 rounded-lg text-gray-400 hover:bg-red-50 hover:text-[hsl(352,83%,48%)] transition-colors" title="Edit">
                         <Pencil className="w-4 h-4" />
                       </button>
                       <button onClick={() => setDeleteId(s.id)} className="p-2 rounded-lg text-gray-400 hover:bg-red-50 hover:text-red-600 transition-colors" title="Delete">

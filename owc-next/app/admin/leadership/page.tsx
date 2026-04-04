@@ -36,7 +36,7 @@ function ImagePickerModal({ onSelect, onClose }: { onSelect: (url: string) => vo
         <div className="flex-1 overflow-y-auto p-4">
           {loading ? (
             <div className="flex items-center justify-center py-16">
-              <div className="w-7 h-7 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin" />
+              <div className="w-7 h-7 border-2 border-gray-200 border-t-[hsl(352,83%,48%)] rounded-full animate-spin" />
             </div>
           ) : images.length === 0 ? (
             <div className="text-center py-16 text-gray-400 text-sm">No images uploaded yet.</div>
@@ -46,12 +46,12 @@ function ImagePickerModal({ onSelect, onClose }: { onSelect: (url: string) => vo
                 <button
                   key={img.filename}
                   onClick={() => setSelected(img.url)}
-                  className={`relative aspect-square rounded-xl overflow-hidden border-2 transition-all ${selected === img.url ? "border-[hsl(210,70%,25%)] shadow-md" : "border-transparent hover:border-gray-300"}`}
+                  className={`relative aspect-square rounded-xl overflow-hidden border-2 transition-all ${selected === img.url ? "border-[hsl(352,83%,48%)] shadow-md" : "border-transparent hover:border-gray-300"}`}
                 >
                   <img src={img.url} alt={img.filename} className="w-full h-full object-cover" />
                   {selected === img.url && (
-                    <div className="absolute inset-0 bg-[hsl(210,70%,25%)]/20 flex items-center justify-center">
-                      <div className="w-7 h-7 rounded-full bg-[hsl(210,70%,25%)] flex items-center justify-center">
+                    <div className="absolute inset-0 bg-[hsl(352,83%,48%)]/20 flex items-center justify-center">
+                      <div className="w-7 h-7 rounded-full bg-[hsl(352,83%,48%)] flex items-center justify-center">
                         <Check className="w-4 h-4 text-white" />
                       </div>
                     </div>
@@ -149,7 +149,7 @@ export default function LeadershipManager() {
       )}
 
       {toast && (
-        <div className={`fixed top-4 right-4 z-50 flex items-center gap-2 px-4 py-3 rounded-xl shadow-lg text-white text-sm font-medium ${toast.type === "success" ? "bg-emerald-600" : "bg-red-600"}`}>
+        <div className={`fixed top-4 right-4 z-50 flex items-center gap-2 px-4 py-3 rounded-xl shadow-lg text-white text-sm font-medium ${toast.type === "success" ? "bg-amber-600" : "bg-red-600"}`}>
           {toast.type === "success" ? <CheckCircle className="w-4 h-4 shrink-0" /> : <AlertCircle className="w-4 h-4 shrink-0" />}
           {toast.msg}
         </div>
@@ -234,7 +234,7 @@ export default function LeadershipManager() {
         <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
           {loading ? (
             <div className="p-16 text-center">
-              <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto mb-3" />
+              <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(352,83%,48%)] rounded-full animate-spin mx-auto mb-3" />
               <p className="text-gray-400 text-sm">Loading members…</p>
             </div>
           ) : members.length === 0 ? (
@@ -257,7 +257,7 @@ export default function LeadershipManager() {
                     {m.photo ? (
                       <img src={m.photo} alt={m.name} className="w-10 h-10 rounded-full object-cover border border-gray-200 shrink-0 mr-4" />
                     ) : (
-                      <div className="w-10 h-10 rounded-full bg-[hsl(210,70%,90%)] flex items-center justify-center font-bold text-[hsl(210,70%,25%)] text-sm shrink-0 mr-4">
+                      <div className="w-10 h-10 rounded-full bg-[hsl(352,75%,90%)] flex items-center justify-center font-bold text-[hsl(352,83%,48%)] text-sm shrink-0 mr-4">
                         {m.name.split(" ").map(n => n[0]).slice(0, 2).join("")}
                       </div>
                     )}
@@ -267,7 +267,7 @@ export default function LeadershipManager() {
                     </div>
                     <div className="hidden sm:block px-4 text-sm text-gray-500">{m.since}</div>
                     <div className="flex items-center gap-1">
-                      <button onClick={() => startEdit(m)} className="p-2 rounded-lg text-gray-400 hover:bg-blue-50 hover:text-[hsl(210,70%,25%)] transition-colors" title="Edit">
+                      <button onClick={() => startEdit(m)} className="p-2 rounded-lg text-gray-400 hover:bg-red-50 hover:text-[hsl(352,83%,48%)] transition-colors" title="Edit">
                         <Pencil className="w-4 h-4" />
                       </button>
                       <button onClick={() => setDeleteId(m.id)} className="p-2 rounded-lg text-gray-400 hover:bg-red-50 hover:text-red-600 transition-colors" title="Remove">

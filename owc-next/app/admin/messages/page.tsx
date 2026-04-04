@@ -74,7 +74,7 @@ export default function Messages() {
             </p>
           </div>
           {unread > 0 && (
-            <span className="flex items-center gap-2 bg-[hsl(210,70%,93%)] text-[hsl(210,70%,30%)] text-sm font-semibold px-4 py-2.5 rounded-xl">
+            <span className="flex items-center gap-2 bg-[hsl(210,70%,93%)] text-[hsl(352,75%,33%)] text-sm font-semibold px-4 py-2.5 rounded-xl">
               <Mail className="w-4 h-4" /> {unread} unread
             </span>
           )}
@@ -87,7 +87,7 @@ export default function Messages() {
               key={f}
               onClick={() => setFilter(f)}
               className={`px-5 py-2.5 text-sm font-medium capitalize transition-colors ${
-                filter === f ? "bg-[hsl(210,70%,25%)] text-white" : "text-gray-500 hover:bg-gray-50"
+                filter === f ? "bg-[hsl(352,83%,48%)] text-white" : "text-gray-500 hover:bg-gray-50"
               }`}
             >
               {f === "all" ? `All (${messages.length})` : f === "unread" ? `Unread (${unread})` : `Read (${messages.length - unread})`}
@@ -98,7 +98,7 @@ export default function Messages() {
         {/* List */}
         {loading ? (
           <div className="bg-white rounded-2xl border border-gray-200 p-16 text-center">
-            <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(210,70%,25%)] rounded-full animate-spin mx-auto mb-3" />
+            <div className="w-8 h-8 border-2 border-gray-200 border-t-[hsl(352,83%,48%)] rounded-full animate-spin mx-auto mb-3" />
             <p className="text-gray-400 text-sm">Loading messages…</p>
           </div>
         ) : filtered.length === 0 ? (
@@ -116,7 +116,7 @@ export default function Messages() {
                 >
                   {/* Avatar */}
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 mt-0.5 font-bold text-sm ${
-                    msg.read ? "bg-gray-100 text-gray-500" : "bg-[hsl(210,70%,93%)] text-[hsl(210,70%,30%)]"
+                    msg.read ? "bg-gray-100 text-gray-500" : "bg-[hsl(210,70%,93%)] text-[hsl(352,75%,33%)]"
                   }`}>
                     {msg.name.charAt(0).toUpperCase()}
                   </div>
@@ -126,7 +126,7 @@ export default function Messages() {
                         <span className={`text-sm font-bold truncate ${msg.read ? "text-gray-700" : "text-gray-900"}`}>
                           {msg.name}
                         </span>
-                        {!msg.read && <span className="w-2 h-2 rounded-full bg-[hsl(210,70%,40%)] shrink-0" />}
+                        {!msg.read && <span className="w-2 h-2 rounded-full bg-[hsl(352,83%,55%)] shrink-0" />}
                         <span className="text-xs text-gray-400 hidden sm:block truncate">{msg.email}</span>
                       </div>
                       <span className="text-xs text-gray-400 shrink-0">{timeAgo(msg.receivedAt)}</span>
@@ -160,7 +160,7 @@ export default function Messages() {
                     <div className="flex items-center gap-4">
                       <a
                         href={`mailto:${msg.email}?subject=Re: ${encodeURIComponent(msg.subject)}`}
-                        className="inline-flex items-center gap-2 text-sm font-semibold text-[hsl(210,70%,25%)] bg-[hsl(210,70%,93%)] hover:bg-[hsl(210,70%,88%)] px-4 py-2 rounded-lg transition-colors"
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-[hsl(352,83%,48%)] bg-[hsl(210,70%,93%)] hover:bg-[hsl(210,70%,88%)] px-4 py-2 rounded-lg transition-colors"
                       >
                         <Mail className="w-4 h-4" /> Reply via email
                       </a>

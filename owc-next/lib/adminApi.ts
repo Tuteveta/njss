@@ -1,7 +1,7 @@
 const BASE = "/api"
 
-const TOKEN_KEY = "owc_admin_token"
-const SESSION_KEY = "owc_admin_session"
+const TOKEN_KEY = "njss_admin_token"
+const SESSION_KEY = "njss_admin_session"
 
 const isBrowser = typeof window !== 'undefined'
 
@@ -206,4 +206,13 @@ export const adminApi = {
       method: "PUT",
       body: JSON.stringify({ current, new: newPass }),
     }),
+
+  // Users (superadmin only)
+  getUsers: () => authFetch("/admin/users"),
+  createUser: (data: { username: string; password: string; role: string }) =>
+    authFetch("/admin/users", { method: "POST", body: JSON.stringify(data) }),
+  updateUser: (id: number, data: { role?: string; password?: string }) =>
+    authFetch(`/admin/users/${id}`, { method: "PUT", body: JSON.stringify(data) }),
+  deleteUser: (id: number) =>
+    authFetch(`/admin/users/${id}`, { method: "DELETE" }),
 }

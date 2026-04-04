@@ -138,7 +138,7 @@ export default function MediaLibrary() {
               <div
                 key={img.filename}
                 className={`bg-white rounded-2xl border overflow-hidden group cursor-pointer transition-all ${
-                  selected === img.filename ? "border-[hsl(210,70%,40%)] ring-2 ring-[hsl(210,70%,40%)]/20" : "border-gray-200 hover:border-gray-300"
+                  selected === img.filename ? "border-[hsl(352,83%,55%)] ring-2 ring-[hsl(352,83%,55%)]/20" : "border-gray-200 hover:border-gray-300"
                 }`}
                 onClick={() => setSelected(selected === img.filename ? null : img.filename)}
               >
