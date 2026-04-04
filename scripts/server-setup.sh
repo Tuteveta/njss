@@ -12,8 +12,18 @@ echo "==> Installing Node.js 20..."
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt install -y nodejs
 
-echo "==> Installing nginx & git..."
-sudo apt install -y nginx git
+echo "==> Installing nginx, git & MySQL..."
+sudo apt install -y nginx git mysql-server
+
+echo "==> Securing MySQL and creating database..."
+sudo mysql <<'SQL'
+CREATE DATABASE IF NOT EXISTS njss_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER IF NOT EXISTS 'njss_user'@'localhost' IDENTIFIED BY 'CHANGE_ME_STRONG_DB_PASSWORD';
+GRANT ALL PRIVILEGES ON njss_db.* TO 'njss_user'@'localhost';
+FLUSH PRIVILEGES;
+SQL
+echo "    MySQL ready. DB: njss_db, User: njss_user"
+echo "    !! Change the DB password above before running this script !!"
 
 echo "==> Installing PM2..."
 sudo npm install -g pm2
@@ -28,10 +38,10 @@ echo "==> Repo cloned. Now create your environment file:"
 echo "    nano /var/www/njss/.env.local"
 echo ""
 echo "    Paste and fill in:"
-echo "    DB_HOST=<your-rds-endpoint>"
+echo "    DB_HOST=127.0.0.1"
 echo "    DB_PORT=3306"
 echo "    DB_USER=njss_user"
-echo "    DB_PASSWORD=<your-password>"
+echo "    DB_PASSWORD=CHANGE_ME_STRONG_DB_PASSWORD"
 echo "    DB_NAME=njss_db"
 echo "    JWT_SECRET=<64-random-chars>"
 echo "    NODE_ENV=production"
