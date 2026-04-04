@@ -187,18 +187,17 @@ function HeroSlider({ slides }: { slides: ApiSlide[] }) {
         </div>
       </div>
 
-      {/* Prev / Next arrows — only show if multiple slides */}
-      {slides.length > 1 && <>
-        <button
-          onClick={prev}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/25 hover:bg-black/50 border border-white/15 flex items-center justify-center text-white transition-all hover:scale-110 backdrop-blur-sm"
-          aria-label="Previous slide"
-        >
-          <ChevronLeft className="w-5 h-5" />
-        </button>
+      {/* Dots + prev/next — grouped at bottom centre */}
+      {slides.length > 1 && (
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3">
+          <button
+            onClick={prev}
+            className="w-7 h-7 rounded-full bg-black/25 hover:bg-black/50 border border-white/15 flex items-center justify-center text-white transition-all backdrop-blur-sm"
+            aria-label="Previous slide"
+          >
+            <ChevronLeft className="w-3.5 h-3.5" />
+          </button>
 
-        {/* Dots */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
           {slides.map((_, i) => (
             <button
               key={i}
@@ -209,16 +208,16 @@ function HeroSlider({ slides }: { slides: ApiSlide[] }) {
               }`}
             />
           ))}
-        </div>
 
-        <button
-          onClick={next}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/25 hover:bg-black/50 border border-white/15 flex items-center justify-center text-white transition-all hover:scale-110 backdrop-blur-sm"
-          aria-label="Next slide"
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
-      </>}
+          <button
+            onClick={next}
+            className="w-7 h-7 rounded-full bg-black/25 hover:bg-black/50 border border-white/15 flex items-center justify-center text-white transition-all backdrop-blur-sm"
+            aria-label="Next slide"
+          >
+            <ChevronRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
     </section>
   )
 }
