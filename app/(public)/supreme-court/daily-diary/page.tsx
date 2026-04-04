@@ -2,7 +2,7 @@
 import PageHero from "@/components/PageHero"
 import SectionNav from "@/components/SectionNav"
 import SectionTabs from "@/components/SectionTabs"
-import { CalendarDays, Clock, MapPin, User, ChevronRight } from "lucide-react"
+import { CalendarDays, Clock, MapPin, User } from "lucide-react"
 
 const TODAY = new Date().toLocaleDateString("en-PG", { weekday: "long", year: "numeric", month: "long", day: "numeric" })
 
@@ -99,7 +99,7 @@ export default function DailyCourtDiaryPage() {
             {diaryEntries.map((entry, i) => (
               <div key={i} className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
                 {/* Court header */}
-                <div className="bg-[hsl(352,83%,44%)] px-6 py-4 flex flex-wrap items-center gap-4">
+                <div className="bg-gray-700 px-6 py-4 flex flex-wrap items-center gap-4">
                   <div className="flex items-center gap-2 text-white">
                     <Clock className="w-4 h-4 shrink-0" />
                     <span className="font-bold text-sm">{entry.time}</span>

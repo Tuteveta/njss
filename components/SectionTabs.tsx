@@ -26,7 +26,7 @@ export default function SectionTabs({ section }: { section: string }) {
               }`}
             >
               <Icon className="w-3 h-3" />
-              {item.label}
+              {item.short ?? item.label}
             </Link>
           )
         })}

@@ -4,7 +4,7 @@ import {
   Library, BookMarked, Newspaper, FileText, Info, Database,
 } from "lucide-react"
 
-export interface SectionItem { label: string; href: string; icon: React.ElementType }
+export interface SectionItem { label: string; short?: string; href: string; icon: React.ElementType }
 export interface SectionDef { heading: string; items: SectionItem[] }
 
 export const SECTIONS: Record<string, SectionDef> = {
@@ -32,7 +32,7 @@ export const SECTIONS: Record<string, SectionDef> = {
       { label: "Provincial Registries", href: "/national-court/provincial-registries", icon: MapPin },
       { label: "Sheriff's Office",      href: "/national-court/sheriff",               icon: Shield },
       { label: "Court Reporting",       href: "/national-court/court-reporting",       icon: FileVideo },
-      { label: "Interpreting Service",  href: "/national-court/interpreting-service",  icon: Languages },
+      { label: "Interpreting Service",  short: "Interpreting",  href: "/national-court/interpreting-service",  icon: Languages },
     ],
   },
   library: {
