@@ -128,17 +128,17 @@ export default function Contact() {
       />
 
       {/* Quick contact strip */}
-      <div className="bg-gray-900 border-b border-gray-800">
+      <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 lg:px-10">
-          <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-gray-800">
+          <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-gray-100">
             {QUICK_CONTACTS.map(({ icon: Icon, label, value, sub }) => (
               <div key={label} className="flex items-center gap-4 px-6 py-5">
-                <div className="w-9 h-9 rounded-lg bg-[hsl(352,83%,44%)]/15 flex items-center justify-center shrink-0">
-                  <Icon className="w-4 h-4 text-[hsl(352,83%,55%)]" />
+                <div className="w-9 h-9 rounded-lg bg-[hsl(352,83%,44%)]/10 flex items-center justify-center shrink-0">
+                  <Icon className="w-4 h-4 text-[hsl(352,83%,44%)]" />
                 </div>
                 <div>
-                  <p className="text-[11px] text-gray-500 uppercase tracking-widest font-semibold">{label}</p>
-                  <p className="text-sm font-semibold text-white">{value}</p>
+                  <p className="text-[11px] text-gray-400 uppercase tracking-widest font-semibold">{label}</p>
+                  <p className="text-sm font-semibold text-gray-900">{value}</p>
                   <p className="text-[11px] text-gray-400">{sub}</p>
                 </div>
               </div>

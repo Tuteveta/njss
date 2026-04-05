@@ -559,7 +559,7 @@ export default function Navbar() {
 
         {/* Main Navbar — dark charcoal */}
         <div ref={navRef} className="bg-gray-900">
-          <div className="max-w-7xl mx-auto px-4 lg:px-10 flex items-center h-17 gap-0">
+          <div className="max-w-7xl mx-auto px-4 lg:px-10 flex items-center h-[72px] gap-0">
 
             {/* Logo */}
             <Link
@@ -569,7 +569,7 @@ export default function Navbar() {
               <img
                 src="/png-coa.png"
                 alt="NJSS Logo"
-                className="h-11 w-auto transition-transform duration-200 group-hover:scale-105"
+                className="h-[50px] w-auto transition-transform duration-200 group-hover:scale-105"
               />
               <div className="hidden sm:flex flex-col justify-center">
                 <div className="font-bold text-white text-[13.5px] leading-tight tracking-tight">

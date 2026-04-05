@@ -2,11 +2,15 @@ import pool from './db'
 import bcrypt from 'bcryptjs'
 import { SEED_DOCUMENTS, SEED_SERVICES, SEED_NEWS, SEED_EVENTS } from './seedData'
 
-let initialized = false
+let initPromise: Promise<void> | null = null
 
 export async function initDb() {
-  if (initialized) return
-  initialized = true
+  if (initPromise) return initPromise
+  initPromise = _initDb()
+  return initPromise
+}
+
+async function _initDb() {
 
   // Auto-create the database if it doesn't exist
   const mysql = await import('mysql2/promise')

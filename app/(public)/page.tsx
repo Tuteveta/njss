@@ -268,20 +268,6 @@ export default function Home() {
       {/* Hero Slider */}
       <HeroSlider slides={heroSlides} />
 
-      {/* Alert banner — controlled from admin settings */}
-      {s.banner_enabled === "true" && s.banner_text && (
-        <div className="bg-gray-900 border-b border-gray-800 py-2.5 px-4">
-          <div className="max-w-7xl mx-auto flex items-center justify-center gap-2.5 text-xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0 animate-pulse" />
-            <span className="text-gray-300 tracking-wide">
-              {s.banner_text}{" "}
-              {s.banner_link && (
-                <Link href={s.banner_link} className="text-amber-400 hover:text-amber-300 font-semibold transition-colors">Learn more →</Link>
-              )}
-            </span>
-          </div>
-        </div>
-      )}
 
       {/* Stats */}
       {show("home_show_stats") && (

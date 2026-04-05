@@ -124,6 +124,8 @@ export default function JudgesPage() {
             </p>
           </div>
 
+            </div>
+          </div>
         </div>
       </div>
     </div>

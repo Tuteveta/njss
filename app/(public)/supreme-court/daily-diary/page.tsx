@@ -95,51 +95,35 @@ export default function DailyCourtDiaryPage() {
           </div>
 
           {/* Court listings */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             {diaryEntries.map((entry, i) => (
-              <div key={i} className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                {/* Court header */}
-                <div className="bg-gray-700 px-6 py-4 flex flex-wrap items-center gap-4">
-                  <div className="flex items-center gap-2 text-white">
-                    <Clock className="w-4 h-4 shrink-0" />
-                    <span className="font-bold text-sm">{entry.time}</span>
+              <div key={i} className="bg-white rounded-2xl border border-gray-200 p-5">
+                {/* Card header — icon + court info */}
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-[hsl(352,83%,44%)]/10 flex items-center justify-center shrink-0">
+                    <Clock className="w-5 h-5 text-[hsl(352,83%,44%)]" />
                   </div>
-                  <div className="flex items-center gap-2 text-white/90">
-                    <MapPin className="w-4 h-4 shrink-0" />
-                    <span className="font-semibold text-sm">{entry.court}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-white/80 ml-auto">
-                    <User className="w-4 h-4 shrink-0" />
-                    <span className="text-sm">{entry.judge}</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-bold text-gray-900 text-[15px] leading-snug">{entry.court}</div>
+                    <div className="flex flex-wrap items-center gap-3 mt-1 text-xs text-gray-500">
+                      <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{entry.time}</span>
+                      <span className="flex items-center gap-1"><User className="w-3 h-3" />{entry.judge}</span>
+                    </div>
                   </div>
                 </div>
 
-                {/* Cases table */}
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead>
-                      <tr className="bg-gray-50 border-b border-gray-100">
-                        <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider w-40">Case No.</th>
-                        <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Parties</th>
-                        <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider hidden md:table-cell">Type</th>
-                        <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider w-28">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-50">
-                      {entry.cases.map((c, j) => (
-                        <tr key={j} className="hover:bg-gray-50 transition-colors">
-                          <td className="px-5 py-3.5 font-mono text-xs text-[hsl(352,83%,44%)] font-semibold">{c.no}</td>
-                          <td className="px-5 py-3.5 text-gray-800 font-medium">{c.parties}</td>
-                          <td className="px-5 py-3.5 text-gray-500 hidden md:table-cell">{c.type}</td>
-                          <td className="px-5 py-3.5">
-                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${statusColor[c.status] ?? "bg-gray-100 text-gray-600"}`}>
-                              {c.status}
-                            </span>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                {/* Cases */}
+                <div className="divide-y divide-gray-100">
+                  {entry.cases.map((c, j) => (
+                    <div key={j} className="flex flex-wrap items-center gap-3 py-3">
+                      <span className="font-mono text-xs font-semibold text-[hsl(352,83%,44%)] w-36 shrink-0">{c.no}</span>
+                      <span className="flex-1 text-sm font-medium text-gray-800 min-w-0">{c.parties}</span>
+                      <span className="hidden md:block text-xs text-gray-400 w-44 shrink-0">{c.type}</span>
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold shrink-0 ${statusColor[c.status] ?? "bg-gray-100 text-gray-600"}`}>
+                        {c.status}
+                      </span>
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}
