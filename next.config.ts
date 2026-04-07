@@ -1,6 +1,5 @@
 import type { NextConfig } from "next"
 
-const isProd = process.env.NODE_ENV === 'production'
 
 const securityHeaders = [
   { key: "X-DNS-Prefetch-Control",  value: "on" },
@@ -16,10 +15,7 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      // Next.js requires nonce-based inline scripts in prod; unsafe-inline only in dev
-      isProd
-        ? "script-src 'self'"
-        : "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+      "script-src 'self' 'unsafe-inline'",
       "style-src 'self' 'unsafe-inline'",           // Next.js CSS-in-JS requires this
       "img-src 'self' data: blob: https://images.unsplash.com https://flagcdn.com https://upload.wikimedia.org",
       "font-src 'self' data:",
