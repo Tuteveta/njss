@@ -5,10 +5,11 @@ import PageHero from "@/components/PageHero"
 import ScrollNav from "@/components/ScrollNav"
 import { Badge } from "@/components/ui/badge"
 import {
-  CheckCircle, Search, FileText, AlertCircle, Scale, Users,
+  CheckCircle, Search, FileText, AlertCircle, Scale,
   BookOpen, ChevronDown, ChevronUp, Phone, Mail, MapPin, Download,
   ArrowRight, ClipboardList, Gavel, Building2, Shield,
 } from "lucide-react"
+import CustomSelect from "@/components/CustomSelect"
 
 const SECTIONS = [
   { id: "overview",     label: "Overview" },
@@ -207,8 +208,8 @@ export default function FilingsPage() {
 
       {/* Overview */}
       <section id="overview" className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="max-w-3xl">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
+          <div>
             <Badge variant="outline" className="mb-3">Overview</Badge>
             <h2 className="text-3xl font-bold text-gray-900 mb-4">About Court Filings</h2>
             <p className="text-gray-600 leading-relaxed mb-4">
@@ -231,7 +232,7 @@ export default function FilingsPage() {
 
       {/* Who Can File */}
       <section id="eligibility" className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
           <div className="mb-10">
             <Badge variant="outline" className="mb-3">Eligibility</Badge>
             <h2 className="text-3xl font-bold text-gray-900">Who Can File?</h2>
@@ -263,7 +264,7 @@ export default function FilingsPage() {
 
       {/* Types of Matters */}
       <section id="matter-types" className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
           <div className="mb-10">
             <Badge variant="outline" className="mb-3">Proceedings</Badge>
             <h2 className="text-3xl font-bold text-gray-900">Types of Court Matters</h2>
@@ -286,7 +287,7 @@ export default function FilingsPage() {
 
       {/* How to File */}
       <section id="how-to-file" className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
           <div className="mb-10">
             <Badge variant="outline" className="mb-3">Process</Badge>
             <h2 className="text-3xl font-bold text-gray-900">How to File a Court Matter</h2>
@@ -294,7 +295,7 @@ export default function FilingsPage() {
               Follow these steps to ensure your matter is correctly filed and accepted by the Registry without delay.
             </p>
           </div>
-          <div className="space-y-4 max-w-3xl">
+          <div className="space-y-4">
             {FILING_STEPS.map((s, i) => (
               <div key={s.step} className="flex gap-5 bg-white rounded-2xl border border-gray-200 p-5">
                 <div className="shrink-0">
@@ -338,7 +339,7 @@ export default function FilingsPage() {
 
       {/* Lodge a Matter + Tracker */}
       <section id="lodge" className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
           <div className="mb-10">
             <Badge variant="outline" className="mb-3">Online Enquiry</Badge>
             <h2 className="text-3xl font-bold text-gray-900">Lodge a Filing Enquiry</h2>
@@ -383,37 +384,27 @@ export default function FilingsPage() {
                       <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">
                         Party Type <span className="text-[hsl(352,83%,44%)]">*</span>
                       </label>
-                      <select
-                        required value={form.partyType}
-                        onChange={e => setForm({ ...form, partyType: e.target.value })}
-                        className="w-full h-10 px-3.5 rounded-xl border border-gray-200 text-sm bg-gray-50 focus:bg-white focus:border-[hsl(352,83%,44%)] focus:outline-none transition-colors"
-                      >
-                        <option value="">Select…</option>
-                        <option>Plaintiff / Applicant</option>
-                        <option>Defendant / Respondent</option>
-                        <option>Legal Practitioner</option>
-                        <option>Self-Represented</option>
-                        <option>Other</option>
-                      </select>
+                      <CustomSelect
+                        value={form.partyType}
+                        options={["Plaintiff / Applicant", "Defendant / Respondent", "Legal Practitioner", "Self-Represented", "Other"]}
+                        placeholder="Select party type…"
+                        variant="field"
+                        onChange={v => setForm({ ...form, partyType: v })}
+                        className="w-full"
+                      />
                     </div>
                     <div>
                       <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">
                         Type of Matter <span className="text-[hsl(352,83%,44%)]">*</span>
                       </label>
-                      <select
-                        required value={form.matterType}
-                        onChange={e => setForm({ ...form, matterType: e.target.value })}
-                        className="w-full h-10 px-3.5 rounded-xl border border-gray-200 text-sm bg-gray-50 focus:bg-white focus:border-[hsl(352,83%,44%)] focus:outline-none transition-colors"
-                      >
-                        <option value="">Select…</option>
-                        <option>Civil Proceedings</option>
-                        <option>Criminal Matter</option>
-                        <option>Constitutional Reference</option>
-                        <option>Election Petition</option>
-                        <option>Judicial Review</option>
-                        <option>Appeal</option>
-                        <option>Other</option>
-                      </select>
+                      <CustomSelect
+                        value={form.matterType}
+                        options={["Civil Proceedings", "Criminal Matter", "Constitutional Reference", "Election Petition", "Judicial Review", "Appeal", "Other"]}
+                        placeholder="Select matter type…"
+                        variant="field"
+                        onChange={v => setForm({ ...form, matterType: v })}
+                        className="w-full"
+                      />
                     </div>
                     <div>
                       <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">Phone Number</label>
@@ -528,7 +519,7 @@ export default function FilingsPage() {
 
       {/* Rights & Registry Duties */}
       <section id="rights" className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <div>
               <Badge variant="outline" className="mb-3">Parties</Badge>
@@ -564,7 +555,7 @@ export default function FilingsPage() {
 
       {/* Court Data */}
       <section id="data" className="py-16 bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
           <div className="mb-10">
             <span className="inline-block text-xs font-semibold uppercase tracking-widest text-amber-400/80 border border-amber-400/30 bg-amber-400/10 px-4 py-1.5 rounded-full mb-4">Statistics</span>
             <h2 className="text-3xl font-bold">Court Filing Data (2025)</h2>
@@ -590,7 +581,7 @@ export default function FilingsPage() {
 
       {/* FAQs */}
       <section id="faq" className="py-16 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
           <div className="mb-10">
             <Badge variant="outline" className="mb-3">FAQs</Badge>
             <h2 className="text-3xl font-bold text-gray-900">Frequently Asked Questions</h2>

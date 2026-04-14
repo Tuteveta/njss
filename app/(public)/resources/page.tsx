@@ -212,7 +212,7 @@ export default function Resources() {
 
       {/* Court Forms */}
       <section id="forms" className="py-14 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
           <SectionHeader
             icon={FileText}
             label="Downloadable Court Forms"
@@ -230,7 +230,7 @@ export default function Resources() {
 
       {/* Guides & Publications */}
       <section id="guides" className="py-14 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
           <SectionHeader
             icon={BookOpen}
             label="Guides & Publications"
@@ -245,7 +245,7 @@ export default function Resources() {
 
       {/* Reports & Statistics */}
       <section id="reports" className="py-14 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
           <SectionHeader
             icon={BarChart2}
             label="Reports & Statistics"
@@ -260,7 +260,7 @@ export default function Resources() {
 
       {/* Legislation */}
       <section id="legislation" className="py-14 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
           <SectionHeader
             icon={Scale}
             label="Legislation & Regulations"
@@ -284,7 +284,7 @@ export default function Resources() {
 
       {/* FAQ */}
       <section id="faq" className="py-16 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
           <div className="mb-10">
             <Badge variant="outline" className="mb-2">Frequently Asked Questions</Badge>
             <h2 className="text-2xl lg:text-3xl font-extrabold text-gray-900 mb-3">Common Questions</h2>

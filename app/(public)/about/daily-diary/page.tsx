@@ -4,11 +4,6 @@ import PageHero from "@/components/PageHero"
 import SectionNav from "@/components/SectionNav"
 import SectionTabs from "@/components/SectionTabs"
 
-const COURTS = [
-  { name: "Supreme Court", color: "bg-[hsl(352,83%,44%)]", short: "SC" },
-  { name: "National Court", color: "bg-blue-700", short: "NC" },
-]
-
 const LISTINGS = [
   { court: "SC", division: "Full Court", judge: "Cannings J, Shepherd J, Makail J", time: "09:30", matter: "SCR No. 1 of 2025 — Constitutional Reference (Electoral Rolls)", type: "Hearing", room: "Court Room 1", status: "Confirmed" },
   { court: "SC", division: "Supreme Court", judge: "Hartshorn J", time: "10:00", matter: "SCA No. 44 of 2024 — Application for Leave to Appeal", type: "Leave", room: "Court Room 2", status: "Confirmed" },
@@ -98,7 +93,7 @@ export default function DailyCourtDiary() {
               </div>
               {sc.map((l, i) => (
                 <div key={i} className={`grid md:grid-cols-[70px_1fr_140px_100px_80px] gap-2 md:gap-0 px-4 py-3.5 text-sm ${i < sc.length - 1 ? "border-b border-gray-100" : ""} hover:bg-gray-50 transition-colors`}>
-                  <div className="font-mono font-semibold text-gray-700 text-[12px]">{l.time}</div>
+                  <div className="font-semibold text-gray-700 text-[12px]">{l.time}</div>
                   <div className="min-w-0">
                     <p className="font-semibold text-gray-900 text-[13px] leading-snug">{l.matter}</p>
                     <p className="text-[11px] text-gray-400 mt-0.5">{l.division} · {l.room}</p>
@@ -123,7 +118,7 @@ export default function DailyCourtDiary() {
               </div>
               {nc.map((l, i) => (
                 <div key={i} className={`grid md:grid-cols-[70px_1fr_140px_100px_80px] gap-2 md:gap-0 px-4 py-3.5 text-sm ${i < nc.length - 1 ? "border-b border-gray-100" : ""} hover:bg-gray-50 transition-colors`}>
-                  <div className="font-mono font-semibold text-gray-700 text-[12px]">{l.time}</div>
+                  <div className="font-semibold text-gray-700 text-[12px]">{l.time}</div>
                   <div className="min-w-0">
                     <p className="font-semibold text-gray-900 text-[13px] leading-snug">{l.matter}</p>
                     <p className="text-[11px] text-gray-400 mt-0.5">{l.division} · {l.room}</p>

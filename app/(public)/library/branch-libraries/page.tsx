@@ -120,8 +120,7 @@ export default function BranchLibrariesPage() {
                   Head Library
                 </span>
               </div>
-              <div className="bg-white rounded-2xl border border-[hsl(352,83%,44%)]/20 shadow-sm overflow-hidden">
-                <div className="h-1 bg-gradient-to-r from-[hsl(352,83%,44%)] via-amber-400 to-[hsl(352,83%,44%)]" />
+              <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
                 <div className="p-6 grid md:grid-cols-2 gap-6">
                   <div>
                     <h2 className="text-lg font-bold text-gray-900 mb-1">{branch.name}</h2>

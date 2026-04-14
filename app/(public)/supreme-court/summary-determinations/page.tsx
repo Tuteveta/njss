@@ -4,6 +4,7 @@ import PageHero from "@/components/PageHero"
 import SectionNav from "@/components/SectionNav"
 import SectionTabs from "@/components/SectionTabs"
 import { Search, FileText, Download, ChevronDown, ChevronUp } from "lucide-react"
+import CustomSelect from "@/components/CustomSelect"
 
 const determinations = [
   {
@@ -111,7 +112,7 @@ export default function SummaryDeterminationsPage() {
       />
       <SectionTabs section="supreme-court" />
       <section className="py-12 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
           <div className="flex items-start gap-8">
             <SectionNav section="supreme-court" />
             <div className="flex-1 min-w-0">
@@ -138,12 +139,12 @@ export default function SummaryDeterminationsPage() {
                 className="flex-1 text-sm bg-transparent outline-none placeholder:text-gray-400"
               />
             </div>
-            <select value={division} onChange={e => setDivision(e.target.value)} className="border border-gray-200 rounded-xl h-10 px-3 bg-gray-50 text-sm text-gray-700 outline-none">
-              {divisions.map(d => <option key={d}>{d}</option>)}
-            </select>
-            <select value={year} onChange={e => setYear(e.target.value)} className="border border-gray-200 rounded-xl h-10 px-3 bg-gray-50 text-sm text-gray-700 outline-none">
-              {years.map(y => <option key={y}>{y}</option>)}
-            </select>
+            <div className="border border-gray-200 rounded-xl h-10 px-3 bg-gray-50 flex items-center">
+              <CustomSelect value={division} options={divisions} onChange={setDivision} />
+            </div>
+            <div className="border border-gray-200 rounded-xl h-10 px-3 bg-gray-50 flex items-center">
+              <CustomSelect value={year} options={years} onChange={setYear} />
+            </div>
             <span className="text-xs text-gray-400 ml-auto">{filtered.length} determination{filtered.length !== 1 ? "s" : ""}</span>
           </div>
 
@@ -164,7 +165,7 @@ export default function SummaryDeterminationsPage() {
                   >
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-wrap items-center gap-2 mb-1">
-                        <span className="font-mono text-xs text-[hsl(352,83%,44%)] font-bold">{d.no}</span>
+                        <span className="text-xs text-[hsl(352,83%,44%)] font-bold">{d.no}</span>
                         <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full ${divisionColor[d.division] ?? "bg-gray-100 text-gray-600"}`}>
                           {d.division}
                         </span>

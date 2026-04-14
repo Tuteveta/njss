@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Building2, Users, FileText, MapPin, Phone, Mail, ArrowRight } from "lucide-react"
+import { Building2, Users, MapPin, Phone, Mail, ArrowRight } from "lucide-react"
 import PageHero from "@/components/PageHero"
 import SectionNav from "@/components/SectionNav"
 import SectionTabs from "@/components/SectionTabs"
@@ -10,42 +10,36 @@ const DIVISIONS = [
     head: "Registrar of the Supreme Court & National Court",
     description: "The Registrar is the principal administrative officer of both courts. The Office oversees case management, registry operations, and court administration across all NJSS locations.",
     functions: ["Court listings and case management", "Supervision of all registries", "Administration of court orders and judgments", "Liaison between the bench and court staff"],
-    color: "border-l-[hsl(352,83%,44%)]",
   },
   {
     name: "Registry Services Division",
     head: "Director of Registry Services",
     description: "Responsible for the operation of all National Court registries across Papua New Guinea's 22 provinces, including filing, sealing, and certification of court documents.",
     functions: ["Document filing and processing", "Certified copy issuance", "Court fee collection", "Provincial registry coordination"],
-    color: "border-l-blue-500",
   },
   {
     name: "Human Resources Division",
     head: "Director of Human Resources",
     description: "Manages recruitment, training, payroll, and welfare of all NJSS staff across the judiciary. Responsible for professional development and compliance with PSMA obligations.",
     functions: ["Staff recruitment and selection", "Payroll and entitlements management", "Performance management", "Training and development coordination"],
-    color: "border-l-emerald-500",
   },
   {
     name: "Finance & Accounts Division",
     head: "Director of Finance",
     description: "Manages the NJSS budget, financial reporting, procurement, and asset management in compliance with PFMA requirements and donor grant conditions.",
     functions: ["Budget preparation and monitoring", "Financial statements and reporting", "Procurement and tendering", "Asset register and management"],
-    color: "border-l-amber-500",
   },
   {
     name: "Information & Communications Technology",
     head: "Director of ICT",
     description: "Maintains and develops the IT infrastructure supporting court operations, including the e-judiciary portal, case management system, and network security.",
     functions: ["Court IT infrastructure", "E-Judiciary portal maintenance", "Cybersecurity and data protection", "ICT procurement and support"],
-    color: "border-l-purple-500",
   },
   {
     name: "Infrastructure & Facilities",
     head: "Director of Infrastructure",
     description: "Responsible for the construction, maintenance, and management of all court facilities including the Waigani Court Complex and provincial courthouse infrastructure.",
     functions: ["Court facility maintenance", "Capital works projects", "Property leasing and management", "Security and safety compliance"],
-    color: "border-l-orange-500",
   },
 ]
 
@@ -91,7 +85,7 @@ export default function CourtAdministrationPage() {
             <h2 className="text-[11px] font-bold uppercase tracking-widest text-gray-400 mb-4">Divisions &amp; Directorates</h2>
             <div className="flex flex-col gap-4">
               {DIVISIONS.map(div => (
-                <div key={div.name} className={`bg-white rounded-xl border border-gray-200 border-l-4 ${div.color} p-5 hover:border-gray-300 transition-colors`}>
+                <div key={div.name} className="bg-white rounded-xl border border-gray-200 p-5 hover:border-gray-300 transition-colors">
                   <div className="flex items-start justify-between gap-3 flex-wrap mb-2">
                     <h3 className="font-bold text-gray-900 text-[14px]">{div.name}</h3>
                     <span className="text-[11px] text-gray-400 shrink-0">{div.head}</span>

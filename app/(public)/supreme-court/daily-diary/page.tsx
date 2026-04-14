@@ -2,7 +2,7 @@
 import PageHero from "@/components/PageHero"
 import SectionNav from "@/components/SectionNav"
 import SectionTabs from "@/components/SectionTabs"
-import { CalendarDays, Clock, MapPin, User } from "lucide-react"
+import { CalendarDays, Clock, User } from "lucide-react"
 
 const TODAY = new Date().toLocaleDateString("en-PG", { weekday: "long", year: "numeric", month: "long", day: "numeric" })
 
@@ -74,7 +74,7 @@ export default function DailyCourtDiaryPage() {
       />
       <SectionTabs section="supreme-court" />
       <section className="py-12 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
           <div className="flex items-start gap-8">
             <SectionNav section="supreme-court" />
             <div className="flex-1 min-w-0">
@@ -116,7 +116,7 @@ export default function DailyCourtDiaryPage() {
                 <div className="divide-y divide-gray-100">
                   {entry.cases.map((c, j) => (
                     <div key={j} className="flex flex-wrap items-center gap-3 py-3">
-                      <span className="font-mono text-xs font-semibold text-[hsl(352,83%,44%)] w-36 shrink-0">{c.no}</span>
+                      <span className="text-xs font-semibold text-[hsl(352,83%,44%)] w-36 shrink-0">{c.no}</span>
                       <span className="flex-1 text-sm font-medium text-gray-800 min-w-0">{c.parties}</span>
                       <span className="hidden md:block text-xs text-gray-400 w-44 shrink-0">{c.type}</span>
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold shrink-0 ${statusColor[c.status] ?? "bg-gray-100 text-gray-600"}`}>

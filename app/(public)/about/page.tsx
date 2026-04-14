@@ -112,10 +112,10 @@ export default function About() {
 
       {/* Mission & Vision */}
       <section id="mission" className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
           <div className="mb-14">
             <span className="inline-block text-xs font-semibold uppercase tracking-widest text-[hsl(352,83%,48%)] border border-[hsl(352,83%,48%)]/30 bg-[hsl(352,83%,48%)]/5 px-4 py-1.5 rounded-full mb-4">Our Purpose</span>
-            <h2 className="text-3xl lg:text-4xl font-bold text-[hsl(352,83%,38%)]">Mission &amp; Vision</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">Mission &amp; Vision</h2>
             <div className="w-12 h-1 rounded-full bg-gradient-to-r from-amber-500 to-amber-200 mt-4" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -149,7 +149,7 @@ export default function About() {
 
       {/* Mandate */}
       <section id="mandate" className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
           <div className="mb-10">
             <Badge variant="outline" className="mb-3">Our Mandate</Badge>
             <h2 className="text-3xl font-bold text-gray-900">What We Are Mandated To Do</h2>
@@ -170,10 +170,10 @@ export default function About() {
 
       {/* Highlights */}
       <section id="highlights" className="py-10 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
           <div className="mb-8">
             <span className="inline-block text-xs font-semibold uppercase tracking-widest text-[hsl(352,83%,48%)] border border-[hsl(352,83%,48%)]/30 bg-[hsl(352,83%,48%)]/5 px-3 py-1 rounded-full mb-3">Performance</span>
-            <h2 className="text-2xl font-bold text-[hsl(352,83%,38%)]">2025 Highlights</h2>
+            <h2 className="text-2xl font-bold text-gray-900">2025 Highlights</h2>
             <div className="w-8 h-0.5 rounded-full bg-gradient-to-r from-amber-500 to-amber-200 mt-3" />
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
@@ -184,7 +184,7 @@ export default function About() {
                   <TrendingUp className="w-3.5 h-3.5 text-[hsl(352,83%,48%)]" />
                 </div>
                 <div className="min-w-0">
-                  <div className="text-xl font-black text-[hsl(352,83%,38%)] tracking-tight leading-none">{h.title}</div>
+                  <div className="text-xl font-black text-gray-900 tracking-tight leading-none">{h.title}</div>
                   <div className="text-[11px] text-gray-500 leading-snug mt-0.5">{h.desc}</div>
                 </div>
               </div>
@@ -196,10 +196,10 @@ export default function About() {
       {/* Strategic Priorities */}
       {about.priorities.length > 0 && (
         <section className="py-16 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="max-w-7xl mx-auto px-4 lg:px-10">
             <div className="mb-12">
               <span className="inline-block text-xs font-semibold uppercase tracking-widest text-amber-600 border border-amber-300/50 bg-amber-50 px-4 py-1.5 rounded-full mb-4">2022–2027</span>
-              <h2 className="text-3xl lg:text-4xl font-bold text-[hsl(352,83%,38%)]">Strategic Priorities</h2>
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">Strategic Priorities</h2>
               <p className="text-gray-500 text-sm mt-3">Aligned with the Judiciary Corporate Strategic Plan</p>
               <div className="w-12 h-1 rounded-full bg-gradient-to-r from-amber-400 to-amber-200 mt-4" />
             </div>
@@ -222,7 +222,7 @@ export default function About() {
 
       {/* Values */}
       <section id="values" className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
           <div className="mb-10">
             <Badge variant="outline" className="mb-3">Our Values</Badge>
             <h2 className="text-3xl font-bold text-gray-900">Our Core Values</h2>
@@ -244,7 +244,7 @@ export default function About() {
       {/* Leadership */}
       {leadership.length > 0 && (
         <section id="leadership" className="py-16 bg-white">
-          <div className="max-w-7xl mx-auto px-4">
+          <div className="max-w-7xl mx-auto px-4 lg:px-10">
             <div className="mb-10">
               <Badge variant="outline" className="mb-3">Our People</Badge>
               <h2 className="text-3xl font-bold text-gray-900">Leadership Team</h2>
@@ -277,7 +277,7 @@ export default function About() {
 
       {/* Legislation */}
       <section id="legislation" className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
           <div className="mb-10">
             <Badge variant="outline" className="mb-3">Legal Framework</Badge>
             <h2 className="text-3xl font-bold text-gray-900">Governing Legislation</h2>

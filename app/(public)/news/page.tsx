@@ -61,7 +61,7 @@ export default function News() {
       />
 
       <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
           <div className="flex flex-col lg:flex-row gap-8">
 
             {/* Sidebar */}

@@ -88,7 +88,7 @@ export default function NCDailyDiary() {
             </div>
             {LISTINGS.map((l, i) => (
               <div key={i} className={`grid md:grid-cols-[65px_80px_1fr_110px_90px_80px] gap-1 md:gap-0 px-4 py-3.5 ${i < LISTINGS.length - 1 ? "border-b border-gray-100" : ""} hover:bg-gray-50 transition-colors`}>
-                <div className="font-mono font-semibold text-gray-700 text-[12px]">{l.time}</div>
+                <div className="font-semibold text-gray-700 text-[12px]">{l.time}</div>
                 <div className="text-[12px] text-gray-400 font-medium">{l.room}</div>
                 <div className="min-w-0">
                   <p className="font-semibold text-gray-900 text-[13px] leading-snug">{l.matter}</p>

@@ -40,9 +40,8 @@ export default function Footer() {
   const addressLines = (s.contact_address || "").split("\n").filter(Boolean)
 
   return (
-    <footer className="bg-gray-900 text-gray-300 border-t border-gray-800">
-      {/* Gold accent top bar */}
-      <div className="h-1 bg-linear-to-r from-[hsl(352,83%,44%)] via-amber-400 to-[hsl(352,83%,44%)]" />
+    <footer className="bg-gray-900 text-gray-300">
+      <hr className="gradient-rule" />
       <div className="max-w-7xl mx-auto px-4 lg:px-10 py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           <div className="lg:col-span-1">

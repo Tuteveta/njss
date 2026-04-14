@@ -111,7 +111,7 @@ export default function MembershipPage() {
               {MEMBER_TYPES.map(type => {
                 const Icon = type.icon
                 return (
-                  <div key={type.title} className={`bg-white rounded-xl border p-5 ${type.color.split(" ")[2]}`}>
+                  <div key={type.title} className="bg-white rounded-xl border border-gray-200 p-5 hover:border-gray-300 transition-colors">
                     <div className="flex items-start gap-3 mb-3">
                       <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 ${type.color}`}>
                         <Icon className="w-4 h-4" />

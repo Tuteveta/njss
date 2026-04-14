@@ -75,7 +75,7 @@ export default function NewsArticle() {
       </div>
 
       <section className="py-12 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
           <div className="flex flex-col lg:flex-row gap-10">
 
             {/* Article body */}
@@ -90,7 +90,7 @@ export default function NewsArticle() {
                   {(article.body || []).map((block, i) => (
                     <div key={i}>
                       {block.heading && (
-                        <h2 className="text-lg font-bold text-[hsl(352,83%,48%)] mb-2">{block.heading}</h2>
+                        <h2 className="text-lg font-bold text-gray-900 mb-2">{block.heading}</h2>
                       )}
                       <p className="text-sm text-gray-600 leading-relaxed">{block.text}</p>
                     </div>

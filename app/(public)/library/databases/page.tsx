@@ -1,4 +1,4 @@
-import { Database, ExternalLink, Lock, Globe, CheckCircle, ArrowRight, Shield, ChevronRight } from "lucide-react"
+import { ExternalLink, Lock, Globe, CheckCircle, ArrowRight, Shield, ChevronRight } from "lucide-react"
 import Link from "next/link"
 import PageHero from "@/components/PageHero"
 import SectionNav from "@/components/SectionNav"
@@ -144,7 +144,7 @@ export default function DatabasesPage() {
             </div>
             <div className="flex flex-col gap-4">
               {publicDBs.map(db => (
-                <div key={db.name} className={`bg-white rounded-xl border p-5 hover:border-gray-300 transition-colors ${db.highlight ? "border-[hsl(352,83%,44%)]/25 shadow-sm" : "border-gray-200"}`}>
+                <div key={db.name} className="bg-white rounded-xl border border-gray-200 p-5 hover:border-gray-300 transition-colors">
                   {db.highlight && (
                     <span className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full mb-3">
                       Recommended

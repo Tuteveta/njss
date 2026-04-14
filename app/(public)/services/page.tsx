@@ -63,7 +63,7 @@ export default function Services() {
         <>
           {/* Mobile pill tabs */}
           <div className="bg-white border-b border-gray-100 sticky top-0 z-10">
-            <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-2 overflow-x-auto no-scrollbar">
+            <div className="max-w-7xl mx-auto px-4 lg:px-10 py-3 flex items-center gap-2 overflow-x-auto no-scrollbar">
               <span className="text-xs text-gray-400 font-medium shrink-0 pr-2">Courts:</span>
               {services.map(svc => {
                 const Icon = ICON_MAP[svc.iconName] ?? HelpCircle
@@ -81,7 +81,7 @@ export default function Services() {
             </div>
           </div>
 
-          <div className="max-w-7xl mx-auto px-4 py-16">
+          <div className="max-w-7xl mx-auto px-4 lg:px-10 py-16">
             <div className="flex flex-col lg:flex-row gap-10">
 
               {/* Sticky sidebar */}
@@ -129,7 +129,7 @@ export default function Services() {
                             {String(activeIndex + 1).padStart(2, "0")}
                           </span>
                         </div>
-                        <h2 className="text-2xl font-bold text-[hsl(352,83%,38%)] mb-2">{active.title}</h2>
+                        <h2 className="text-2xl font-bold text-gray-900 mb-2">{active.title}</h2>
                         <p className="text-gray-500 text-sm leading-relaxed">{active.description}</p>
                       </div>
                     </div>

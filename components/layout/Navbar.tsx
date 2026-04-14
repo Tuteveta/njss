@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation"
 import {
   Menu, X, ChevronDown, FileText, Lock, Search, Newspaper, CalendarCheck,
   Layers, ArrowRight, BookOpen, Scale, Users, Building2, Library,
-  Calendar, Gavel, Scroll, ClipboardList, Info, LayoutList,
+  Calendar, Gavel, Scroll, LayoutList,
   BookMarked, Briefcase, MessageSquareWarning, GraduationCap,
   MapPin, Shield, Languages, FileVideo
 } from "lucide-react"
@@ -468,7 +468,7 @@ function DesktopNavItem({
     <span className="relative">
       {label}
       <span className={cn(
-        "absolute left-0 right-0 -bottom-1 h-[3px] rounded-full bg-amber-400 transition-all duration-200",
+        "absolute left-0 right-0 -bottom-1 h-px rounded-full bg-amber-400 transition-all duration-200",
         active || isOpen ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0 group-hover:opacity-60 group-hover:scale-x-100"
       )} />
     </span>

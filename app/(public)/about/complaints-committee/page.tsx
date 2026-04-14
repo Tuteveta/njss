@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { MessageSquareWarning, CheckCircle, AlertTriangle, ArrowRight, Mail, Phone, FileText, XCircle, Clock } from "lucide-react"
+import { CheckCircle, AlertTriangle, ArrowRight, Mail, Phone, FileText, XCircle, Clock } from "lucide-react"
 import PageHero from "@/components/PageHero"
 import SectionNav from "@/components/SectionNav"
 import SectionTabs from "@/components/SectionTabs"
@@ -66,7 +66,7 @@ export default function ComplaintsCommitteePage() {
 
           {/* What you can/cannot complain about */}
           <div className="grid sm:grid-cols-2 gap-4 mb-10">
-            <div className="bg-white rounded-xl border border-emerald-200 p-5">
+            <div className="bg-white rounded-xl border border-gray-200 p-5">
               <div className="flex items-center gap-2 mb-3">
                 <CheckCircle className="w-4 h-4 text-emerald-600" />
                 <h2 className="font-bold text-gray-900 text-[13.5px]">You CAN complain about</h2>

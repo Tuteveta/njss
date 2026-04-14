@@ -126,7 +126,7 @@ export default function Events() {
       <ScrollNav sections={SECTIONS} />
 
       <section id="upcoming" className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
 
           {/* Filters */}
           <div className="flex flex-col sm:flex-row gap-3 mb-8">

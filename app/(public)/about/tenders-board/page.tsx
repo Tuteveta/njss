@@ -91,7 +91,7 @@ export default function TendersBoardPage() {
                 <div key={tender.ref} className="bg-white rounded-xl border border-gray-200 p-5 hover:border-gray-300 transition-colors">
                   <div className="flex items-start justify-between gap-3 flex-wrap mb-2">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="font-mono text-[11px] text-gray-400">{tender.ref}</span>
+                      <span className="text-[11px] text-gray-400">{tender.ref}</span>
                       <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${CAT_COLORS[tender.category] ?? "bg-gray-100 text-gray-600"}`}>{tender.category}</span>
                     </div>
                     <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${STATUS_COLORS[tender.status]}`}>{tender.status}</span>

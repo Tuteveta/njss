@@ -98,8 +98,8 @@ export default function CourtCalendar2018() {
             <h2 className="text-[11px] font-bold uppercase tracking-widest text-gray-400 mb-4">Public Holidays & Court Recesses 2018</h2>
             <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
               {HOLIDAYS.map((h, i) => (
-                <div key={i} className={`flex items-center justify-between px-5 py-3 text-sm ${i < HOLIDAYS.length - 1 ? "border-b border-gray-100" : ""} hover:bg-gray-50 transition-colors`}>
-                  <span className="font-mono text-[12px] text-gray-500 w-36 shrink-0">{h.date}</span>
+                <div key={i} className={`flex items-center gap-6 px-5 py-3 text-sm ${i < HOLIDAYS.length - 1 ? "border-b border-gray-100" : ""} hover:bg-gray-50 transition-colors`}>
+                  <span className="text-[12px] text-gray-500 w-32 shrink-0">{h.date}</span>
                   <span className="text-gray-800 font-medium">{h.name}</span>
                 </div>
               ))}
@@ -112,8 +112,8 @@ export default function CourtCalendar2018() {
             <p className="text-[12px] text-gray-500 mb-3">Judges assigned to deal with urgent vacation matters between terms.</p>
             <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
               {VACATION_JUDGES.map((v, i) => (
-                <div key={i} className={`flex items-center justify-between px-5 py-3 text-sm ${i < VACATION_JUDGES.length - 1 ? "border-b border-gray-100" : ""} hover:bg-gray-50 transition-colors`}>
-                  <span className="text-[12px] text-gray-600">{v.period}</span>
+                <div key={i} className={`flex items-center gap-6 px-5 py-3 text-sm ${i < VACATION_JUDGES.length - 1 ? "border-b border-gray-100" : ""} hover:bg-gray-50 transition-colors`}>
+                  <span className="text-[12px] text-gray-600 w-52 shrink-0">{v.period}</span>
                   <span className="font-semibold text-gray-900">{v.judge}</span>
                 </div>
               ))}

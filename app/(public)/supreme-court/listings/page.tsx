@@ -4,6 +4,7 @@ import PageHero from "@/components/PageHero"
 import SectionNav from "@/components/SectionNav"
 import SectionTabs from "@/components/SectionTabs"
 import { Search, Filter, CalendarDays, ChevronRight } from "lucide-react"
+import CustomSelect from "@/components/CustomSelect"
 
 const allListings = [
   { no: "SC REV 01 of 2025", parties: "In Re: Organic Law on Elections (Amendment)",     division: "Constitutional",  date: "2025-04-07", judge: "Full Bench",          status: "Active",   nextAction: "Hearing 7 Apr 2025" },
@@ -80,16 +81,12 @@ export default function SupremeCourtListingsPage() {
                 className="flex-1 text-sm bg-transparent outline-none placeholder:text-gray-400"
               />
             </div>
-            <div className="flex items-center gap-2 border border-gray-200 rounded-xl h-10 px-3 bg-gray-50 text-sm text-gray-600">
-              <Filter className="w-3.5 h-3.5 text-gray-400" />
-              <select value={division} onChange={e => setDivision(e.target.value)} className="bg-transparent outline-none text-sm text-gray-700">
-                {divisions.map(d => <option key={d}>{d}</option>)}
-              </select>
+            <div className="flex items-center gap-2 border border-gray-200 rounded-xl h-10 px-3 bg-gray-50">
+              <Filter className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+              <CustomSelect value={division} options={divisions} onChange={setDivision} />
             </div>
-            <div className="flex items-center gap-2 border border-gray-200 rounded-xl h-10 px-3 bg-gray-50 text-sm text-gray-600">
-              <select value={status} onChange={e => setStatus(e.target.value)} className="bg-transparent outline-none text-sm text-gray-700">
-                {statuses.map(s => <option key={s}>{s}</option>)}
-              </select>
+            <div className="flex items-center gap-2 border border-gray-200 rounded-xl h-10 px-3 bg-gray-50">
+              <CustomSelect value={status} options={statuses} onChange={setStatus} />
             </div>
             <div className="flex items-center gap-1.5 ml-auto text-xs text-gray-400">
               <CalendarDays className="w-3.5 h-3.5" />
@@ -120,7 +117,7 @@ export default function SupremeCourtListingsPage() {
                     </tr>
                   ) : filtered.map((l) => (
                     <tr key={l.no} className="hover:bg-gray-50 transition-colors group">
-                      <td className="px-5 py-3.5 font-mono text-xs text-[hsl(352,83%,44%)] font-semibold whitespace-nowrap">{l.no}</td>
+                      <td className="px-5 py-3.5 text-xs text-[hsl(352,83%,44%)] font-semibold whitespace-nowrap">{l.no}</td>
                       <td className="px-5 py-3.5 text-gray-800 font-medium max-w-xs">
                         <span className="line-clamp-2">{l.parties}</span>
                       </td>

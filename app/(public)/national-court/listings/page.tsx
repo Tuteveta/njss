@@ -82,7 +82,7 @@ export default function ListingsPage() {
                 <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
                   {day.matters.map((m, i) => (
                     <div key={i} className={`grid grid-cols-[55px_1fr_120px_80px_80px] gap-0 px-4 py-3 text-sm ${i < day.matters.length - 1 ? "border-b border-gray-100" : ""} hover:bg-gray-50 transition-colors`}>
-                      <div className="font-mono text-[11.5px] font-semibold text-gray-500">{m.time}</div>
+                      <div className="text-[11.5px] font-semibold text-gray-500">{m.time}</div>
                       <div className="min-w-0 pr-3">
                         <p className="font-semibold text-gray-900 text-[13px] leading-snug truncate">{m.matter}</p>
                       </div>

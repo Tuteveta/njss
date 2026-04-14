@@ -1,9 +1,7 @@
 "use client"
 import Link from "next/link"
 import { useEffect, useState, useCallback } from "react"
-import { ArrowRight, Shield, Users, FileText, Clock, TrendingUp, CheckCircle, Phone, Download, AlertCircle, ChevronRight, ChevronLeft, CalendarDays, MapPin, HelpCircle, Building2, Stethoscope, Scale, Briefcase, Heart, BookOpen, Star, Globe } from "lucide-react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { ArrowRight, Shield, Users, FileText, Clock, TrendingUp, CheckCircle, Phone, Download, ChevronRight, ChevronLeft, CalendarDays, MapPin, HelpCircle, Building2, Stethoscope, Scale, Briefcase, Heart, BookOpen, Star, Globe } from "lucide-react"
 import { useSettings } from "@/context/SettingsContext"
 import ScrollNav from "@/components/ScrollNav"
 
@@ -126,7 +124,7 @@ function HeroSlider({ slides }: { slides: ApiSlide[] }) {
   const slide = slides[Math.min(current, slides.length - 1)]
 
   return (
-    <section className="relative text-white overflow-hidden h-[420px] sm:h-[500px] lg:h-[560px]">
+    <section className="relative text-white overflow-hidden h-[420px] sm:h-[500px] lg:h-[580px]">
       {/* Slides */}
       {slides.map((s, i) => (
         <div
@@ -138,47 +136,48 @@ function HeroSlider({ slides }: { slides: ApiSlide[] }) {
             className="absolute inset-0 bg-cover bg-center scale-105 transition-transform duration-[8000ms]"
             style={{ backgroundImage: `url('${s.image}')`, transform: i === current ? 'scale(1)' : 'scale(1.05)' }}
           />
-          <div className="absolute inset-0 bg-linear-to-r from-gray-950/90 via-gray-900/70 to-gray-800/40" />
-          <div className="absolute inset-0 bg-linear-to-t from-gray-950/60 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-r from-gray-950/95 via-gray-900/75 to-gray-800/30" />
+          <div className="absolute inset-0 bg-linear-to-t from-gray-950/70 via-transparent to-transparent" />
         </div>
       ))}
 
       {/* Content */}
       <div className="relative z-10 h-full flex items-center">
-        <div className="max-w-7xl mx-auto px-6 lg:px-14 w-full">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10 w-full">
           <div className="max-w-2xl">
             {slide.badge && (
-              <span className="text-amber-300 text-xs font-bold tracking-[0.18em] uppercase mb-4 block">
+              <span className="text-amber-400 text-xs font-semibold tracking-[0.18em] uppercase mb-4 block opacity-90">
                 {slide.badge}
               </span>
             )}
             <h1
               key={`title-${current}`}
               className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight mb-4 text-white"
+              style={{ textShadow: '0 2px 24px rgba(0,0,0,0.4)' }}
             >
               {slide.title}
             </h1>
             <p
               key={`sub-${current}`}
-              className="text-sm sm:text-base text-gray-200/85 mb-7 leading-relaxed line-clamp-3 max-w-xl"
+              className="text-sm sm:text-base text-gray-200/85 mb-8 leading-relaxed line-clamp-3 max-w-xl"
             >
               {slide.subtitle}
             </p>
             <div className="flex flex-wrap gap-3 mb-8">
               {slide.ctaLabel && (slide.ctaExternal ? (
                 <a href={slide.ctaHref || "/"} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 h-11 px-7 rounded-lg text-sm font-bold bg-[hsl(352,83%,44%)] hover:bg-[hsl(352,83%,38%)] text-white transition-colors shadow-lg shadow-[hsl(352,83%,44%)]/30">
+                  className="inline-flex items-center gap-2 h-11 px-7 rounded-lg text-sm font-bold bg-[hsl(352,83%,44%)] hover:bg-[hsl(352,83%,38%)] text-white transition-colors">
                   {slide.ctaLabel} <ArrowRight className="w-4 h-4" />
                 </a>
               ) : (
                 <Link href={slide.ctaHref || "/"}
-                  className="inline-flex items-center gap-2 h-11 px-7 rounded-lg text-sm font-bold bg-[hsl(352,83%,44%)] hover:bg-[hsl(352,83%,38%)] text-white transition-colors shadow-lg shadow-[hsl(352,83%,44%)]/30">
+                  className="inline-flex items-center gap-2 h-11 px-7 rounded-lg text-sm font-bold bg-[hsl(352,83%,44%)] hover:bg-[hsl(352,83%,38%)] text-white transition-colors">
                   {slide.ctaLabel} <ArrowRight className="w-4 h-4" />
                 </Link>
               ))}
               {slide.secondaryLabel && (
                 <Link href={slide.secondaryHref || "/"}
-                  className="inline-flex items-center gap-2 h-11 px-7 rounded-lg text-sm font-semibold border border-gray-500/50 text-white/90 hover:bg-white/10 hover:border-gray-400/60 hover:text-white transition-colors backdrop-blur-sm">
+                  className="inline-flex items-center gap-2 h-11 px-7 rounded-lg text-sm font-semibold text-white border border-white/30 hover:border-white/60 hover:bg-white/10 transition-colors">
                   {slide.secondaryLabel}
                 </Link>
               )}
@@ -272,44 +271,50 @@ export default function Home() {
       {/* Stats */}
       {show("home_show_stats") && (
         <section id="stats" className="bg-gray-900 py-0">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/8">
+          <hr className="gradient-rule" />
+          <div className="max-w-7xl mx-auto px-4 lg:px-10">
+            <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/10">
               {STAT_DEFS.map((stat) => (
-                <div key={stat.label} className="text-center px-6 py-7 group">
-                  <stat.icon className="w-5 h-5 text-amber-400/70 mx-auto mb-2 group-hover:text-amber-400 transition-colors" />
-                  <div className="text-3xl font-extrabold text-white tracking-tight">{s[stat.settingKey as keyof typeof s]}</div>
+                <div key={stat.label} className="text-center px-6 py-9">
+                  <div className="w-10 h-10 rounded-xl bg-[hsl(352,83%,44%)]/15 border border-[hsl(352,83%,44%)]/20 flex items-center justify-center mx-auto mb-3">
+                    <stat.icon className="w-5 h-5 text-amber-400" />
+                  </div>
+                  <div className="text-3xl font-extrabold text-white tracking-tight">
+                    {s[stat.settingKey as keyof typeof s]}
+                  </div>
                   <div className="text-[11px] text-gray-400 mt-1.5 uppercase tracking-widest font-medium">{stat.label}</div>
                 </div>
               ))}
             </div>
           </div>
+          <hr className="gradient-rule" />
         </section>
       )}
 
       {/* Services */}
       {show("home_show_services") && (
-        <section id="home-services" className="py-16 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="mb-10">
-              <Badge variant="outline" className="mb-2">Courts &amp; Services</Badge>
-              <h2 className="text-2xl lg:text-3xl font-extrabold text-gray-900 mb-3">Our Courts &amp; Services</h2>
-              <p className="text-gray-500 text-sm leading-relaxed max-w-xl">
+        <section id="home-services" className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 lg:px-10">
+            <div className="mb-12">
+              <p className="text-[hsl(352,83%,44%)] text-xs font-semibold tracking-[0.18em] uppercase mb-3">Courts &amp; Services</p>
+              <h2 className="text-2xl lg:text-3xl font-extrabold text-gray-900 mb-3 heading-bar">Our Courts &amp; Services</h2>
+              <p className="text-gray-500 text-sm leading-relaxed max-w-xl mt-6">
                 The NJSS supports the Supreme Court and National Court to deliver independent, fair and just judicial services throughout Papua New Guinea.
               </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {homeServices.map((svc) => {
                 const Icon = ICON_MAP[svc.iconName] ?? ICON_MAP.HelpCircle
                 return (
                   <Link key={svc.id} href="/services"
-                    className="group flex items-start gap-4 bg-white rounded-2xl border border-gray-200 hover:border-[hsl(352,83%,44%)]/30 p-5 transition-all hover:shadow-lg hover:shadow-[hsl(352,83%,44%)]/6 hover:-translate-y-0.5">
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 bg-[hsl(352,83%,44%)]/8 text-[hsl(352,83%,44%)] group-hover:bg-[hsl(352,83%,44%)]/15 transition-colors">
-                      <Icon className="w-5 h-5" />
+                    className="flex items-start gap-4 bg-white rounded-2xl border border-gray-200 p-6">
+                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 bg-[hsl(352,83%,44%)]/8 text-[hsl(352,83%,44%)]">
+                      <Icon className="w-6 h-6" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-bold text-gray-900 mb-1.5 group-hover:text-[hsl(352,83%,44%)] transition-colors">{svc.title}</h3>
+                      <h3 className="font-bold text-gray-900 mb-1.5 text-base">{svc.title}</h3>
                       <p className="text-sm text-gray-500 leading-relaxed">{svc.description}</p>
-                      <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-[hsl(352,83%,44%)] group-hover:gap-2 transition-all">
+                      <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-[hsl(352,83%,44%)]">
                         Learn more <ChevronRight className="w-3.5 h-3.5" />
                       </span>
                     </div>
@@ -323,38 +328,35 @@ export default function Home() {
 
       {/* How to File a Court Matter */}
       {show("home_show_process") && (
-        <section id="process" className="py-16 bg-white">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="mb-10">
-              <Badge variant="outline" className="mb-2">Filing a Court Matter</Badge>
-              <h2 className="text-2xl lg:text-3xl font-extrabold text-gray-900 mb-3">How to File a Court Matter</h2>
-              <p className="text-gray-500 text-sm leading-relaxed max-w-xl">
+        <section id="process" className="py-20 bg-gray-900">
+          <div className="max-w-7xl mx-auto px-4 lg:px-10">
+            <div className="mb-12">
+              <p className="text-[hsl(352,83%,44%)] text-xs font-semibold tracking-[0.18em] uppercase mb-3">Filing a Court Matter</p>
+              <h2 className="text-2xl lg:text-3xl font-extrabold text-white mb-3 heading-bar">How to File a Court Matter</h2>
+              <p className="text-gray-400 text-sm leading-relaxed max-w-xl mt-6">
                 Follow these steps to lodge your matter with the Supreme Court or National Court of Papua New Guinea.
               </p>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
               {process.map((p, i) => (
-                <div key={p.step} className="relative group">
+                <div key={p.step} className="relative">
                   <div className="text-center p-3">
-                    <div className="relative w-10 h-10 mx-auto mb-2">
-                      <span className="absolute inset-0 rounded-full bg-[hsl(352,83%,48%)] opacity-0 group-hover:opacity-20 group-hover:scale-[2.2] transition-all duration-500 ease-out" />
-                      <span className="absolute inset-0 rounded-full bg-[hsl(352,83%,48%)] opacity-0 group-hover:opacity-10 group-hover:scale-[3.2] transition-all duration-700 ease-out delay-100" />
-                      <div className="relative w-10 h-10 bg-[hsl(352,83%,48%)] text-white rounded-full flex items-center justify-center font-bold text-xs group-hover:scale-110 group-hover:shadow-lg transition-all duration-300">
-                        {p.step}
-                      </div>
+                    <div className="w-12 h-12 mx-auto mb-3 bg-[hsl(352,83%,44%)] text-white rounded-full flex items-center justify-center font-black text-sm">
+                      {p.step}
                     </div>
-                    <h3 className="font-semibold text-gray-900 mb-1 text-sm group-hover:text-[hsl(352,83%,48%)] transition-colors">{p.title}</h3>
-                    <p className="text-xs text-gray-500 leading-relaxed hidden sm:block">{p.desc}</p>
+                    <h3 className="font-bold text-white mb-1.5 text-sm">{p.title}</h3>
+                    <p className="text-xs text-gray-400 leading-relaxed hidden sm:block">{p.desc}</p>
                   </div>
                   {i < process.length - 1 && (
-                    <div className="hidden lg:block absolute top-9 left-[calc(50%+20px)] w-[calc(100%-40px)] h-0.5 bg-red-100" />
+                    <div className="hidden lg:block absolute top-10 left-[calc(50%+24px)] w-[calc(100%-48px)] h-px"
+                      style={{ background: 'linear-gradient(90deg, hsl(352,83%,44%), hsla(352,83%,44%,0.2))' }} />
                   )}
                 </div>
               ))}
             </div>
-            <div className="text-center mt-6">
+            <div className="text-center mt-10">
               <Link href={COURT_DIARY_URL}
-                className="inline-flex items-center h-9 px-5 rounded-md text-sm font-medium bg-amber-600 hover:bg-amber-700 text-white transition-colors">
+                className="inline-flex items-center h-11 px-7 rounded-lg text-sm font-bold bg-[hsl(352,83%,44%)] hover:bg-[hsl(352,83%,38%)] text-white transition-colors">
                 View Court Diary <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </div>
@@ -364,43 +366,37 @@ export default function Home() {
 
       {/* News */}
       {show("home_show_news") && (
-        <section id="home-news" className="py-16 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="flex justify-between items-end mb-10">
+        <section id="home-news" className="py-20 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 lg:px-10">
+            <div className="flex justify-between items-end mb-12">
               <div>
-                <Badge variant="outline" className="mb-2">Latest Updates</Badge>
-                <h2 className="text-2xl lg:text-3xl font-extrabold text-gray-900">News &amp; Announcements</h2>
+                <p className="text-[hsl(352,83%,44%)] text-xs font-semibold tracking-[0.18em] uppercase mb-3">Latest Updates</p>
+                <h2 className="text-2xl lg:text-3xl font-extrabold text-gray-900 heading-bar">News &amp; Announcements</h2>
               </div>
               <Link href="/news" className="text-sm font-semibold text-[hsl(352,83%,44%)] hover:underline flex items-center gap-1 shrink-0">
                 View all <ChevronRight className="w-4 h-4" />
               </Link>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {homeNews.map((n) => (
-                <Link key={n.id} href={`/news/${n.slug}`}>
-                  <Card className="hover:-translate-y-1 transition-all duration-300 overflow-hidden h-full">
-                    <div className="h-36 overflow-hidden">
-                      {n.image
-                        ? <img src={n.image} alt={n.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                        : <div className="w-full h-full bg-gray-100" />
-                      }
+                <Link key={n.id} href={`/news/${n.slug}`} className="block bg-white rounded-2xl border border-gray-200 overflow-hidden h-full">
+                  <div className="h-44 overflow-hidden">
+                    {n.image
+                      ? <img src={n.image} alt={n.title} className="w-full h-full object-cover" />
+                      : <div className="w-full h-full bg-gray-100" />
+                    }
+                  </div>
+                  <div className="p-5">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-[10px] font-semibold uppercase tracking-wide text-[hsl(352,83%,44%)]">{n.category}</span>
+                      <span className="text-xs text-gray-400">{n.date}</span>
                     </div>
-                    <CardHeader>
-                      <div className="flex items-center justify-between mb-2">
-                        <Badge variant="secondary" className="text-xs">{n.category}</Badge>
-                        <span className="text-xs text-gray-400">{n.date}</span>
-                      </div>
-                      <CardTitle className="text-base leading-snug hover:text-[hsl(352,83%,48%)]">
-                        {n.title}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <CardDescription>{n.excerpt}</CardDescription>
-                      <span className="mt-3 text-sm font-medium text-[hsl(352,83%,48%)] hover:underline flex items-center gap-1">
-                        Read more <ChevronRight className="w-4 h-4" />
-                      </span>
-                    </CardContent>
-                  </Card>
+                    <h3 className="font-bold text-gray-900 text-base leading-snug mb-2">{n.title}</h3>
+                    <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">{n.excerpt}</p>
+                    <span className="mt-4 text-sm font-semibold text-[hsl(352,83%,44%)] flex items-center gap-1">
+                      Read more <ChevronRight className="w-3.5 h-3.5" />
+                    </span>
+                  </div>
                 </Link>
               ))}
             </div>
@@ -410,12 +406,12 @@ export default function Home() {
 
       {/* Upcoming Events */}
       {show("home_show_events") && (
-        <section id="home-events" className="py-16 bg-white">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="flex justify-between items-end mb-10">
+        <section id="home-events" className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 lg:px-10">
+            <div className="flex justify-between items-end mb-12">
               <div>
-                <Badge variant="outline" className="mb-2">Upcoming Events</Badge>
-                <h2 className="text-2xl lg:text-3xl font-extrabold text-gray-900">Events &amp; Workshops</h2>
+                <p className="text-[hsl(352,83%,44%)] text-xs font-semibold tracking-[0.18em] uppercase mb-3">Upcoming Events</p>
+                <h2 className="text-2xl lg:text-3xl font-extrabold text-gray-900 heading-bar">Events &amp; Workshops</h2>
               </div>
               <Link href="/events" className="text-sm font-semibold text-[hsl(352,83%,44%)] hover:underline flex items-center gap-1 shrink-0">
                 View all <ChevronRight className="w-4 h-4" />
@@ -438,15 +434,15 @@ export default function Home() {
                   const colorClass = EVENT_COLORS[e.category] ?? EVENT_COLORS.General
                   return (
                     <Link key={e.id} href="/events"
-                      className="group flex gap-4 bg-white rounded-xl border border-gray-200 p-4 transition-colors">
-                      <div className="shrink-0 w-14 h-14 rounded-xl bg-[hsl(352,83%,48%)] text-white flex flex-col items-center justify-center">
-                        <span className="text-lg font-black leading-none">{day}</span>
-                        <span className="text-[10px] font-semibold uppercase tracking-wider opacity-80">{month}</span>
+                      className="flex gap-4 bg-white rounded-2xl border border-gray-200 p-5">
+                      <div className="shrink-0 w-16 h-16 rounded-2xl bg-[hsl(352,83%,44%)] text-white flex flex-col items-center justify-center">
+                        <span className="text-xl font-black leading-none">{day}</span>
+                        <span className="text-[10px] font-bold uppercase tracking-wider opacity-85">{month}</span>
                         <span className="text-[9px] opacity-60">{year}</span>
                       </div>
                       <div className="flex-1 min-w-0">
                         <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${colorClass}`}>{e.category}</span>
-                        <h3 className="font-semibold text-gray-900 text-sm mt-1.5 leading-snug group-hover:text-[hsl(352,83%,48%)] transition-colors line-clamp-2">
+                        <h3 className="font-semibold text-gray-900 text-sm mt-1.5 leading-snug line-clamp-2">
                           {e.title}
                         </h3>
                         {e.location && (
@@ -473,71 +469,82 @@ export default function Home() {
 
       {/* CTA */}
       {show("home_show_cta") && (
-        <section id="cta" className="py-10 bg-white">
+        <>
+        <section id="cta" className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 lg:px-10">
-            <div className="mb-8">
-              <Badge variant="outline" className="mb-2">Get in Touch</Badge>
-              <h2 className="text-2xl lg:text-3xl font-bold text-[hsl(352,83%,38%)]">Need Assistance with the Courts?</h2>
-              <div className="w-12 h-1 rounded-full bg-linear-to-r from-amber-500 to-amber-200 mt-3 mb-4" />
-              <p className="text-gray-500 leading-relaxed text-sm">
-                Our registry staff are available Monday to Friday to assist you with filing, court listings, and general judicial enquiries.
+
+            {/* Header */}
+            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
+              <div>
+                <p className="text-[hsl(352,83%,44%)] text-xs font-semibold tracking-[0.18em] uppercase mb-3">Get in Touch</p>
+                <h2 className="text-2xl lg:text-3xl font-bold text-gray-900">Need Assistance with the Courts?</h2>
+                <div className="w-8 h-0.5 bg-[hsl(352,83%,44%)] mt-3 rounded-full" />
+              </div>
+              <p className="text-gray-500 text-sm leading-relaxed max-w-md lg:text-right">
+                Registry staff are available Monday – Friday to assist with filing, court listings, and judicial enquiries.
               </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-              <div className="bg-white rounded-xl border border-gray-200 p-5 flex flex-col gap-2">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-[hsl(352,83%,48%)]/10 flex items-center justify-center shrink-0">
-                    <Phone className="w-3.5 h-3.5 text-[hsl(352,83%,48%)]" />
-                  </div>
-                  <span className="text-xs font-semibold uppercase tracking-widest text-[hsl(352,83%,48%)]">Registry</span>
+
+            {/* Registry cards — joined panel */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 rounded-2xl overflow-hidden border border-gray-200">
+              <div className="p-7 flex flex-col gap-5">
+                <div className="w-10 h-10 rounded-xl bg-[hsl(352,83%,44%)]/8 border border-[hsl(352,83%,44%)]/15 flex items-center justify-center">
+                  <Phone className="w-4 h-4 text-[hsl(352,83%,44%)]" />
                 </div>
-                <div className="font-bold text-gray-900 text-sm">Talk to Registry Staff</div>
-                <div className="text-xs text-gray-500 leading-relaxed">Call or visit your nearest court registry. Our staff are here to assist you.</div>
-                <div className="mt-auto pt-2.5 border-t border-gray-100">
-                  <Link href="/contact" className="inline-flex items-center gap-1.5 text-sm font-semibold text-[hsl(352,83%,48%)] hover:gap-2.5 transition-all">
-                    Contact Us <ArrowRight className="w-4 h-4" />
-                  </Link>
+                <div className="flex-1">
+                  <p className="text-[10px] font-bold tracking-widest uppercase text-[hsl(352,83%,44%)] mb-2">Registry</p>
+                  <p className="font-semibold text-gray-900 text-sm mb-2">Talk to Registry Staff</p>
+                  <p className="text-xs text-gray-500 leading-relaxed">Call or visit your nearest court registry. Our staff are here to assist you.</p>
                 </div>
+                <Link href="/contact" className="inline-flex items-center gap-1.5 text-sm font-semibold text-[hsl(352,83%,44%)] hover:text-[hsl(352,83%,35%)] transition-colors">
+                  Contact Us <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
-              <div className="bg-white rounded-xl border border-gray-200 p-5 flex flex-col gap-2">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-[hsl(352,83%,48%)]/10 flex items-center justify-center shrink-0">
-                    <Phone className="w-3.5 h-3.5 text-[hsl(352,83%,48%)]" />
-                  </div>
-                  <span className="text-xs font-semibold uppercase tracking-widest text-[hsl(352,83%,48%)]">Head Registry</span>
+
+              <div className="p-7 flex flex-col gap-5 border-x border-gray-200">
+                <div className="w-10 h-10 rounded-xl bg-[hsl(352,83%,44%)]/8 border border-[hsl(352,83%,44%)]/15 flex items-center justify-center">
+                  <MapPin className="w-4 h-4 text-[hsl(352,83%,44%)]" />
                 </div>
-                <div className="font-bold text-gray-900 text-sm">Waigani Court Complex</div>
-                <div className="text-xs text-gray-500 leading-relaxed">Waigani Drive, Waigani, NCD, Papua New Guinea</div>
-                <div className="mt-auto pt-2.5 border-t border-gray-100 text-sm font-semibold text-[hsl(352,83%,48%)]">{s.contact_phone.split("/")[0].trim()}</div>
+                <div className="flex-1">
+                  <p className="text-[10px] font-bold tracking-widest uppercase text-[hsl(352,83%,44%)] mb-2">Head Registry</p>
+                  <p className="font-semibold text-gray-900 text-sm mb-2">Waigani Court Complex</p>
+                  <p className="text-xs text-gray-500 leading-relaxed">Waigani Drive, Waigani, NCD, Papua New Guinea</p>
+                </div>
+                <p className="text-sm font-bold text-gray-900">{s.contact_phone.split("/")[0].trim()}</p>
               </div>
-              <div className="bg-white rounded-xl border border-gray-200 p-5 flex flex-col gap-2">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center shrink-0">
-                    <Phone className="w-3.5 h-3.5 text-emerald-700" />
-                  </div>
-                  <span className="text-xs font-semibold uppercase tracking-widest text-emerald-700">Provincial Registry</span>
+
+              <div className="p-7 flex flex-col gap-5">
+                <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center">
+                  <Phone className="w-4 h-4 text-emerald-600" />
                 </div>
-                <div className="font-bold text-gray-900 text-sm">Lae Registry</div>
-                <div className="text-xs text-gray-500 leading-relaxed">Lae National Court, Morobe Province</div>
-                <div className="mt-auto pt-2.5 border-t border-gray-100 text-sm font-semibold text-emerald-700">+675 472 1855</div>
+                <div className="flex-1">
+                  <p className="text-[10px] font-bold tracking-widest uppercase text-emerald-600 mb-2">Provincial Registry</p>
+                  <p className="font-semibold text-gray-900 text-sm mb-2">Lae Registry</p>
+                  <p className="text-xs text-gray-500 leading-relaxed">Lae National Court, Morobe Province</p>
+                </div>
+                <p className="text-sm font-bold text-gray-900">+675 472 1855</p>
               </div>
             </div>
-            <div className="mt-5 bg-gray-50 rounded-xl border border-gray-200 p-4 flex items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
-                  <Download className="w-4 h-4 text-red-300" />
+
+            {/* Resources bar */}
+            <div className="mt-4 flex items-center justify-between gap-4 rounded-2xl border border-gray-200 bg-gray-50 px-6 py-4">
+              <div className="flex items-center gap-4">
+                <div className="w-9 h-9 rounded-lg bg-[hsl(352,83%,44%)]/8 border border-[hsl(352,83%,44%)]/15 flex items-center justify-center shrink-0">
+                  <Download className="w-4 h-4 text-[hsl(352,83%,44%)]" />
                 </div>
                 <div>
-                  <div className="font-semibold text-gray-800 text-sm">Court Forms &amp; Resources</div>
-                  <div className="text-xs text-gray-400 mt-0.5">Download official court forms, practice directions and guides</div>
+                  <p className="font-semibold text-gray-900 text-sm">Court Forms &amp; Resources</p>
+                  <p className="text-xs text-gray-500 mt-0.5">Download official court forms, practice directions and guides</p>
                 </div>
               </div>
-              <Link href="/resources" className="shrink-0 inline-flex items-center gap-1.5 text-sm font-semibold text-[hsl(352,83%,48%)] hover:gap-2.5 transition-all">
+              <Link href="/resources" className="shrink-0 inline-flex items-center gap-1.5 text-sm font-semibold text-[hsl(352,83%,44%)] hover:text-[hsl(352,83%,35%)] transition-colors">
                 Download <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
+
           </div>
         </section>
+        </>
       )}
     </div>
   )

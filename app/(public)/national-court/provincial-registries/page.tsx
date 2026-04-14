@@ -83,7 +83,7 @@ export default function ProvincialRegistriesPage() {
             <div className="flex items-center gap-2 mb-3">
               <span className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-full">Head Registry</span>
             </div>
-            <div className="bg-white rounded-xl border border-blue-200 shadow-sm p-5 grid md:grid-cols-2 gap-5">
+            <div className="bg-white rounded-xl border border-gray-200 p-5 grid md:grid-cols-2 gap-5">
               <div>
                 <h3 className="font-bold text-gray-900 text-[14px] mb-0.5">{head.name}</h3>
                 <p className="text-[12px] text-blue-700 font-medium mb-3">{head.province}</p>

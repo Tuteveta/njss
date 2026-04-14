@@ -174,8 +174,8 @@ export default function Contact() {
                         key={court.id}
                         type="button"
                         onClick={() => setSelectedCourt(court.id)}
-                        className={`flex items-start gap-3 p-4 rounded-2xl border-2 text-left transition-all ${
-                          isActive ? court.activeColor + " shadow-sm" : "border-gray-200 bg-white hover:border-gray-300"
+                        className={`flex items-start gap-3 p-4 rounded-2xl border text-left transition-all ${
+                          isActive ? "border-[hsl(352,83%,44%)] bg-[hsl(352,83%,44%)]/5" : "border-gray-200 bg-white hover:border-gray-300"
                         }`}
                       >
                         <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 mt-0.5 ${isActive ? "bg-white/70" : "bg-gray-50"}`}>
@@ -238,7 +238,7 @@ export default function Contact() {
                 ) : (
                   <form
                     onSubmit={handleSubmit}
-                    className={`bg-white rounded-2xl border-2 p-7 space-y-5 transition-all ${
+                    className={`bg-white rounded-2xl border p-7 space-y-5 transition-all ${
                       selectedCourt ? "border-gray-200" : "border-dashed border-gray-200 opacity-60 pointer-events-none"
                     }`}
                     noValidate

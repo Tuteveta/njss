@@ -9,8 +9,7 @@ const DIVISIONS = [
     id: "adr",
     title: "Alternative Dispute Resolution (ADR)",
     icon: Users,
-    color: "border-l-emerald-500 bg-emerald-50 text-emerald-700",
-    iconBg: "bg-emerald-50 text-emerald-700",
+    iconBg: "bg-gray-100 text-gray-600",
     desc: "The ADR Division facilitates resolution of civil disputes through mediation, conciliation, and arbitration as alternatives to full trial. Participation may be ordered by the court or agreed by the parties.",
     items: [
       { label: "ADR Acts & Rules",    href: "/national-court/acts-rules",   desc: "Mediation Act, ADR Rules and Practice Directions" },
@@ -28,8 +27,7 @@ const DIVISIONS = [
     id: "equity",
     title: "Equity Division",
     icon: Scale,
-    color: "border-l-purple-500 bg-purple-50 text-purple-700",
-    iconBg: "bg-purple-50 text-purple-700",
+    iconBg: "bg-gray-100 text-gray-600",
     desc: "The Equity Division handles applications for injunctions, declarations, trusts, estates, wills and administration of deceased estates, and other equitable relief.",
     items: [
       { label: "Equity Practice Directions", href: "/national-court/acts-rules", desc: "Applicable rules and procedure" },
@@ -47,8 +45,7 @@ const DIVISIONS = [
     id: "common-law",
     title: "Common Law Division",
     icon: Gavel,
-    color: "border-l-blue-500 bg-blue-50 text-blue-700",
-    iconBg: "bg-blue-50 text-blue-700",
+    iconBg: "bg-gray-100 text-gray-600",
     desc: "The Common Law Division hears personal injury, negligence, defamation, contract, employment, and other common law civil claims. It is the most active civil division of the National Court.",
     items: [
       { label: "Civil Listings",           href: "/national-court/listings",     desc: "Common Law Division case list" },
@@ -68,8 +65,7 @@ const DIVISIONS = [
     id: "tribunals",
     title: "Other Tribunals",
     icon: Building2,
-    color: "border-l-amber-500 bg-amber-50 text-amber-700",
-    iconBg: "bg-amber-50 text-amber-700",
+    iconBg: "bg-gray-100 text-gray-600",
     desc: "The National Court exercises supervisory jurisdiction over a range of specialised tribunals and statutory bodies, and hears appeals from their decisions.",
     items: [
       { label: "Tribunal Appeals",        href: "/national-court/listings",         desc: "Appeals from statutory tribunals" },
@@ -119,7 +115,7 @@ export default function CivilCasesPage() {
         {DIVISIONS.map(div => {
           const Icon = div.icon
           return (
-            <div key={div.id} id={div.id} className={`bg-white rounded-2xl border border-gray-200 border-l-4 ${div.color.split(" ")[0]} overflow-hidden`}>
+            <div key={div.id} id={div.id} className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
               <div className="p-6">
                 <div className="flex items-start gap-4 mb-4">
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${div.iconBg}`}>

@@ -101,7 +101,7 @@ export default function TermsOfUse() {
       />
 
       <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10">
           <div className="bg-white rounded-2xl border border-gray-200 p-8 md:p-12">
             <p className="text-sm text-gray-500 mb-8 pb-6 border-b border-gray-100">
               <strong>Effective Date:</strong> 1 January 2026 &nbsp;|&nbsp; <strong>Last Updated:</strong> 1 April 2026
