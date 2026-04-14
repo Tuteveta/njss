@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireAuth } from '@/lib/auth'
+import { canWrite } from '@/lib/roles'
 import pool from '@/lib/db'
 import { unlink } from 'fs/promises'
 import path from 'path'
@@ -8,6 +9,7 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
   const { id } = await params
   const user = requireAuth(req)
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  if (!canWrite(user.role)) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   const [rows] = await pool.execute('SELECT filename FROM documents WHERE id=?', [id]) as any[]
   const doc = (rows as any[])[0]
   if (doc) { try { await unlink(path.join(process.cwd(), 'uploads', 'documents', doc.filename)) } catch {} }

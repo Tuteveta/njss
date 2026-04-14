@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireAuth } from '@/lib/auth'
+import { canWrite } from '@/lib/roles'
 import pool from '@/lib/db'
 
 const ABOUT_KEYS = ['mission', 'vision', 'mandate', 'highlights', 'priorities', 'values', 'legislation']
@@ -20,8 +21,10 @@ export async function GET(req: NextRequest) {
 export async function PUT(req: NextRequest) {
   const user = requireAuth(req)
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  if (!canWrite(user.role)) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   const data = await req.json()
   for (const [k, v] of Object.entries(data)) {
+    if (!ABOUT_KEYS.includes(k)) continue
     const stored = typeof v === 'string' ? v : JSON.stringify(v)
     await pool.execute('INSERT INTO site_settings (`key`, value) VALUES (?, ?) ON DUPLICATE KEY UPDATE value=?', [k, stored, stored])
   }

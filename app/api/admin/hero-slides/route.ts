@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireAuth } from '@/lib/auth'
+import { canWrite } from '@/lib/roles'
 import pool from '@/lib/db'
 
 function mapSlide(r: any) {
@@ -16,6 +17,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const user = requireAuth(req)
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  if (!canWrite(user.role)) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   const d = await req.json()
   if (!d.title) return NextResponse.json({ error: 'Title required' }, { status: 400 })
   const cta_label = d.ctaLabel ?? d.cta_label

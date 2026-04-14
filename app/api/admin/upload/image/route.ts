@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireAuth } from '@/lib/auth'
+import { canWrite } from '@/lib/roles'
 import { writeFile, mkdir } from 'fs/promises'
 import path from 'path'
 import { v4 as uuidv4 } from 'uuid'
@@ -13,6 +14,7 @@ const ALLOWED_EXTS = new Set(['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'])
 export async function POST(req: NextRequest) {
   const user = requireAuth(req)
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  if (!canWrite(user.role)) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
 
   const formData = await req.formData()
   const file = formData.get('file') as File | null
@@ -45,6 +47,22 @@ export async function POST(req: NextRequest) {
   // PNG magic: 89 50 4E 47
   if (ext === '.png' && !(buf[0] === 0x89 && buf[1] === 0x50 && buf[2] === 0x4E && buf[3] === 0x47)) {
     return NextResponse.json({ error: 'File content does not match PNG format' }, { status: 415 })
+  }
+  // GIF magic: GIF87a or GIF89a
+  if (ext === '.gif' && !(buf[0] === 0x47 && buf[1] === 0x49 && buf[2] === 0x46)) {
+    return NextResponse.json({ error: 'File content does not match GIF format' }, { status: 415 })
+  }
+  // WebP magic: RIFF????WEBP
+  if (ext === '.webp' && !(buf[0] === 0x52 && buf[1] === 0x49 && buf[2] === 0x46 && buf[3] === 0x46 &&
+      buf[8] === 0x57 && buf[9] === 0x45 && buf[10] === 0x42 && buf[11] === 0x50)) {
+    return NextResponse.json({ error: 'File content does not match WebP format' }, { status: 415 })
+  }
+  // SVG: must be valid XML text, strip any script tags
+  if (ext === '.svg') {
+    const text = buf.toString('utf8')
+    if (!text.trimStart().startsWith('<') || /<script[\s>]/i.test(text) || /on\w+\s*=/i.test(text)) {
+      return NextResponse.json({ error: 'SVG file contains disallowed content' }, { status: 415 })
+    }
   }
 
   const filename = `${uuidv4()}${ext}`

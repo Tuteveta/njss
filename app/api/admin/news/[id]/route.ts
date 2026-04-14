@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireAuth } from '@/lib/auth'
+import { canWrite } from '@/lib/roles'
 import pool from '@/lib/db'
 
 export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -16,6 +17,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
   const { id } = await params
   const user = requireAuth(req)
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  if (!canWrite(user.role)) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   const d = await req.json()
   const read_time = d.readTime ?? d.read_time
   await pool.execute(
@@ -29,6 +31,7 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
   const { id } = await params
   const user = requireAuth(req)
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  if (!canWrite(user.role)) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   await pool.execute('DELETE FROM news_articles WHERE id=?', [id])
   return NextResponse.json({ ok: true })
 }

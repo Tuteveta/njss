@@ -15,6 +15,11 @@ uploads/documents/*
 .env
 .env.local
 .env.*.local
+.env.production
+.env.staging
+*.pem
+*.key
+*.crt
 
 # OS
 .DS_Store

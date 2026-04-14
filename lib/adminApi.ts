@@ -1,40 +1,31 @@
 const BASE = "/api"
 
-const TOKEN_KEY = "njss_admin_token"
 const SESSION_KEY = "njss_admin_session"
 
 const isBrowser = typeof window !== 'undefined'
 
-export function getToken(): string | null {
-  return isBrowser ? sessionStorage.getItem(TOKEN_KEY) : null
-}
-
-export function saveSession(token: string, username: string) {
+export function saveSession(username: string) {
   if (!isBrowser) return
-  sessionStorage.setItem(TOKEN_KEY, token)
   sessionStorage.setItem(SESSION_KEY, username)
 }
 
 export function clearSession() {
   if (!isBrowser) return
-  sessionStorage.removeItem(TOKEN_KEY)
   sessionStorage.removeItem(SESSION_KEY)
 }
 
 export const clearToken = clearSession
 
 export function isLoggedIn(): boolean {
-  return isBrowser ? !!sessionStorage.getItem(TOKEN_KEY) : false
+  return isBrowser ? !!sessionStorage.getItem(SESSION_KEY) : false
 }
 
 async function authFetch(path: string, options: RequestInit = {}) {
-  const token = getToken()
   const res = await fetch(`${BASE}${path}`, {
     ...options,
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...(options.headers || {}),
     },
   })
@@ -104,11 +95,9 @@ export const adminApi = {
   uploadImage: (file: File) => {
     const form = new FormData()
     form.append("file", file)
-    const token = getToken()
     return fetch(`/api/admin/upload/image`, {
       method: "POST",
       credentials: "include",
-      headers: token ? { Authorization: `Bearer ${token}` } : {},
       body: form,
     })
   },
@@ -122,11 +111,9 @@ export const adminApi = {
     form.append("file", file)
     form.append("title", title)
     form.append("category", category)
-    const token = getToken()
     return fetch(`/api/admin/upload/document`, {
       method: "POST",
       credentials: "include",
-      headers: token ? { Authorization: `Bearer ${token}` } : {},
       body: form,
     })
   },

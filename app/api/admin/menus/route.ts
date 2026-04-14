@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireAuth } from '@/lib/auth'
+import { canWrite } from '@/lib/roles'
 import pool from '@/lib/db'
 
 export async function GET(req: NextRequest) {
@@ -12,6 +13,7 @@ export async function GET(req: NextRequest) {
 export async function PUT(req: NextRequest) {
   const user = requireAuth(req)
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  if (!canWrite(user.role)) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   const { items } = await req.json()
   await pool.execute('DELETE FROM menu_items')
   for (let i = 0; i < items.length; i++) {

@@ -4,11 +4,7 @@ import jwt from 'jsonwebtoken'
 function getSecret(): string {
   const secret = process.env.JWT_SECRET
   if (!secret || secret.length < 32) {
-    if (process.env.NODE_ENV === 'production') {
-      throw new Error('JWT_SECRET environment variable must be set to at least 32 characters in production')
-    }
-    // Dev fallback — never used in production
-    return 'njss-dev-secret-not-for-production-use'
+    throw new Error('JWT_SECRET environment variable must be set to at least 32 characters')
   }
   return secret
 }

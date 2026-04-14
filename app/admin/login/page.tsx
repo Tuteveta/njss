@@ -30,7 +30,7 @@ export default function AdminLogin() {
         setError(data.error || "Login failed")
         return
       }
-      saveSession(data.token, data.user?.username ?? "admin")
+      saveSession(data.username ?? data.user?.username ?? "admin")
       router.push("/admin")
     } catch {
       setError("Could not connect to server")
